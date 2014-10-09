@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/shaders">
+        <file>phong.fsh</file>
+        <file>phong.vsh</file>
+        <file>simple_texture.fsh</file>
+        <file>simple_texture.vsh</file>
+    </qresource>
+</RCC>

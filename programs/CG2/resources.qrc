@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/arrow.png</file>
+        <file>resources/arrow.svg</file>
+        <file>models/car.mtl</file>
+        <file>models/car.obj</file>
+        <file>models/crystal_formations.mtl</file>
+        <file>models/crystal_formations.obj</file>
+        <file>models/cube.mtl</file>
+        <file>models/cube.obj</file>
+        <file>models/one_crystal.mtl</file>
+        <file>models/one_crystal.obj</file>
+        <file>models/cubes.mtl</file>
+        <file>models/cubes.obj</file>
+        <file>models/cubes.png</file>
+        <file>models/spheres.mtl</file>
+        <file>models/spheres.obj</file>
+        <file>models/pyramid.mtl</file>
+        <file>models/pyramid.obj</file>
+        <file>models/plane.mtl</file>
+        <file>models/plane.obj</file>
+        <file>models/cornell.mtl</file>
+        <file>models/cornell.obj</file>
+        <file>models/textured.mtl</file>
+        <file>models/textured.obj</file>
+        <file>resources/mario_brick.png</file>
+        <file>models/tr_and_ref.obj</file>
+        <file>models/tr_and_ref.mtl</file>
+        <file>resources/example_cube_map_environment.png</file>
+        <file>resources/example_cube_map_environment_2.png</file>
+        <file>models/environment.obj</file>
+        <file>models/environment.mtl</file>
+        <file>models/enviro_monkey.mtl</file>
+        <file>models/enviro_monkey.obj</file>
+        <file>models/enviro_ball.obj</file>
+        <file>models/enviro_ball.mtl</file>
+    </qresource>
+</RCC>

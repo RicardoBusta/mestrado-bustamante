@@ -1,0 +1,32 @@
+# Blender MTL File: 'pickup.blend'
+# Material Count: 3
+
+newmtl pickup_exterior.001
+Ns 84.313725
+Ka 0.000000 0.000000 0.000000
+Kd 0.262144 0.262144 0.262144
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd pickup_exterior_d.png
+
+newmtl pickup_glass.001
+Ns 845.098039
+Ka 0.000000 0.000000 0.000000
+Kd 0.262144 0.262144 0.262144
+Ks 1.000000 1.000000 1.000000
+Ni 1.000000
+d 0.500000
+illum 2
+map_Kd pickup_glass_d.png
+
+newmtl pickup_interior.001
+Ns 84.313725
+Ka 0.000000 0.000000 0.000000
+Kd 0.262144 0.262144 0.262144
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd pickup_interior_d.png
