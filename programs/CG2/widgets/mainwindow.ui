@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>800</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Trabalho CG2 - Ricardo Bustamante</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ===QWidget=== */
+
+QWidget{
+background-color: #000;
+color: #fff;
+}
+
+/* ===QSlider=== */
+QSlider::groove:horizontal {
+     background: #999;
+     position: absolute; /* absolutely position 4px from the left and right of the widget. setting margins on the widget should work too... */
+	top: 6px;bottom: 6px;
+     left: 6px; right: 6px;
+ }
+
+ QSlider::handle:horizontal {
+     height: 10px;
+	width: 10px;
+    background: #fff;
+	border: 1px solid #999;
+     margin:  -4px; /* expand outside the groove */
+ }
+
+/* ===QGroupBox=== */
+QGroupBox{
+	border: 2px solid white;
+	padding: 0px;
+	margin: 5px;
+}
+
+QGroupBox::title{
+	subcontrol-origin: margin;
+	subcontrol-position: top center;
+}
+
+/* ===QCheckBox=== */
+QCheckBox::indicator{
+	background-color: #999;
+	border: 1px solid #999;
+	width: 10px;
+	height: 10px;
+}
+
+QCheckBox::indicator::checked{
+	background-color: #fff;
+}
+
+QCheckBox::indicator::unchecked{
+	background-color: #000;
+}
+
+QCheckBox::indicator::disabled{
+	background-color: #666;
+	border: 1px solid #666;
+}
+
+QCheckBox::disabled{
+	color: #666;
+}
+
+/* ===QComboBox=== */
+QComboBox{
+	background-color: #000;
+	border: 1px solid white;
+}
+
+QComboBox::drop-down{
+border: none;
+}
+
+QComboBox::down-arrow{
+	
+	border-image: url(:/resources/arrow.png);
+}
+
+QComboBox::hover{
+	background-color: #666
+}
+
+/* ===QPushButton=== */
+QPushButton{
+	border:1px solid white;
+width: 20px;
+height: 20px;
+}
+
+QPushButton::hover{
+	background-color: #666
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QGridLayout" name="gridLayout" rowstretch="0,5,5" columnstretch="5,5">
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="opengl_box">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="title">
+       <string>OpenGL</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="raytracing_box">
+      <property name="title">
+       <string>RayTracing</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5"/>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QGroupBox" name="outerview_box">
+      <property name="title">
+       <string>Outer View</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_6"/>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Trabalho CG2 Ricardo Bustamante</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="1">
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="title">
+       <string>Control</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>FoV</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="fov_label">
+           <property name="text">
+            <string>FoV</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QSlider" name="fov_slider">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="singleStep">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::NoTicks</enum>
+         </property>
+         <property name="tickInterval">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Near</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="near_label">
+           <property name="text">
+            <string>Near</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QSlider" name="near_slider">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Far</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="far_label">
+           <property name="text">
+            <string>Far</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QSlider" name="far_slider">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="checkBox_5">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Textures</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QCheckBox" name="checkBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Reflections</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="checkBox_3">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Multi-Sampling</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QCheckBox" name="checkBox_2">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Soft Shadows</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QCheckBox" name="checkBox_6">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Motion Blur</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="track_ray_check">
+           <property name="text">
+            <string>Track Ray</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="light_check">
+           <property name="text">
+            <string>Light Calculation Active</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="fast_render_check">
+           <property name="text">
+            <string>Fast Render Only</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QCheckBox" name="checkBox_4">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>OpenCL</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QCheckBox" name="checkBox_7">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Refractions</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Scene:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="scene_comboBox">
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Boxes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Crystals</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>spheres</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>pyramid</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>plane</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>car</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>cornell</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>textured</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>cubes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>cube</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tr_and_ref</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>environment</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>enviro_monkey</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>enviro_ball</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Image Resolution</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QComboBox" name="image_size">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>800x600</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>1024x768</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>1280x800</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>1440x900</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="render_button">
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: #ffffff;
+	color: #000;
+	font: 75 12pt;
+	border: 0px;
+}
+
+QPushButton::hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 0, 0, 255), stop:0.166 rgba(255, 255, 0, 255), stop:0.333 rgba(0, 255, 0, 255), stop:0.5 rgba(0, 255, 255, 255), stop:0.666 rgba(0, 0, 255, 255), stop:0.833 rgba(255, 0, 255, 255), stop:1 rgba(255, 0, 0, 255));
+	color: #FFF;
+}</string>
+           </property>
+           <property name="text">
+            <string>RENDER!</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="recursion_spinBox"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Recursion Level</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>214</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

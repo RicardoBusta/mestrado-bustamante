@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/texture">
+        <file>tire.png</file>
+        <file>skybox.jpg</file>
+        <file>skydome.jpg</file>
+        <file>pie_table.png</file>
+        <file>skydome.png</file>
+        <file>panoramic_room.jpg</file>
+        <file>choco_donut.png</file>
+        <file>donut.png</file>
+        <file>fur.png</file>
+        <file>fur_alt.png</file>
+        <file>voxel_scene.png</file>
+        <file>voxatron.png</file>
+        <file>test_key.png</file>
+        <file>huntingrifle_d.png</file>
+        <file>pickup_exterior_d.png</file>
+        <file>pickup_glass_d.png</file>
+        <file>pickup_interior_d.png</file>
+        <file>shotgundoublebarrelled_d.png</file>
+        <file>pickup_exterior_alt.png</file>
+        <file>Campfire_texture.jpg</file>
+        <file>fire_particle_texture.png</file>
+    </qresource>
+    <qresource prefix="/model">
+        <file>tire.obj</file>
+        <file>skybox.obj</file>
+        <file>skydome.obj</file>
+        <file>pie_table.obj</file>
+        <file>cube.obj</file>
+        <file>donut.obj</file>
+        <file>fur.obj</file>
+        <file>pickup.obj</file>
+        <file>campfire.obj</file>
+    </qresource>
+    <qresource prefix="/material">
+        <file>tire.mtl</file>
+        <file>skybox.mtl</file>
+        <file>skydome.mtl</file>
+        <file>pie_table.mtl</file>
+        <file>cube.mtl</file>
+        <file>donut.mtl</file>
+        <file>fur.mtl</file>
+        <file>pickup.mtl</file>
+        <file>campfire.mtl</file>
+    </qresource>
+</RCC>
