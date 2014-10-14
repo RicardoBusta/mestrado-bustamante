@@ -3,8 +3,8 @@
 #include <cstring>
 #include <cmath>
 
-#include "constants.h"
-#include "vector.h"
+#include "programs/CG2/constants.h"
+#include "programs/CG2/structures/vector.h"
 
 namespace Ric{
 

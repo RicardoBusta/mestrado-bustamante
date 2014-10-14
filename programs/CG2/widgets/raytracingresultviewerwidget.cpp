@@ -1,10 +1,10 @@
 #include "raytracingresultviewerwidget.h"
 #include "ui_raytracingresultviewerwidget.h"
 
-#include "structures.h"
-#include "scene/scene.h"
-#include "ray.h"
-#include "raytracingthread.h"
+#include "programs/CG2/structures.h"
+#include "programs/CG2/scene/scene.h"
+#include "programs/CG2/ray.h"
+#include "programs/CG2/widgets/raytracingthread.h"
 
 #include <QThread>
 #include <QPainter>

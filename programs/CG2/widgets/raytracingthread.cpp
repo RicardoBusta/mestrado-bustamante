@@ -3,8 +3,8 @@
 #include <QDebug>
 #include <QThread>
 
-#include "ray.h"
-#include "scene/scene.h"
+#include "programs/CG2/ray.h"
+#include "programs/CG2/scene/scene.h"
 
 RayTracingThread::RayTracingThread(const QRect &rect, const int &id, const float &prop_x, const float &prop_y, const float &val_x, const float &val_y, const Scene *scene, QObject *parent)
   : QObject(parent),

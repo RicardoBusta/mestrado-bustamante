@@ -1,6 +1,6 @@
 #include "openglauxfunctions.h"
 
-#include "structures.h"
+#include "programs/CG2/structures.h"
 #ifdef _WIN32
 #include <Windows.h>
 #endif

@@ -1,11 +1,11 @@
 #include "triangleface.h"
 
-#include "scene/sceneobject.h"
+#include "programs/CG2/scene/sceneobject.h"
 
 #include <QImage>
 #include <cmath>
 
-#include "structures/texturecontainer.h"
+#include "programs/CG2/structures/texturecontainer.h"
 
 TriangleFace::TriangleFace()
 {

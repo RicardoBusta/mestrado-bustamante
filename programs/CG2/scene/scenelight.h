@@ -1,7 +1,7 @@
 #ifndef SCENELIGHT_H
 #define SCENELIGHT_H
 
-#include "structures.h"
+#include "programs/CG2/structures.h"
 
 class SceneLight
 {

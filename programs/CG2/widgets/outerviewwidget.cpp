@@ -1,14 +1,14 @@
 #include "outerviewwidget.h"
 
-#include "scene/scene.h"
-#include "ray.h"
+#include "programs/CG2/scene/scene.h"
+#include "programs/CG2/ray.h"
 #include <cmath>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include "constants.h"
+#include "programs/CG2/constants.h"
 
-#include "scene/triangleface.h"
-#include "scene/openglauxfunctions.h"
+#include "programs/CG2/scene/triangleface.h"
+#include "programs/CG2/scene/openglauxfunctions.h"
 
 OuterViewWidget::OuterViewWidget(Scene *scene,QWidget *parent)
   : QGLWidget(parent),

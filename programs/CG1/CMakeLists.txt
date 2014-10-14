@@ -3,7 +3,7 @@ project("CG1")
 INCLUDE_DIRECTORIES(${ROOT_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 #Add project files
-set(QOB_SOURCES
+set(SOURCE_FILES
     main.cpp
     widgets/mainwindow.cpp
     widgets/glwidget.cpp
@@ -34,7 +34,7 @@ set(QOB_SOURCES
     utils/random.cpp
     opengl/particle_behavior.cpp
 )
-set(QOB_HEADERS
+set(HEADER_FILES
   widgets/mainwindow.h
   widgets/glwidget.h
   opengl/scene.h
@@ -65,7 +65,7 @@ set(QOB_HEADERS
   utils/random.h
   opengl/particle_behavior.h
 )
-set(QOB_FORMS
+set(FORM_FILES
   widgets/mainwindow.ui
   widgets/bezier_widget.ui
   widgets/voxel_widget.ui
@@ -74,22 +74,25 @@ set(QOB_FORMS
   widgets/fur_widget.ui
   widgets/truck_widget.ui
 )
-set(QOB_RESOURCES
+set(RESOURCE_FILES
   shaders/shaders.qrc
   resources/resources.qrc
 )
 
+set(OTHER_FILES
+)
+
 #Qt steps before compiling
-qt5_wrap_cpp(QOB_HEADERS_MOC ${QOB_HEADERS})
-qt5_wrap_ui(QOB_FORMS_HEADERS ${QOB_FORMS})
-qt5_add_resources(QOB_RESOURCES_RCC ${QOB_RESOURCES})
+qt5_wrap_cpp(HEADER_FILES_MOC ${HEADER_FILES})
+qt5_wrap_ui(FORM_HEADERS ${FORM_FILES})
+qt5_add_resources(RESOURCE_FILES_RCC ${RESOURCE_FILES})
 
 #Adding files post-qt to project
 add_executable(${PROJECT_NAME}
-  ${QOB_SOURCES}
-  ${QOB_HEADERS_MOC}
-  ${QOB_FORMS_HEADERS}
-  ${QOB_RESOURCES_RCC}
+  ${SOURCE_FILES}
+  ${HEADER_FILES_MOC}
+  ${FORM_HEADERS}
+  ${RESOURCE_FILES_RCC}
 )
 
 #Linking Library

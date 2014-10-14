@@ -5,9 +5,9 @@
 #include <QWheelEvent>
 #include <QTimer>
 
-#include "ray.h"
-#include "scene/scene.h"
-#include "constants.h"
+#include "programs/CG2/ray.h"
+#include "programs/CG2/scene/scene.h"
+#include "programs/CG2/constants.h"
 
 RayTracingWidget::RayTracingWidget(Scene *scene_, QWidget *parent):
   QWidget(parent),

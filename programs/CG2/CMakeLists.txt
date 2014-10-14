@@ -1,11 +1,14 @@
 project("CG2")
 
+INCLUDE_DIRECTORIES(${ROOT_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+
 #Add project files
-set(QOB_SOURCES
+set(SOURCE_FILES
     main.cpp
     widgets/mainwindow.cpp 
     application.cpp 
     ray.cpp 
+    constants.h
     scene/sceneobject.cpp 
     scene/scene.cpp 
     widgets/glwidget.cpp 
@@ -26,7 +29,7 @@ set(QOB_SOURCES
     widgets/raytracingthread.cpp 
     structures/texturecontainer.cpp
 )
-set(QOB_HEADERS
+set(HEADER_FILES
    widgets/mainwindow.h 
     application.h 
     ray.h 
@@ -52,14 +55,14 @@ set(QOB_HEADERS
     widgets/raytracingthread.h 
     structures/texturecontainer.h
 )
-set(QOB_FORMS
+set(FORM_FILES
     widgets/mainwindow.ui 
     widgets/raytracingresultviewerwidget.ui
 )
-set(QOB_RESOURCES
+set(RESOURCE_FILES
    resources.qrc
 )
-set(QOB_OTHER_FILES
+set(OTHER_FILES
     models/crystal_formations.mtl 
     models/crystal_formations.obj 
     models/cube.mtl 
@@ -86,19 +89,18 @@ set(QOB_OTHER_FILES
 )
 
 #Qt steps before compiling
-qt5_wrap_cpp(QOB_HEADERS_MOC ${QOB_HEADERS})
-qt5_wrap_ui(QOB_FORMS_HEADERS ${QOB_FORMS})
-qt5_add_resources(QOB_RESOURCES_RCC ${QOB_RESOURCES})
+qt5_wrap_cpp(HEADER_FILES_MOC ${HEADER_FILES})
+qt5_wrap_ui(FORM_HEADERS ${FORM_FILES})
+qt5_add_resources(RESOURCE_FILES_RCC ${RESOURCE_FILES})
 
 #Adding files post-qt to project
 add_executable(${PROJECT_NAME}
-  ${QOB_SOURCES}
-  ${QOB_HEADERS_MOC}
-  ${QOB_FORMS_HEADERS}
-  ${QOB_RESOURCES_RCC}
+  ${SOURCE_FILES}
+  ${HEADER_FILES_MOC}
+  ${FORM_HEADERS}
+  ${RESOURCE_FILES_RCC}
 )
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
-
 #Linking Library
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+qt5_use_modules(${PROJECT_NAME} Core Gui Widgets OpenGL)
+target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
