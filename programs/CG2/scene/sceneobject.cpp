@@ -12,7 +12,11 @@
 #include "programs/CG2/scene/openglauxfunctions.h"
 #include "programs/CG2/scene/objloader.h"
 
-const float kMaxFloat = FLT_MAX;//std::numeric_limits<float>::max();
+#ifndef FLT_MAX
+  #define FLT_MAX std::numeric_limits<float>::max()
+#endif
+
+const float kMaxFloat = FLT_MAX;
 const float kMinFloat = -kMaxFloat;
 
 SceneObject::SceneObject()
