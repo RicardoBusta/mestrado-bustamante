@@ -2,11 +2,11 @@
 
 #include <cmath>
 #include <math.h>
-#include "constants.h"
+#include "programs/CG2/constants.h"
 #include "triangleface.h"
-#include "structures/material.h"
+#include "programs/CG2/structures/material.h"
 
-#include "scene/objloader.h"
+#include "programs/CG2/scene/objloader.h"
 
 Scene::Scene()
   : rotx(15),

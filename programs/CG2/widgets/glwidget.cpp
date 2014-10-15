@@ -1,18 +1,18 @@
 #include "glwidget.h"
 
-#include "scene/scene.h"
-#include "scene/sceneobject.h"
-#include "scene/openglauxfunctions.h"
+#include "programs/CG2/scene/scene.h"
+#include "programs/CG2/scene/sceneobject.h"
+#include "programs/CG2/scene/openglauxfunctions.h"
 
 #include <QDebug>
 //#include <QMatrix4x4>
-#include "ray.h"
+#include "programs/CG2/ray.h"
 #include <cmath>
 #include <QMouseEvent>
 #include <QWheelEvent>
 
-#include "scene/triangleface.h"
-#include "constants.h"
+#include "programs/CG2/scene/triangleface.h"
+#include "programs/CG2/constants.h"
 
 const QImage texture("://models/cubes.png");
 

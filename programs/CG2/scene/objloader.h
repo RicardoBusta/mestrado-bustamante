@@ -4,9 +4,9 @@
 #include <QVector>
 #include <QMap>
 
-#include "scene/sceneobject.h"
-#include "scene/triangleface.h"
-#include "structures/material.h"
+#include "programs/CG2/scene/sceneobject.h"
+#include "programs/CG2/scene/triangleface.h"
+#include "programs/CG2/structures/material.h"
 
 class ObjLoader
 {

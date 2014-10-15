@@ -3,7 +3,7 @@
 
 #include <QGLWidget>
 
-#include "structures.h"
+#include "programs/CG2/structures.h"
 
 class Scene;
 

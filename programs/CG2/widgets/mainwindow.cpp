@@ -1,4 +1,4 @@
-#include "widgets/mainwindow.h"
+#include "programs/CG2/widgets/mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QTimer>
@@ -6,12 +6,12 @@
 #include <QLabel>
 #include <QMouseEvent>
 
-#include "constants.h"
-#include "scene/scene.h"
-#include "widgets/glwidget.h"
-#include "widgets/raytracingwidget.h"
-#include "widgets/outerviewwidget.h"
-#include "widgets/raytracingresultviewerwidget.h"
+#include "programs/CG2/constants.h"
+#include "programs/CG2/scene/scene.h"
+#include "programs/CG2/widgets/glwidget.h"
+#include "programs/CG2/widgets/raytracingwidget.h"
+#include "programs/CG2/widgets/outerviewwidget.h"
+#include "programs/CG2/widgets/raytracingresultviewerwidget.h"
 
 MainWindow::MainWindow(Scene *scene, QWidget *parent) :
   QMainWindow(parent),

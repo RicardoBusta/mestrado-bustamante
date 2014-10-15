@@ -8,11 +8,11 @@
 #include <GL/gl.h>
 #include <limits>
 
-#include "scene/triangleface.h"
-#include "scene/openglauxfunctions.h"
-#include "scene/objloader.h"
+#include "programs/CG2/scene/triangleface.h"
+#include "programs/CG2/scene/openglauxfunctions.h"
+#include "programs/CG2/scene/objloader.h"
 
-const float kMaxFloat = std::numeric_limits<float>::max();
+const float kMaxFloat = FLT_MAX;//std::numeric_limits<float>::max();
 const float kMinFloat = -kMaxFloat;
 
 SceneObject::SceneObject()

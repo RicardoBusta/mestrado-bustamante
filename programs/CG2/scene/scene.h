@@ -4,8 +4,8 @@
 #include "sceneobject.h"
 
 //#include <QMatrix4x4>
-#include "structures.h"
-#include "scenelight.h"
+#include "programs/CG2/structures.h"
+#include "programs/CG2/scene/scenelight.h"
 
 class Scene
 {

@@ -1,6 +1,6 @@
 #include "scenelight.h"
 
-#include "structures.h"
+#include "programs/CG2/structures.h"
 
 SceneLight::SceneLight()
 {

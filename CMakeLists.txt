@@ -22,6 +22,6 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 #add_definitions(${Qt5Widgets_DEFINITIONS})
 
 add_subdirectory("${ROOT_DIR}/libraries")
-add_subdirectory("${ROOT_DIR}/third_party")
+add_subdirectory("${ROOT_DIR}/dependencies")
 add_subdirectory("${ROOT_DIR}/prototypes")
 add_subdirectory("${ROOT_DIR}/programs")
