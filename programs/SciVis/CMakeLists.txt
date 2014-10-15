@@ -6,9 +6,13 @@ include_directories(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY
 set(SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/main.cpp
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.cpp
 )
 set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.h
+  ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.h
+  ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.h
 )
 set(FORM_FILES
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.ui

@@ -8,7 +8,12 @@ class GLWidgetScene
 public:
   GLWidgetScene();
 
+  virtual void init();
   virtual void paint();
+  virtual void projection();
+
+  float rotx;
+  float roty;
 };
 
 }

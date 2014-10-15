@@ -3,6 +3,8 @@
 
 #include "busta_libs/glwidget/glwidget.h"
 
+#include "scene/volumeplanesscene.h"
+
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui_(new Ui::MainWindow)
@@ -10,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui_->setupUi(this);
 
   glwidget_ = new Busta::GLWidget(this);
+  glwidget_->setScene(new VolumePlanesScene());
 
   setCentralWidget(glwidget_);
 }

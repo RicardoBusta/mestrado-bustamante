@@ -13,7 +13,9 @@ class GLWidget : public QGLWidget
   Q_OBJECT
 public:
   explicit GLWidget(QWidget *parent = 0);
+  virtual ~GLWidget();
 
+  void setScene(GLWidgetScene *scene);
 protected:
   void initializeGL();
   void resizeGL(int w, int h);
@@ -22,6 +24,12 @@ protected:
 
   virtual void setViewport(int w, int h);
 
+  void sceneStep();
+
+  void mousePressEvent(QMouseEvent *event);
+  void mouseReleaseEvent(QMouseEvent *event);
+  void wheelEvent(QWheelEvent *event);
+  void mouseMoveEvent(QMouseEvent *event);
 
 private:
   QTimer timer_;
