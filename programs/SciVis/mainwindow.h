@@ -7,6 +7,10 @@ namespace Ui {
 class MainWindow;
 }
 
+namespace Busta{
+class GLWidget;
+}
+
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
@@ -16,7 +20,9 @@ public:
   ~MainWindow();
 
 private:
-  Ui::MainWindow *ui;
+  Ui::MainWindow *ui_;
+
+  Busta::GLWidget *glwidget_;
 };
 
 #endif // MAINWINDOW_H

@@ -17,10 +17,10 @@ void SceneTruck::setup_spec()
 
   Object *tire[4];
   QVector3D pos[4]={
-    QVector3D(1,0,1.85),
-    QVector3D(-1,0,1.85),
-    QVector3D(1,0,-1.1),
-    QVector3D(-1,0,-1.1)
+    QVector3D(1.0f,0.0f,1.85f),
+    QVector3D(-1.0f,0.0f,1.85f),
+    QVector3D(1.0f,0.0f,-1.1f),
+    QVector3D(-1.0f,0.0f,-1.1f)
   };
 
   QVector3D rot[4]={
@@ -37,7 +37,7 @@ void SceneTruck::setup_spec()
     1
   };
 
-  QVector3D truck_translate = QVector3D(0,-0.4,0);
+  QVector3D truck_translate = QVector3D(0.0f,-0.4f,0.0f);
 
   Object *interior = Object::create("Interior","interior");
   interior->setPosition(truck_translate);

@@ -1,23 +1,27 @@
 project("SciVis")
 
-INCLUDE_DIRECTORIES(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 #Add project files
 set(SOURCE_FILES
-  main.cpp
-  mainwindow.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/main.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/mainwindow.cpp
 )
 set(HEADER_FILES
-  mainwindow.h
+  ${CMAKE_CURRENT_LIST_DIR}/mainwindow.h
 )
 set(FORM_FILES
-  mainwindow.ui
+  ${CMAKE_CURRENT_LIST_DIR}/mainwindow.ui
 )
 set(RESOURCE_FILES
 
 )
 
 set(OTHER_FILES
+)
+
+set(DEPENDENCY_LIBRARIES
+  BustaGLWidget
 )
 
 #Qt steps before compiling
@@ -35,4 +39,4 @@ add_executable(${PROJECT_NAME}
 
 #Linking Library
 qt5_use_modules(${PROJECT_NAME} Core Gui Widgets OpenGL)
-target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${DEPENDENCY_LIBRARIES})
