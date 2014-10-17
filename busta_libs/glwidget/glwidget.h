@@ -21,10 +21,9 @@ protected:
   void resizeGL(int w, int h);
   void paintGL();
 
-
   virtual void setViewport(int w, int h);
 
-  void sceneStep();
+
 
   void mousePressEvent(QMouseEvent *event);
   void mouseReleaseEvent(QMouseEvent *event);
@@ -34,11 +33,15 @@ protected:
 private:
   QTimer timer_;
 
+  QPoint last_click_;
+  QPoint delta_;
+  QPoint auto_delta_;
+
   Busta::GLWidgetScene *scene_;
 signals:
 
-public slots:
-
+private slots:
+  void sceneStep();
 };
 
 }

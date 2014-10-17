@@ -1,18 +1,34 @@
 #include "volumeplanesscene.h"
 
 #include <QtOpenGL>
+#include <QDebug>
+
+#include "algorithm/marchingcubes.h"
+
+const float kZoomFactor = 0.001;
 
 VolumePlanesScene::VolumePlanesScene()
 {
 }
 
-void VolumePlanesScene::paint()
+void VolumePlanesScene::init()
+{
+  vertex = MarchingCubes::march(data, 800);
+}
+
+void VolumePlanesScene::paintGL()
 {
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-  glBegin(GL_QUADS);
-  glVertex3f(0,0,0);
-  glVertex3f(1,0,0);
-  glVertex3f(1,1,0);
-  glVertex3f(0,1,0);
+
+  glLoadIdentity();
+
+  glTranslated(0,0,zoom_*kZoomFactor);
+  glRotatef(rotx_,1,0,0);
+  glRotatef(roty_,0,1,0);
+
+  glBegin(GL_TRIANGLES);
+  for(int i=0;i<vertex.size();i++){
+    glVertex3f(vertex[i].x(),vertex[i].y(),vertex[i].z());
+  }
   glEnd();
 }

@@ -2,13 +2,18 @@
 #define VOLUMEPLANESSCENE_H
 
 #include "busta_libs/glwidget/glwidgetscene.h"
+#include "data/volumedata.h"
 
 class VolumePlanesScene : public Busta::GLWidgetScene
 {
 public:
   explicit VolumePlanesScene();
 
-  void paint();
+  void init();
+  void paintGL();
+
+  VolumeData data;
+  QVector<QVector3D> vertex;
 };
 
 #endif // VOLUMEPLANESSCENE_H

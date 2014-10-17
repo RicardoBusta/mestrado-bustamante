@@ -9,11 +9,14 @@ public:
   GLWidgetScene();
 
   virtual void init();
-  virtual void paint();
+  virtual void initGL();
+  virtual void paintGL();
   virtual void projection();
 
-  float rotx;
-  float roty;
+  float rotx_;
+  float roty_;
+
+  float zoom_;
 };
 
 }
