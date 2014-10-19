@@ -2,15 +2,19 @@ project("SciVis")
 
 include_directories(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
+include_directories("${ROOT_DIR}/others_libs/NVIDIA_SDK/OpenCL/inc")
+
 #Add project files
 set(SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/main.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/scivis.cpp
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.cpp
   ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.cpp
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.cpp
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.cpp
 )
 set(HEADER_FILES
+  ${CMAKE_CURRENT_LIST_DIR}/scivis.h
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.h
   ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.h
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.h
@@ -28,6 +32,7 @@ set(OTHER_FILES
 
 set(DEPENDENCY_LIBRARIES
   BustaGLWidget
+  BustaOpenCLManager
 )
 
 #Qt steps before compiling

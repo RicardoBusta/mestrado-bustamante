@@ -37,6 +37,8 @@ private:
   QPoint delta_;
   QPoint auto_delta_;
 
+  float auto_rot_speed_;
+
   Busta::GLWidgetScene *scene_;
 signals:
 

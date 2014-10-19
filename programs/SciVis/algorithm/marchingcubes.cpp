@@ -4,11 +4,34 @@ const int voxel_size = 10;
 
 #include <QDebug>
 
+#include "busta_libs/opencl_manager/openclmanager.h"
+
 QVector<QVector3D> MarchingCubes::march(const VolumeData &data, const float value)
 {
   QVector<QVector3D> output;
 
   qDebug() << "marching";
+
+  Busta::OpenCLManager *ocl = Busta::OpenCLManager::instance();
+
+  if(ocl==NULL){
+    qWarning() << "Could not create instance of OpenCLManager";
+    return output;
+  }
+
+  ocl->SetupGPUDevice();
+
+  //http://www.heterogeneouscompute.org/wordpress/wp-content/uploads/2011/06/Chapter2.txt
+
+  cl_mem data_buffer;
+  cl_mem out_buffer;
+  cl_int status;
+
+  //data_buffer = ocl->clCreateBuffer(ocl->GPUContext(),CL_MEM_READ_ONLY,data.data_.size(),NULL,status);
+  //out_buffer = ocl->clCreateBuffer(ocl->GPUContext(),CL_MEM_WRITE_ONLY,data.data_.size(),NULL,status);
+
+  //ocl->clReleaseMemObject(data_buffer);
+
 
   float inc = 1.0/float(voxel_size-1);
 
@@ -31,9 +54,6 @@ QVector<QVector3D> MarchingCubes::march(const VolumeData &data, const float valu
       }
     }
   }
-
-  qDebug() << output.size();
-
   return output;
 }
 

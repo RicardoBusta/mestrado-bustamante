@@ -10,14 +10,16 @@ MainWindow::MainWindow(QWidget *parent) :
   ui_(new Ui::MainWindow)
 {
   ui_->setupUi(this);
-
-  glwidget_ = new Busta::GLWidget(this);
-  glwidget_->setScene(new VolumePlanesScene());
-
-  setCentralWidget(glwidget_);
 }
 
 MainWindow::~MainWindow()
 {
   delete ui_;
+}
+
+void MainWindow::init(){
+  glwidget_ = new Busta::GLWidget(this);
+  glwidget_->setScene(new VolumePlanesScene());
+
+  setCentralWidget(glwidget_);
 }

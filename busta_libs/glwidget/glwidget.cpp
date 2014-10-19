@@ -9,7 +9,8 @@ namespace Busta{
 
 GLWidget::GLWidget(QWidget *parent) :
   QGLWidget(parent),
-  scene_(NULL)
+  scene_(NULL),
+  auto_rot_speed_(0.4f)
 {
   connect(&timer_,SIGNAL(timeout()),this,SLOT(sceneStep()));
   connect(&timer_,SIGNAL(timeout()),this,SLOT(updateGL()));
@@ -42,8 +43,8 @@ void GLWidget::paintGL()
 {
   if(NULL == scene_) return;
 
-  scene_->rotx_+=auto_delta_.x();
-  scene_->roty_+=auto_delta_.y();
+  scene_->rotx_+=auto_delta_.y()*auto_rot_speed_;
+  scene_->roty_+=auto_delta_.x()*auto_rot_speed_;
   scene_->paintGL();
 }
 

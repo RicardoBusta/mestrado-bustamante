@@ -18,7 +18,6 @@ VolumeData::VolumeData()
       for(int k=0;k<d;k++){
         float fk = (float(k)-(float(kSize)/2.0f));
         setValue(i,j,k, 1000-(fi*fi + fj*fj + fk*fk) ) ;
-        qDebug() << "value" << getValue(i,j,k);
       }
     }
   }
@@ -75,6 +74,5 @@ float VolumeData::getInterpolatedValue(float i, float j, float k) const
 
 float VolumeData::getParametricValue(float i, float j, float k) const
 {
-  qDebug() << "parametric" << i*float(h) << j*float(w) << k*float(d);
   return getInterpolatedValue(i*float(h),j*float(w),k*float(d));
 }

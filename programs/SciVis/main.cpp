@@ -1,11 +1,10 @@
-#include "mainwindow.h"
-#include <QApplication>
+#include "scivis.h"
 
 int main(int argc, char *argv[])
 {
-  QApplication a(argc, argv);
-  MainWindow w;
-  w.show();
+  SciVis a(argc, argv);
 
-  return a.exec();
+  int ret = a.exec();
+  a.clean();
+  return ret;
 }
