@@ -140,9 +140,12 @@ void MarchingCubes::setup()
   setup_ = true;
 }
 
-void MarchingCubes::clear()
+void MarchingCubes::release()
 {
-
+  qDebug() << "clearing marching cubes";
+  cl_->clReleaseKernel(kernel_);
+  cl_->clReleaseProgram(program_);
+  cl_->clReleaseCommandQueue(command_queue_);
 }
 
 MarchingCubes *MarchingCubes::instance()

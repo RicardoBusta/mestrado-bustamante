@@ -33,3 +33,8 @@ void VolumePlanesScene::paintGL()
   }
   glEnd();
 }
+
+void VolumePlanesScene::release()
+{
+  MarchingCubes::instance()->release();
+}

@@ -16,6 +16,11 @@ void GLWidgetScene::init()
 
 }
 
+void GLWidgetScene::release()
+{
+
+}
+
 void GLWidgetScene::initGL()
 {
 //  glEnable(GL_LIGHTING);

@@ -9,6 +9,7 @@ public:
   GLWidgetScene();
 
   virtual void init();
+  virtual void release();
   virtual void initGL();
   virtual void paintGL();
   virtual void projection();

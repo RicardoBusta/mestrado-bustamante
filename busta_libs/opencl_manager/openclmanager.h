@@ -32,7 +32,7 @@ namespace Busta{
 //    cl_int clGetContextInfo( cl_context context, cl_context_info param_name, size_t param_value_size, void * param_value, size_t *param_value_size_ret );
     cl_command_queue clCreateCommandQueue( cl_context context, cl_device_id device, cl_command_queue_properties properties, cl_int * errcode_ret );
 //    cl_int clRetainCommandQueue( cl_command_queue command_queue );
-//    cl_int clReleaseCommandQueue( cl_command_queue command_queue );
+    cl_int clReleaseCommandQueue( cl_command_queue command_queue );
 //    cl_int clGetCommandQueueInfo( cl_command_queue command_queue, cl_command_queue_info param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret);
 //    cl_int clSetCommandQueueProperty( cl_command_queue command_queue, cl_command_queue_properties properties, cl_bool enable, cl_command_queue_properties * old_properties); //< if CL_USE_DEPRECATED_OPENCL_1_0_APIS (not thread safe)
     cl_mem clCreateBuffer( cl_context context, cl_mem_flags flags, size_t size, void * host_ptr, cl_int * errcode_ret );
@@ -52,7 +52,7 @@ namespace Busta{
     cl_program clCreateProgramWithSource(cl_context context, cl_uint count, const char ** strings, const size_t * lengths, cl_int * errcode_ret);
 //    cl_program clCreateProgramWithBinary(cl_context context, cl_uint num_devices, const cl_device_id * device_list, const size_t * lengths, const unsigned char ** binaries, cl_int * binary_status, cl_int * errcode_ret);
 //    cl_int clRetainProgram(cl_program program);
-//    cl_int clReleaseProgram(cl_program program);
+    cl_int clReleaseProgram(cl_program program);
     cl_int clBuildProgram(cl_program program, cl_uint num_devices, const cl_device_id * device_list, const char * options, void (CL_CALLBACK * pfn_notify)(cl_program, void *), void * user_data);
 //    cl_int clUnloadCompiler(void);
 //    cl_int clGetProgramInfo(cl_program program, cl_program_info param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret);
@@ -60,7 +60,7 @@ namespace Busta{
     cl_kernel clCreateKernel(cl_program program, const char * kernel_name, cl_int * errcode_ret);
 //    cl_int clCreateKernelsInProgram(cl_program program, cl_uint num_kernels, cl_kernel * kernels, cl_uint * num_kernels_ret);
 //    cl_int clRetainKernel(cl_kernel kernel);
-//    cl_int clReleaseKernel(cl_kernel kernel);
+    cl_int clReleaseKernel(cl_kernel kernel);
     cl_int clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size, const void * arg_value);
 //    cl_int clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret);
 //    cl_int clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_group_info param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret);
@@ -107,7 +107,7 @@ namespace Busta{
     PF_CL_GET_CONTEXT_INFO get_context_info_func_;
     PF_CL_CREATE_COMMAND_QUEUE create_command_queue_func_;
     PF_CL_RETAIN_COMMAND_QUEUE retaing_command_queue_;
-    PF_N_CL_RELEASE_COMMAND_QUEUE release_command_queue_func_;
+    PF_CL_RELEASE_COMMAND_QUEUE release_command_queue_func_;
     PF_CL_GET_COMMAND_QUEUE_INFO get_command_queue_info_func_;
     PF_CL_SET_COMMAND_QUEUE_PROPERTY set_command_queue_property_func_;
     PF_CL_CREATE_BUFFER create_buffer_func_;

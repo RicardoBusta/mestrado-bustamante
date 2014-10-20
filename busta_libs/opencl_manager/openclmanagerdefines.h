@@ -68,7 +68,7 @@ namespace Busta{
 
   typedef CL_API_ENTRY cl_int (CL_API_CALL * PF_CL_RETAIN_COMMAND_QUEUE)(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
 
-  typedef CL_API_ENTRY cl_int (CL_API_CALL * PF_N_CL_RELEASE_COMMAND_QUEUE)(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
+  typedef CL_API_ENTRY cl_int (CL_API_CALL * PF_CL_RELEASE_COMMAND_QUEUE)(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
 
   typedef CL_API_ENTRY cl_int (CL_API_CALL * PF_CL_GET_COMMAND_QUEUE_INFO)(cl_command_queue      /* command_queue */,
                                                                            cl_command_queue_info /* param_name */,

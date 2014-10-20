@@ -9,7 +9,7 @@ class MarchingCubes
 public:
   QVector<QVector3D> march(const VolumeData &data, const float value);
   void setup();
-  void clear();
+  void release();
 
   static MarchingCubes * instance();
 private:

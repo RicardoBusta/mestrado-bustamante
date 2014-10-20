@@ -303,6 +303,21 @@ namespace Busta{
     }
   }
 
+  cl_int OpenCLManager::clReleaseCommandQueue(cl_command_queue command_queue)
+  {
+    if( release_command_queue_func_ == NULL ){
+      release_command_queue_func_ = (PF_CL_RELEASE_COMMAND_QUEUE) getProcAddr( "clReleaseCommandQueue" );
+    }
+
+    if( release_command_queue_func_ != NULL){
+      return release_command_queue_func_(command_queue);
+    }else{
+      qWarning() << "Bind Error: release_command_queue_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
   cl_mem OpenCLManager::clCreateBuffer(cl_context context, cl_mem_flags flags, size_t size, void *host_ptr, cl_int *errcode_ret)
   {
     if( create_buffer_func_ == NULL ){
@@ -348,6 +363,21 @@ namespace Busta{
     }
   }
 
+  cl_int OpenCLManager::clReleaseProgram(cl_program program)
+  {
+    if( release_program_func_ == NULL ){
+      release_program_func_ = (PF_CL_RELEASE_PROGRAM) getProcAddr( "clReleaseProgram" );
+    }
+
+    if( release_program_func_ != NULL){
+      return release_program_func_(program);
+    }else{
+      qWarning() << "Bind Error: release_program_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
   cl_int OpenCLManager::clBuildProgram(cl_program program, cl_uint num_devices, const cl_device_id *device_list, const char *options, void (CL_CALLBACK*pfn_notify)(cl_program, void *), void *user_data)
   {
     if( build_program_func_ == NULL ){
@@ -388,6 +418,21 @@ namespace Busta{
       return create_kernel_func_(program,kernel_name,errcode_ret);
     }else{
       qWarning() << "Bind Error: create_kernel_func_";
+      bind_error_ = true;
+      return NULL;
+    }
+  }
+
+  cl_int OpenCLManager::clReleaseKernel(cl_kernel kernel)
+  {
+    if( release_kernel_func_ == NULL ){
+      release_kernel_func_ = (PF_CL_RELEASE_KERNEL) getProcAddr( "clReleaseKernel" );
+    }
+
+    if( release_kernel_func_ != NULL){
+      return release_kernel_func_(kernel);
+    }else{
+      qWarning() << "Bind Error: release_kernel_func_";
       bind_error_ = true;
       return 0;
     }

@@ -11,6 +11,7 @@ public:
 
   void init();
   void paintGL();
+  void release();
 
   VolumeData data;
   QVector<QVector3D> vertex;
