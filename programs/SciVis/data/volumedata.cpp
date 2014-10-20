@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-const int kSize = 20;
+const int kSize = 2;
 
 VolumeData::VolumeData()
 {
@@ -17,7 +17,7 @@ VolumeData::VolumeData()
       float fj = (float(j)-(float(kSize)/2.0f));
       for(int k=0;k<d;k++){
         float fk = (float(k)-(float(kSize)/2.0f));
-        setValue(i,j,k, 1000-(fi*fi + fj*fj + fk*fk) ) ;
+        setValue(i,j,k, (i)+(w*j)+(w*h*k) ) ;
       }
     }
   }

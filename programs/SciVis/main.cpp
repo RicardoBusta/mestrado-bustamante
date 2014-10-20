@@ -2,9 +2,9 @@
 
 int main(int argc, char *argv[])
 {
-  SciVis a(argc, argv);
+  SciVis scivis(argc, argv);
 
-  int ret = a.exec();
-  a.clean();
+  int ret = scivis.exec();
+  scivis.clean();
   return ret;
 }

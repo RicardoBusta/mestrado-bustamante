@@ -99,6 +99,7 @@ add_executable(${PROJECT_NAME}
   ${HEADER_FILES_MOC}
   ${FORM_HEADERS}
   ${RESOURCE_FILES_RCC}
+  #${OTHER_FILES}
 )
 
 #Linking Library

@@ -181,16 +181,11 @@ namespace Busta{
       qWarning() << "Not able to query number of platforms.";
     }
 
-    cl_platform_id * platforms_ptr = NULL;
-    platforms_ptr = new cl_platform_id[num_platforms];
     platforms.resize(num_platforms);
-    if(clGetPlatformIDs(num_platforms,platforms_ptr,NULL)!=CL_SUCCESS){
+    if(clGetPlatformIDs(num_platforms,platforms.data(),NULL)!=CL_SUCCESS){
       qWarning() << "Unable to enumerate platforms.";
-      delete platforms_ptr;
       return;
     }
-    platforms.assign(platforms_ptr,platforms_ptr+num_platforms);
-    delete platforms_ptr;
 
     //--------------------------------
     // Device related
@@ -202,16 +197,11 @@ namespace Busta{
         continue;
       }
 
-      cl_device_id * devices_ptr = NULL;
-      devices_ptr = new cl_device_id[num_devices];
       devices.resize(num_devices);
-      if(clGetDeviceIDs(platforms[i],CL_DEVICE_TYPE_GPU,num_devices,devices_ptr,NULL)!=CL_SUCCESS){
+      if(clGetDeviceIDs(platforms[i],CL_DEVICE_TYPE_GPU,num_devices,devices.data(),NULL)!=CL_SUCCESS){
         qWarning() << "Failed to enumerate platform devices.";
-        delete devices_ptr;
         continue;
       }
-      devices.assign(devices_ptr,devices_ptr+num_devices);
-      delete devices_ptr;
 
       if(devices.size()>0){
         gpu_platform_ = platforms[i];
@@ -298,6 +288,21 @@ namespace Busta{
     }
   }
 
+  cl_command_queue OpenCLManager::clCreateCommandQueue(cl_context context, cl_device_id device, cl_command_queue_properties properties, cl_int *errcode_ret)
+  {
+    if( create_command_queue_func_ == NULL ){
+      create_command_queue_func_ = (PF_CL_CREATE_COMMAND_QUEUE) getProcAddr( "clCreateCommandQueue" );
+    }
+
+    if( create_command_queue_func_ != NULL){
+      return create_command_queue_func_(context,device,properties,errcode_ret);
+    }else{
+      qWarning() << "Bind Error: create_command_queue_func_";
+      bind_error_ = true;
+      return NULL;
+    }
+  }
+
   cl_mem OpenCLManager::clCreateBuffer(cl_context context, cl_mem_flags flags, size_t size, void *host_ptr, cl_int *errcode_ret)
   {
     if( create_buffer_func_ == NULL ){
@@ -323,6 +328,126 @@ namespace Busta{
       return release_mem_object_func_(memobj);
     }else{
       qWarning() << "Bind Error: release_mem_object_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_program OpenCLManager::clCreateProgramWithSource(cl_context context, cl_uint count, const char **strings, const size_t *lengths, cl_int *errcode_ret)
+  {
+    if( create_program_with_source_func_ == NULL ){
+      create_program_with_source_func_ = (PF_CL_CREATE_PROGRAM_WITH_SOURCE) getProcAddr( "clCreateProgramWithSource" );
+    }
+
+    if( create_program_with_source_func_ != NULL){
+      return create_program_with_source_func_(context,count,strings,lengths,errcode_ret);
+    }else{
+      qWarning() << "Bind Error: create_program_with_source_func_";
+      bind_error_ = true;
+      return NULL;
+    }
+  }
+
+  cl_int OpenCLManager::clBuildProgram(cl_program program, cl_uint num_devices, const cl_device_id *device_list, const char *options, void (CL_CALLBACK*pfn_notify)(cl_program, void *), void *user_data)
+  {
+    if( build_program_func_ == NULL ){
+      build_program_func_ = (PF_CL_BUILD_PROGRAM) getProcAddr( "clBuildProgram" );
+    }
+
+    if( build_program_func_ != NULL){
+      return build_program_func_(program,num_devices,device_list,options,pfn_notify,user_data);
+    }else{
+      qWarning() << "Bind Error: enqueue_write_buffer_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_int OpenCLManager::clGetProgramBuildInfo(cl_program program, cl_device_id device, cl_program_build_info param_name, size_t param_value_size, void *param_value, size_t *param_value_size_ret)
+  {
+    if( get_program_build_info_func_ == NULL ){
+      get_program_build_info_func_ = (PF_CL_GET_PROGRAM_BUILD_INFO) getProcAddr( "clGetProgramBuildInfo" );
+    }
+
+    if( get_program_build_info_func_ != NULL){
+      return get_program_build_info_func_(program,device,param_name,param_value_size,param_value,param_value_size_ret);
+    }else{
+      qWarning() << "Bind Error: get_program_build_info_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_kernel OpenCLManager::clCreateKernel(cl_program program, const char *kernel_name, cl_int *errcode_ret)
+  {
+    if( create_kernel_func_ == NULL ){
+      create_kernel_func_ = (PF_CL_CREATE_KERNEL) getProcAddr( "clCreateKernel" );
+    }
+
+    if( create_kernel_func_ != NULL){
+      return create_kernel_func_(program,kernel_name,errcode_ret);
+    }else{
+      qWarning() << "Bind Error: create_kernel_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_int OpenCLManager::clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size, const void *arg_value)
+  {
+    if( set_kerne_arg_func_ == NULL ){
+      set_kerne_arg_func_ = (PF_CL_SET_KERNEL_ARG) getProcAddr( "clSetKernelArg" );
+    }
+
+    if( set_kerne_arg_func_ != NULL){
+      return set_kerne_arg_func_(kernel,arg_index,arg_size,arg_value);
+    }else{
+      qWarning() << "Bind Error: set_kerne_arg_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_int OpenCLManager::clEnqueueReadBuffer(cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_read, size_t offset, size_t cb, void *ptr, cl_uint num_events_in_wait, const cl_event *event_wait_list, cl_event *event)
+  {
+    if( enqueue_read_buffer_func_ == NULL ){
+      enqueue_read_buffer_func_ = (PF_CL_ENQUEUE_READ_BUFFER) getProcAddr( "clEnqueueReadBuffer" );
+    }
+
+    if( enqueue_read_buffer_func_ != NULL){
+      return enqueue_read_buffer_func_(command_queue,buffer,blocking_read,offset,cb,ptr,num_events_in_wait,event_wait_list,event);
+    }else{
+      qWarning() << "Bind Error: enqueue_read_buffer_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_int OpenCLManager::clEnqueueWriteBuffer(cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_write, size_t offset, size_t cb, const void *ptr, cl_uint num_events_in_wait_list, const cl_event *event_wait_list, cl_event *event)
+  {
+    if( enqueue_write_buffer_func_ == NULL ){
+      enqueue_write_buffer_func_ = (PF_CL_ENQUEUE_WRITE_BUFFER) getProcAddr( "clEnqueueWriteBuffer" );
+    }
+
+    if( enqueue_write_buffer_func_ != NULL){
+      return enqueue_write_buffer_func_(command_queue,buffer,blocking_write,offset,cb,ptr,num_events_in_wait_list,event_wait_list,event);
+    }else{
+      qWarning() << "Bind Error: enqueue_write_buffer_func_";
+      bind_error_ = true;
+      return 0;
+    }
+  }
+
+  cl_int OpenCLManager::clEnqueueNDRangeKernel(cl_command_queue command_queue, cl_kernel kernel, cl_uint work_dim, const size_t *global_work_offset, const size_t *global_work_size, const size_t *local_work_size, cl_uint num_events_in_wait_list, const cl_event *event_wait_list, cl_event *event)
+  {
+    if( enqueue_nd_range_kernel_func_ == NULL ){
+      enqueue_nd_range_kernel_func_ = (PF_CL_ENQUEUE_ND_RANGE_KERNEL) getProcAddr( "clEnqueueNDRangeKernel" );
+    }
+
+    if( enqueue_nd_range_kernel_func_ != NULL){
+      return enqueue_nd_range_kernel_func_(command_queue,kernel,work_dim,global_work_offset,global_work_size,local_work_size,num_events_in_wait_list,event_wait_list,event);
+    }else{
+      qWarning() << "Bind Error: enqueue_nd_range_kernel_func_";
       bind_error_ = true;
       return 0;
     }

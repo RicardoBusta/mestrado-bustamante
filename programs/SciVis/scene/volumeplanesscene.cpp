@@ -13,7 +13,8 @@ VolumePlanesScene::VolumePlanesScene()
 
 void VolumePlanesScene::init()
 {
-  vertex = MarchingCubes::march(data, 800);
+  vertex = MarchingCubes::instance()->march(data, 800);
+  vertex = MarchingCubes::instance()->march(data, 800);
 }
 
 void VolumePlanesScene::paintGL()
