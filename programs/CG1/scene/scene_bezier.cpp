@@ -47,8 +47,9 @@ void SceneBezier::setup_spec()
   recalculateControlPoints();
   recalculateSurface();
 
-  skybox_ = Object::create("Skydome","skydome");
-  skybox_->setOverrideTexture("panoramic_room.jpg");
+//  Model::load(":/model/skydome.obj");
+//  skybox_ = Object::create("Skydome","skydome");
+//  skybox_->setOverrideTexture("panoramic_room.jpg");
 }
 
 void SceneBezier::drawObjects() const

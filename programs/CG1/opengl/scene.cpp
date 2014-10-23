@@ -175,6 +175,12 @@ void Scene::clear() const
   }
 }
 
+void Scene::pre_draw() const
+{
+  preDraw();
+  drawSkybox();
+}
+
 void Scene::preDraw() const
 {
 
@@ -182,11 +188,11 @@ void Scene::preDraw() const
 
 void Scene::draw() const
 {
-  preDraw();
-
-  drawSkybox();
   drawObjects();
+}
 
+void Scene::post_draw() const
+{
   postDraw();
 }
 
@@ -237,6 +243,14 @@ void Scene::postDraw() const
 
 void Scene::drawSkybox() const
 {
+  glPushAttrib(GL_ALL_ATTRIB_BITS);
+
+  if(Options::instance()->get_option("check_textures")){
+    glEnable(GL_TEXTURE_2D);
+  }else{
+    glDisable(GL_TEXTURE_2D);
+  }
+
   // Draw Skybox
   if(Options::instance()->get_option("check_skydome")){
     glPushMatrix();
@@ -256,12 +270,12 @@ void Scene::drawSkybox() const
 
     glPopMatrix();
   }
+  glPopAttrib();
 }
 
 void Scene::drawObjects() const
 {
   // Draw Objects
-  Shaders::instance()->bind("phong");
   glPushMatrix();
   glScalef(zoom_,zoom_,zoom_);
   glRotatef(rot_x_,1,0,0);
@@ -275,7 +289,6 @@ void Scene::drawObjects() const
     }
   }
   glPopMatrix();
-  Shaders::instance()->release("phong");
 }
 
 float Scene::zoom() const

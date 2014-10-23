@@ -45,6 +45,8 @@ void MainWindow::init()
 
   connect(ui->button_hide_interface,SIGNAL(clicked()),this,SLOT(hideTabs()));
 
+  connect(ui->shader_apply,SIGNAL(clicked()),this,SLOT(setShaders()));
+
   Scene::addScene("**Empty",new Scene(this));
   Scene::addScene("*Obj File",new SceneObj(this));
   Scene::addScene("Tire",new SceneTire(this));
@@ -86,11 +88,21 @@ void MainWindow::hideTabs()
 void MainWindow::shaderToggle(bool v)
 {
   ui->group_opengl->setEnabled(!v);
+  ui->shader_apply->setVisible(v);
+  ui->shader_widget->setVisible(v);
+  ui->shader_premade->setVisible(v);
+
+  ui->gl_widget->releaseShader();
 }
 
 void MainWindow::optionToggled(bool v)
 {
   Options::instance()->set_option(sender()->objectName(),v);
+}
+
+void MainWindow::setShaders()
+{
+  ui->gl_widget->setShaders(ui->text_vertex_shader->toPlainText(),ui->text_frag_shader->toPlainText());
 }
 
 void MainWindow::setScene(QString s)
@@ -100,7 +112,7 @@ void MainWindow::setScene(QString s)
     ui->stackedWidget->setCurrentWidget(Scene::current()->controlWidget());
   }
 
-  ui->widget->updateGL();
+  ui->gl_widget->updateGL();
 
   ui->list_model->clear();
   ui->list_model->addItems(Model::getList());

@@ -75,3 +75,63 @@ Particle Particle::operator=(const Particle &p)
   memcpy(transform,p.transform,sizeof(transform));
   return *this;
 }
+
+void Particle::set_life(int life)
+{
+  life_ = life;
+}
+
+int Particle::life() const
+{
+  return life_;
+}
+
+void Particle::set_pos(QVector3D pos)
+{
+ pos_ = pos;
+}
+
+QVector3D Particle::pos() const
+{
+  return pos_;
+}
+
+void Particle::set_color(QColor color)
+{
+  color_ = color;
+}
+
+QColor Particle::color() const
+{
+  return color_;
+}
+
+void Particle::set_texture(QString texture)
+{
+  texture_ = texture;
+}
+
+QString Particle::texture() const
+{
+  return texture_;
+}
+
+void Particle::set_scale(float scale)
+{
+  scale_ = scale;
+}
+
+float Particle::scale() const
+{
+  return scale_;
+}
+
+void Particle::set_speed(QVector3D speed)
+{
+  speed_ = speed;
+}
+
+QVector3D Particle::speed() const
+{
+  return speed_;
+}

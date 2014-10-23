@@ -28,7 +28,9 @@ public:
   // Paint OpenGL
   void setOptions();
   void clear() const;
+  void pre_draw() const;
   void draw() const;
+  void post_draw() const;
   void drawArtifacts() const;
 
   // Scene Animation Manipulation

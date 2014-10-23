@@ -17,6 +17,8 @@ public:
   static QStringList getList();
 
   int getTextureSize(QString texture);
+
+  QString current_texture() const;
 private:
   Textures();
 

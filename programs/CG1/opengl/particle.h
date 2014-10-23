@@ -33,6 +33,20 @@ public:
 
   bool operator<(const Particle &p) const;
   Particle operator=(const Particle &p);
+
+  void set_life(int life);
+  int life() const;
+  void set_pos(QVector3D pos);
+  QVector3D pos() const;
+  void set_color(QColor color);
+  QColor color() const;
+  void set_texture(QString texture);
+  QString texture() const;
+  void set_scale(float scale);
+  float scale() const;
+  void set_speed(QVector3D speed);
+  QVector3D speed() const;
+
 };
 
 #endif // PARTICLE_H

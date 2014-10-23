@@ -4,6 +4,7 @@
 #include <QVBoxLayout>
 
 #include "programs/CG1/opengl/particle_system.h"
+#include "particle_behavior/particlefire.h"
 
 SceneBonfire::SceneBonfire(QObject *parent):
   Scene(parent)
@@ -16,14 +17,16 @@ SceneBonfire::~SceneBonfire()
 
 void SceneBonfire::setup_spec()
 {
+  Model::load(":/model/skydome.obj");
   QStringList objects = Model::load(":/model/campfire.obj");
   for(int i=0;i<objects.size();i++){
     Object *obj = Object::create(objects[i],objects[i]);
+    obj->setPosition(QVector3D(0,-2,0));
     objects_.push_back(obj);
   }
 
-  ParticleSystem *ps = ParticleSystem::create("Fire Generator", new ParticleBehavior());
-  ps->setPosition(QVector3D(0,0.5,0));
+  ParticleSystem *ps = ParticleSystem::create("Fire Generator", new ParticleFire());
+  ps->setPosition(QVector3D(0,-1.5,0));
   objects_.push_back(ps);
 
   skybox_ = Object::create("Skydome","skydome");

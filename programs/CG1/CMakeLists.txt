@@ -4,35 +4,36 @@ include_directories(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY
 
 #Add project files
 set(SOURCE_FILES
-    main.cpp
-    widgets/mainwindow.cpp
-    widgets/glwidget.cpp
-    opengl/scene.cpp
-    opengl/material.cpp
-    opengl/object.cpp
-    utils/options.cpp
-    opengl/textures.cpp
-    utils/common.cpp
-    opengl/shaders.cpp
-    scene/scene_tire.cpp
-    scene/scene_pie.cpp
-    opengl/model.cpp
-    opengl/animation.cpp
-    animation/animation_spin.cpp
-    scene/scene_truck.cpp
-    scene/scene_donut.cpp
-    animation/animationshake.cpp
-    scene/scene_fur.cpp
-    scene/scene_bonfire.cpp
-    scene/scene_voxel.cpp
-    opengl/opengl.cpp
-    scene/scene_obj.cpp
-    cgapplication.cpp
-    scene/scene_bezier.cpp
-    opengl/particle_system.cpp
-    opengl/particle.cpp
-    utils/random.cpp
-    opengl/particle_behavior.cpp
+  main.cpp
+  widgets/mainwindow.cpp
+  widgets/glwidget.cpp
+  opengl/scene.cpp
+  opengl/material.cpp
+  opengl/object.cpp
+  utils/options.cpp
+  opengl/textures.cpp
+  utils/common.cpp
+  opengl/shaders.cpp
+  scene/scene_tire.cpp
+  scene/scene_pie.cpp
+  opengl/model.cpp
+  opengl/animation.cpp
+  animation/animation_spin.cpp
+  scene/scene_truck.cpp
+  scene/scene_donut.cpp
+  animation/animationshake.cpp
+  scene/scene_fur.cpp
+  scene/scene_bonfire.cpp
+  scene/scene_voxel.cpp
+  opengl/opengl.cpp
+  scene/scene_obj.cpp
+  cgapplication.cpp
+  scene/scene_bezier.cpp
+  opengl/particle_system.cpp
+  opengl/particle.cpp
+  utils/random.cpp
+  opengl/particle_behavior.cpp
+  particle_behavior/particlefire.cpp
 )
 set(HEADER_FILES
   widgets/mainwindow.h
@@ -64,6 +65,8 @@ set(HEADER_FILES
   opengl/particle.h
   utils/random.h
   opengl/particle_behavior.h
+  shaders/phong_shader.h
+  particle_behavior/particlefire.h
 )
 set(FORM_FILES
   widgets/mainwindow.ui
@@ -91,6 +94,7 @@ qt5_add_resources(RESOURCE_FILES_RCC ${RESOURCE_FILES})
 add_executable(${PROJECT_NAME}
   ${SOURCE_FILES}
   ${HEADER_FILES_MOC}
+  ${HEADER_FILES}
   ${FORM_HEADERS}
   ${RESOURCE_FILES_RCC}
 )

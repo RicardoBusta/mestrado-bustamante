@@ -26,6 +26,8 @@ void SceneVoxel::drawObjects() const
   glPushMatrix();
   glPushAttrib(GL_ALL_ATTRIB_BITS);
 
+  glColor3f(1,1,1);
+
   if(Options::instance()->get_option("check_textures")){
     //    glEnable(GL_TEXTURE_2D);
     glEnable(GL_TEXTURE_3D);

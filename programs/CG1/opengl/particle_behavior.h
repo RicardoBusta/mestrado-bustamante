@@ -7,11 +7,9 @@ class ParticleBehavior
 {
 public:
   ParticleBehavior();
-private:
-  friend class Particle;
 
-  virtual void initialize(Particle *p);
-  virtual void behave(Particle *p);
+  virtual void initialize(Particle *p)=0;
+  virtual void behave(Particle *p)=0;
 };
 
 #endif // PARTICLEBEHAVIOR_H

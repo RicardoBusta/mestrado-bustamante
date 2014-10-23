@@ -16,6 +16,11 @@ ParticleSystem *ParticleSystem::create(QString object_name, ParticleBehavior *so
   return p;
 }
 
+void ParticleSystem::set_source_behavior(ParticleBehavior *source_behavior)
+{
+  source_behavior_ = source_behavior;
+}
+
 void ParticleSystem::preDraw()
 {
   glPushMatrix();

@@ -15,10 +15,14 @@ public:
 
   QTimer *timer_;
 
+  void setShaders(const QString &vert_shader, const QString &frag_shader);
+  void releaseShader();
+
 protected:
   void initializeGL();
   void resizeGL(int w, int h);
   void paintGL();
+  void popUpLogMessage(QString msg);
 
   void mousePressEvent(QMouseEvent *event);
   void mouseReleaseEvent(QMouseEvent *event);

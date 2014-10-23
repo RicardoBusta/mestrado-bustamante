@@ -131,6 +131,11 @@ int Textures::getTextureSize(QString texture)
   }
 }
 
+QString Textures::current_texture() const
+{
+  return current_texture_;
+}
+
 GLuint Textures::bindTexture(const QImage &tex)
 {
   if(NULL == gl_widget_){

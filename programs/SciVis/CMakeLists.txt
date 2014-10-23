@@ -5,7 +5,7 @@ include_directories(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY
 include_directories("${ROOT_DIR}/others_libs/NVIDIA_SDK/OpenCL/inc")
 
 #Add project files
-set(QT_SOURCE_FILES
+set(SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/main.cpp
   ${CMAKE_CURRENT_LIST_DIR}/scivis.cpp
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.cpp
@@ -13,14 +13,12 @@ set(QT_SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.cpp
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.cpp
 )
-set(QT_HEADER_FILES
+set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/scivis.h
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.h
   ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.h
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.h
-)
-set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubeskernel.h
 )
 set(FORM_FILES
@@ -38,17 +36,17 @@ set(DEPENDENCY_LIBRARIES
 )
 
 #Qt steps before compiling
-qt5_wrap_cpp(HEADER_FILES_MOC ${QT_HEADER_FILES})
+qt5_wrap_cpp(HEADER_FILES_MOC ${HEADER_FILES})
 qt5_wrap_ui(FORM_HEADERS ${FORM_FILES})
 qt5_add_resources(RESOURCE_FILES_RCC ${RESOURCE_FILES})
 
 #Adding files post-qt to project
 add_executable(${PROJECT_NAME}
-  ${QT_SOURCE_FILES}
+  ${SOURCE_FILES}
   ${HEADER_FILES_MOC}
+  ${HEADER_FILES}
   ${FORM_HEADERS}
   ${RESOURCE_FILES_RCC}
-  ${HEADER_FILES}
   ${OTHER_FILES}
 )
 

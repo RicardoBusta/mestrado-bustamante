@@ -9,6 +9,8 @@
 #include "programs/CG1/utils/options.h"
 #include "programs/CG1/opengl/shaders.h"
 
+#include <QMessageBox>
+
 GLWidget::GLWidget(QWidget *parent) :
   QGLWidget(parent),
   timer_( new QTimer(this) )
@@ -25,10 +27,38 @@ GLWidget::~GLWidget()
 
 }
 
+void GLWidget::setShaders(const QString &vert_shader, const QString &frag_shader)
+{
+  bool success = true;
+
+  shader_program_.removeAllShaders();
+  success = shader_program_.addShaderFromSourceCode(QGLShader::Vertex, vert_shader);
+  if(!success){
+    popUpLogMessage(shader_program_.log());
+  }
+
+  success = shader_program_.addShaderFromSourceCode(QGLShader::Fragment, frag_shader);
+  if(!success){
+    popUpLogMessage(shader_program_.log());
+  }
+
+  success = shader_program_.link();
+  if(!success){
+    popUpLogMessage(shader_program_.log());
+  }
+}
+
+void GLWidget::releaseShader()
+{
+  shader_program_.removeAllShaders();
+}
+
 void GLWidget::initializeGL()
 {
   Scene::initialize();
-//  Scene::current()->initialize();
+  //  Scene::current()->initialize();
+
+  shader_program_.removeAllShaders();
 }
 
 void GLWidget::resizeGL(int w, int h)
@@ -48,12 +78,23 @@ void GLWidget::paintGL()
 
   Scene::current()->clear();
   Scene::current()->applyCameraConstraint();
+  Scene::current()->pre_draw();
+  if(shader_program_.isLinked()) shader_program_.bind();
   Scene::current()->draw();
+  if(shader_program_.isLinked()) shader_program_.release();
+  Scene::current()->post_draw();
   Scene::current()->drawArtifacts();
 
   while(GLenum err= glGetError()){
     qDebug() << "GL Error:" << err;
   }
+}
+
+void GLWidget::popUpLogMessage(QString msg)
+{
+  QMessageBox m_box;
+  m_box.setText(msg);
+  m_box.exec();
 }
 
 

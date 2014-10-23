@@ -36,6 +36,8 @@ private slots:
 
   void optionToggled(bool v);
 
+  void setShaders();
+
   void setScene(QString s);
 };
 

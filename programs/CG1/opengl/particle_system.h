@@ -14,6 +14,8 @@ public:
 
   static ParticleSystem *create(QString object_name, ParticleBehavior *source_behavior);
 
+  void set_source_behavior(ParticleBehavior * source_behavior);
+
   ParticleBehavior * source_behavior_;
 
   void preDraw();
