@@ -86,7 +86,6 @@ void MainWindow::hideTabs()
 void MainWindow::shaderToggle(bool v)
 {
   ui->group_opengl->setEnabled(!v);
-  ui->group_shader->setEnabled(v);
 }
 
 void MainWindow::optionToggled(bool v)

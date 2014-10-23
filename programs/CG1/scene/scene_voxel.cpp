@@ -152,7 +152,7 @@ void SceneVoxel::buildControlWidget()
 
   ui->comboBox->addItem("voxel_scene.png");
   ui->comboBox->addItem("voxatron.png");
-  ui->comboBox->addItem("test_key.png");
+  ui->comboBox->addItem("ball.png");
   Options::instance()->setVoxelScene(ui->comboBox->currentText());
   connect(ui->comboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(setVoxelScene(QString)));
 }

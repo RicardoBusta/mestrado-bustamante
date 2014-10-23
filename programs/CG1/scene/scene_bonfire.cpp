@@ -25,6 +25,9 @@ void SceneBonfire::setup_spec()
   ParticleSystem *ps = ParticleSystem::create("Fire Generator", new ParticleBehavior());
   ps->setPosition(QVector3D(0,0.5,0));
   objects_.push_back(ps);
+
+  skybox_ = Object::create("Skydome","skydome");
+  skybox_->setOverrideTexture("panoramic_room.jpg");
 }
 
 void SceneBonfire::buildControlWidget()

@@ -13,6 +13,7 @@
 Object::Object():
   valid_(false),
   scale_(1.0f),
+  visible_(true),
   has_custom_color_(false),
   model_(NULL)
 {
