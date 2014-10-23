@@ -13,6 +13,8 @@
 #include "programs/CG1/scene/scene_obj.h"
 #include "programs/CG1/scene/scene_bezier.h"
 
+#include "shaders/phong_shader.h"
+
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
@@ -46,6 +48,10 @@ void MainWindow::init()
   connect(ui->button_hide_interface,SIGNAL(clicked()),this,SLOT(hideTabs()));
 
   connect(ui->shader_apply,SIGNAL(clicked()),this,SLOT(setShaders()));
+
+  ui->shader_premade->addItem("-");
+  ui->shader_premade->addItem("Phong");
+  connect(ui->shader_premade,SIGNAL(currentIndexChanged(int)),this,SLOT(setShaderText(int)));
 
   Scene::addScene("**Empty",new Scene(this));
   Scene::addScene("*Obj File",new SceneObj(this));
@@ -103,6 +109,18 @@ void MainWindow::optionToggled(bool v)
 void MainWindow::setShaders()
 {
   ui->gl_widget->setShaders(ui->text_vertex_shader->toPlainText(),ui->text_frag_shader->toPlainText());
+}
+
+int MainWindow::setShaderText(int s)
+{
+  switch(s){
+  case 1:
+    ui->text_vertex_shader->setText(kPhongShaderVert);
+    ui->text_frag_shader->setText(kPhongShaderFrag);
+    break;
+  default:
+    break;
+  }
 }
 
 void MainWindow::setScene(QString s)
