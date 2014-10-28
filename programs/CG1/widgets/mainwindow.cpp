@@ -12,6 +12,7 @@
 #include "programs/CG1/scene/scene_bonfire.h"
 #include "programs/CG1/scene/scene_obj.h"
 #include "programs/CG1/scene/scene_bezier.h"
+#include "programs/CG1/scene/scene_multicubes.h"
 
 #include "shaders/phong_shader.h"
 
@@ -63,6 +64,7 @@ void MainWindow::init()
   Scene::addScene("*Fur",new SceneFur(this));
   Scene::addScene("*Voxel",new SceneVoxel(this));
   Scene::addScene("Campfire",new SceneBonfire(this));
+  Scene::addScene("MultiCubes",new SceneMultiCubes(this));
   Scene::setCurrent("**Empty");
 
   connect(ui->combo_scenes,SIGNAL(currentIndexChanged(QString)),this,SLOT(setScene(QString)));

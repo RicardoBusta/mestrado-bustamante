@@ -21,6 +21,7 @@
         <file>pickup_exterior_alt.png</file>
         <file>Campfire_texture.jpg</file>
         <file>fire_particle_texture.png</file>
+        <file>multicubes.png</file>
     </qresource>
     <qresource prefix="/model">
         <file>tire.obj</file>
@@ -32,6 +33,7 @@
         <file>fur.obj</file>
         <file>pickup.obj</file>
         <file>campfire.obj</file>
+        <file>multicube.obj</file>
     </qresource>
     <qresource prefix="/material">
         <file>tire.mtl</file>
@@ -43,5 +45,6 @@
         <file>fur.mtl</file>
         <file>pickup.mtl</file>
         <file>campfire.mtl</file>
+        <file>multicube.mtl</file>
     </qresource>
 </RCC>

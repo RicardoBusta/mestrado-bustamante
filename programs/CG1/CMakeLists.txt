@@ -34,6 +34,7 @@ set(SOURCE_FILES
   utils/random.cpp
   opengl/particle_behavior.cpp
   particle_behavior/particlefire.cpp
+  scene/scene_multicubes.cpp
 )
 set(HEADER_FILES
   widgets/mainwindow.h
@@ -67,6 +68,7 @@ set(HEADER_FILES
   opengl/particle_behavior.h
   shaders/phong_shader.h
   particle_behavior/particlefire.h
+  scene/scene_multicubes.h
 )
 set(FORM_FILES
   widgets/mainwindow.ui
