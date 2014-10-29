@@ -15,6 +15,7 @@
 #include "programs/CG1/scene/scene_multicubes.h"
 
 #include "shaders/phong_shader.h"
+#include "shaders/toon_shader.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -52,7 +53,8 @@ void MainWindow::init()
 
   ui->shader_premade->addItem("-");
   ui->shader_premade->addItem("Phong");
-  connect(ui->shader_premade,SIGNAL(currentIndexChanged(int)),this,SLOT(setShaderText(int)));
+  ui->shader_premade->addItem("Toon");
+  connect(ui->shader_premade,SIGNAL(currentTextChanged(QString)),this,SLOT(setShaderText(QString)));
 
   Scene::addScene("**Empty",new Scene(this));
   Scene::addScene("*Obj File",new SceneObj(this));
@@ -113,15 +115,17 @@ void MainWindow::setShaders()
   ui->gl_widget->setShaders(ui->text_vertex_shader->toPlainText(),ui->text_frag_shader->toPlainText());
 }
 
-int MainWindow::setShaderText(int s)
+void MainWindow::setShaderText(const QString &s)
 {
-  switch(s){
-  case 1:
+  if(s=="Phong"){
     ui->text_vertex_shader->setText(kPhongShaderVert);
     ui->text_frag_shader->setText(kPhongShaderFrag);
-    break;
-  default:
-    break;
+    return;
+  }
+  if(s=="Toon"){
+    ui->text_vertex_shader->setText(kToonShaderVert);
+    ui->text_frag_shader->setText(kToonShaderFrag);
+    return;
   }
 }
 

@@ -69,6 +69,7 @@ protected:
 
   void GlVertex(const QVector3D &v) const;
   void GlColor(const QColor &c) const;
+  void GlNormal(const QVector3D &v) const;
 
   virtual void buildControlWidget();
   QWidget *control_widget_;

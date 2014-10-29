@@ -22,6 +22,8 @@
         <file>Campfire_texture.jpg</file>
         <file>fire_particle_texture.png</file>
         <file>multicubes.png</file>
+        <file>clearskydome.jpg</file>
+        <file>nightsky.jpg</file>
     </qresource>
     <qresource prefix="/model">
         <file>tire.obj</file>

@@ -65,6 +65,11 @@ void Scene::GlColor(const QColor &c) const
   glColor3f(c.redF(),c.greenF(),c.blueF());
 }
 
+void Scene::GlNormal(const QVector3D &v) const
+{
+  glNormal3f(v.x(),v.y(),v.z());
+}
+
 void Scene::addZoom(int zoom)
 {
   setZoom( zoom_ + zoom_*float(zoom)/Options::instance()->zoom_to_size() );
@@ -281,6 +286,9 @@ void Scene::drawObjects() const
   glRotatef(rot_x_,1,0,0);
   glRotatef(rot_y_,0,1,0);
   glRotatef(rot_z_,0,0,1);
+
+  //glRotatef(90,1,0,0);
+  //  glFrustum(-.1,.1,-.1,.1,1,10);
 
   for(int i=0;i<objects_.size(); i++){
     if(objects_[i]!=NULL){

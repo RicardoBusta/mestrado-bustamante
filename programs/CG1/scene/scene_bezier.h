@@ -38,6 +38,8 @@ private:
 
     Ui::BezierWidget *ui;
 
+    QVector3D calculateNormal(const QVector3D &v1, const QVector3D &v2, const QVector3D &v3) const;
+
 private slots:
     void currentControlPointChanged();
     void controlPointValueXChanged();

@@ -103,9 +103,11 @@ void SceneBezier::drawObjects() const
   }else{
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
   }
+  glEnable(GL_LIGHTING);
   glBegin(GL_QUADS);
   for(int i=0;i<surface_size_-1;i++){
     for(int j=0;j<surface_size_-1;j++){
+      GlNormal(calculateNormal(surface_points_[i][j],surface_points_[i+1][j],surface_points_[i+1][j+1]));
       GlColor(surface_colors_[i][j]);
       GlVertex(surface_points_[i][j]);
       GlColor(surface_colors_[i+1][j]);
@@ -168,6 +170,15 @@ QVector3D SceneBezier::surfacePoint(float u, float v) const
     }
   }
   return sum;
+}
+
+QVector3D SceneBezier::calculateNormal(const QVector3D &v1, const QVector3D &v2, const QVector3D &v3) const
+{
+  QVector3D normal;
+
+  normal = QVector3D::crossProduct( (v2-v1),(v3-v1) );
+
+  return normal;
 }
 
 void SceneBezier::currentControlPointChanged()

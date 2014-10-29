@@ -67,6 +67,7 @@ set(HEADER_FILES
   utils/random.h
   opengl/particle_behavior.h
   shaders/phong_shader.h
+  shaders/toon_shader.h
   particle_behavior/particlefire.h
   scene/scene_multicubes.h
 )
@@ -87,6 +88,10 @@ set(RESOURCE_FILES
 set(OTHER_FILES
 )
 
+set(DEPENDENCY_LIBRARIES
+  BustaCommonStructures
+)
+
 #Qt steps before compiling
 qt5_wrap_cpp(HEADER_FILES_MOC ${HEADER_FILES})
 qt5_wrap_ui(FORM_HEADERS ${FORM_FILES})
@@ -103,4 +108,4 @@ add_executable(${PROJECT_NAME}
 
 #Linking Library
 qt5_use_modules(${PROJECT_NAME} Core Gui Widgets OpenGL)
-target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${DEPENDENCY_LIBRARIES})

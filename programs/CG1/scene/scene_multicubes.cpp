@@ -14,7 +14,7 @@ void SceneMultiCubes::setup_spec()
   objects_.push_back(box);
 
   skybox_ = Object::create("Skydome","skydome");
-  skybox_->setOverrideTexture("panoramic_room.jpg");
+  skybox_->setOverrideTexture("clearskydome.jpg");
 }
 
 void SceneMultiCubes::buildControlWidget()

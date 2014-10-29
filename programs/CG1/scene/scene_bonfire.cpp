@@ -30,7 +30,7 @@ void SceneBonfire::setup_spec()
   objects_.push_back(ps);
 
   skybox_ = Object::create("Skydome","skydome");
-  skybox_->setOverrideTexture("panoramic_room.jpg");
+  skybox_->setOverrideTexture("nightsky.jpg");
 }
 
 void SceneBonfire::buildControlWidget()
