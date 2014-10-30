@@ -12,6 +12,8 @@ public:
   void init();
   void paintGL();
   void release();
+
+  unsigned int textureID;
 };
 
 #endif // VOLUMEPLANESSCENE_H

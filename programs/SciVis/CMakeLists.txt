@@ -35,6 +35,7 @@ set(OTHER_FILES
 set(DEPENDENCY_LIBRARIES
   BustaGLWidget
   BustaOpenCLManager
+  BustaOpenGLExtensionManager
 )
 
 #Qt steps before compiling

@@ -23,6 +23,7 @@ void OpenGL::texImage3D(GLenum target, GLint level, GLint internalFormat, GLsize
     qDebug() << "Loaded texImage3D:" << gl_tex_image_3d_;
   }
   if(gl_tex_image_3d_ == NULL){
+    qDebug() << "Binding Failed";
     return;
   }
   gl_tex_image_3d_(target,level,internalFormat,width,height,depth,border,format,type,data);

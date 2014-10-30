@@ -42,7 +42,10 @@ namespace Busta{
 
   void GLWidget::paintGL()
   {
-    if(NULL == scene_) return;
+    if(NULL == scene_){
+      glClear(GL_COLOR_BUFFER_BIT);
+      return;
+    }
 
     scene_->rotx_+=auto_delta_.y()*auto_rot_speed_;
     scene_->roty_+=auto_delta_.x()*auto_rot_speed_;
