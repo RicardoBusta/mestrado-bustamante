@@ -36,7 +36,7 @@ Scene::Scene(QObject *parent):
   rot_y_(0),
   rot_z_(0),
   wireframe_(false),
-  zoom_(0.3),
+  zoom_(0.3f),
   user_color_(true),
   current_frame_(0),
   frame_delay_count_(0),

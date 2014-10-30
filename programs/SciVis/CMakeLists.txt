@@ -10,6 +10,7 @@ set(SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/scivis.cpp
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.cpp
   ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/scene/marchingcubesscene.cpp
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.cpp
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.cpp
 )
@@ -17,6 +18,7 @@ set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/scivis.h
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.h
   ${CMAKE_CURRENT_LIST_DIR}/scene/volumeplanesscene.h
+  ${CMAKE_CURRENT_LIST_DIR}/scene/marchingcubesscene.h
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubeskernel.h

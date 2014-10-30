@@ -96,8 +96,6 @@ namespace Busta{
   {
     if(scene_==NULL) return;
 
-    qDebug() << scene_->zoom_;
-
     scene_->zoom_ += event->delta();
 
     event->accept();

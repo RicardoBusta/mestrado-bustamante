@@ -10,5 +10,5 @@ Saturn::Saturn():
   object_name = "Saturn";
   translation_x_radius = 3000;
   translation_z_radius = 3000;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

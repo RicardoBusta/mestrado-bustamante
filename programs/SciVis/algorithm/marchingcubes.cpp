@@ -2,7 +2,7 @@
 
 const int voxel_size = 10;
 
-#include <QDebug>
+//#include <QDebug>
 
 #include "marchingcubeskernel.h"
 
@@ -61,7 +61,7 @@ QVector<QVector3D> MarchingCubes::march(const VolumeData &data, const float valu
     qDebug() << QString("it: %1 in: %2 out: %3").arg(i).arg(data.data_[i]).arg(out_read[i]);
   }
 
-  float inc = 1.0/float(voxel_size-1);
+  float inc = 1.0f/float(voxel_size-1);
 
   for(int i=0;i<voxel_size;i++){
     float fi = float(i)/float(voxel_size-1);

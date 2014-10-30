@@ -10,5 +10,5 @@ Mercury::Mercury():
   object_name = "Mercury";
   translation_x_radius = 500;
   translation_z_radius = 500;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

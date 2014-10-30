@@ -247,6 +247,8 @@ QMap<QString, Ric::Material> ObjLoader::LoadMtl(QString filename)
 
     }
   }
+
+  return mtl_map;
 }
 
 QString ObjLoader::ReadValidLine(QTextStream &in)

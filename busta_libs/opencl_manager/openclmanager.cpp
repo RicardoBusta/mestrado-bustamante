@@ -190,7 +190,7 @@ namespace Busta{
     //--------------------------------
     // Device related
     //--------------------------------
-    for(int i=0;i<platforms.size();i++){
+    for(unsigned int i=0;i<platforms.size();i++){
       cl_uint num_devices=0;
       if(clGetDeviceIDs(platforms[i],CL_DEVICE_TYPE_GPU,0,NULL,&num_devices)!=CL_SUCCESS){
         qWarning() << "Failed to get platform devices.";

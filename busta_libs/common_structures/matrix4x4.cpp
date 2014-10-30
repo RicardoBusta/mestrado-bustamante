@@ -80,9 +80,9 @@ void Matrix4x4::loadIdentity()
 
 void Matrix4x4::rotate(const float &angle, const float &x, const float &y, const float &z)
 {
-  double ar = angle*M_PI/180.0;
-  double c = cos(ar);
-  double s = sin(ar);
+  float ar = float(angle*M_PI/180.0f);
+  float c = cos(ar);
+  float s = sin(ar);
 
   Matrix4x4 rotation(
         (x*x*(1-c))+c,      (x*y*(1-c))-(z*s),  (x*z*(1-c))+(y*s),  0,
@@ -138,12 +138,12 @@ void Matrix4x4::scale(const float &x, const float &y, const float &z)
 
 void Matrix4x4::ortho(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 {
-  double tx = -((right+left)/(right-left));
-  double ty = -((top+bottom)/(top-bottom));
-  double tz = -((far+near)/(far-near));
-  double sx = 2/(right-left);
-  double sy = 2/(top-bottom);
-  double sz = -2/(far-near);
+  float tx = -((right+left)/(right-left));
+  float ty = -((top+bottom)/(top-bottom));
+  float tz = -((far+near)/(far-near));
+  float sx = 2/(right-left);
+  float sy = 2/(top-bottom);
+  float sz = -2/(far-near);
 
   Matrix4x4 orthomatrix(
         sx, 0.f, 0.f, tx,
@@ -156,13 +156,13 @@ void Matrix4x4::ortho(const float &left, const float &right, const float &bottom
 
 void Matrix4x4::frustum(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 {
-  double m11 = (2*near)/(right-left);
-  double m22 = (2*near)/(top-bottom);
-  double m33 = -(far+near)/(far-near);
-  double m13 = (right+left)/(right-left);
-  double m23 = (top+bottom)/(top-bottom);
-  double m34 = (-2*far*near)/(far-near);
-  double m43 = -1;
+  float m11 = (2*near)/(right-left);
+  float m22 = (2*near)/(top-bottom);
+  float m33 = -(far+near)/(far-near);
+  float m13 = (right+left)/(right-left);
+  float m23 = (top+bottom)/(top-bottom);
+  float m34 = (-2*far*near)/(far-near);
+  float m43 = -1;
 
   Matrix4x4 frustummatrix(
         m11, 0.f, m13, 0.f,
@@ -175,12 +175,12 @@ void Matrix4x4::frustum(const float &left, const float &right, const float &bott
 
 void Matrix4x4::orthoC(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 {
-  double tx = -((right+left)/(right-left));
-  double ty = -((top+bottom)/(top-bottom));
-  double tz = ((far+near)/(far-near));
-  double sx = 2/(right-left);
-  double sy = 2/(top-bottom);
-  double sz = 2/(far-near);
+  float tx = -((right+left)/(right-left));
+  float ty = -((top+bottom)/(top-bottom));
+  float tz = ((far+near)/(far-near));
+  float sx = 2/(right-left);
+  float sy = 2/(top-bottom);
+  float sz = 2/(far-near);
 
   Matrix4x4 orthomatrix(
         sx, 0.f, 0.f, tx,
@@ -193,13 +193,13 @@ void Matrix4x4::orthoC(const float &left, const float &right, const float &botto
 
 void Matrix4x4::frustumC(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 {
-  double m11 = (2*near)/(right-left);
-  double m22 = (2*near)/(top-bottom);
-  double m33 = (far+near)/(far-near);
-  double m13 = (right+left)/(right-left);
-  double m23 = (top+bottom)/(top-bottom);
-  double m34 = (2*far*near)/(far-near);
-  double m43 = -1;
+  float m11 = (2*near)/(right-left);
+  float m22 = (2*near)/(top-bottom);
+  float m33 = (far+near)/(far-near);
+  float m13 = (right+left)/(right-left);
+  float m23 = (top+bottom)/(top-bottom);
+  float m34 = (2*far*near)/(far-near);
+  float m43 = -1;
 
   Matrix4x4 frustummatrix(
         m11, 0.f, m13, 0.f,
@@ -230,7 +230,7 @@ Matrix4x4 Matrix4x4::transposed() const
 
 void Matrix4x4::inverse()
 {
-  double inv[16], det;
+  float inv[16], det;
   int i;
 
   inv[0] = data_[5]  * data_[10] * data_[15] -
@@ -352,7 +352,7 @@ void Matrix4x4::inverse()
     return;
   }
 
-  det = 1.0 / det;
+  det = 1.0f / det;
 
   for (i = 0; i < 16; i++)
     data_[i] = inv[i] * det;

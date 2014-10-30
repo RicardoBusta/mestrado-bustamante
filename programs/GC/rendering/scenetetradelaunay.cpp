@@ -246,7 +246,7 @@ bool SceneTetraDelaunay::FindFirstFace()
   double max_dist;
   int max_i, max_j, max_k;
   // case 2
-  QHPoly *pcw, *pccw;
+  //QHPoly *pcw, *pccw;
 
   //  horizon_not_ridge.clear();
 

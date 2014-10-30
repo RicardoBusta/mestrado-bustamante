@@ -10,5 +10,5 @@ Mars::Mars():
   object_name = "Mars";
   translation_x_radius = 2000;
   translation_z_radius = 2000;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

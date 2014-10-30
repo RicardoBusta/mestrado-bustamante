@@ -10,5 +10,5 @@ Neptune::Neptune():
   object_name = "Neptune";
   translation_x_radius = 3500;
   translation_z_radius = 3500;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

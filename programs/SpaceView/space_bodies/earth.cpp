@@ -10,5 +10,5 @@ Earth::Earth():
   object_name = "Earth";
   translation_x_radius = 1500;
   translation_z_radius = 1500;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

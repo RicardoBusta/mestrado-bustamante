@@ -10,5 +10,5 @@ Uranus::Uranus():
   object_name = "Uranus";
   translation_x_radius = 4000;
   translation_z_radius = 4000;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

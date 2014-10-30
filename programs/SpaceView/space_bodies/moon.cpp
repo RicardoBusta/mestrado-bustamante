@@ -6,7 +6,7 @@ Moon::Moon():
   model_name = "Sphere";
   texture = ":/texture/texture_moon.jpg";
   current_translation_angle = 90;
-  radius = 0.273;
+  radius = 0.273f;
   draw_orbit = true;
   object_name = "Moon";
 }

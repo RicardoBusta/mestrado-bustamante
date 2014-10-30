@@ -10,5 +10,5 @@ Pluto::Pluto():
   object_name = "Pluto";
   translation_x_radius = 4500;
   translation_z_radius = 4500;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

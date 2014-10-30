@@ -10,5 +10,5 @@ Jupiter::Jupiter():
   object_name = "Jupiter";
   translation_x_radius = 2500;
   translation_z_radius = 2500;
-  translation_step = 0.1;
+  translation_step = 0.1f;
 }

@@ -11,7 +11,7 @@ namespace Busta{
 
 Vector4::Vector4()
 {
-  std::fill(data_,data_+4,0);
+  std::fill(data_,data_+4,0.0f);
 }
 
 Vector4::Vector4(const Vector4 &v)

@@ -7,8 +7,8 @@
 
 #include "rendering/scene.h"
 
-const float kAxisWidth = 0.025;
-const float kAxisSize = 0.9;
+const float kAxisWidth = 0.025f;
+const float kAxisSize = 0.9f;
 const float kArrowWidth = 2*kAxisWidth;
 const float kArrowSize = kAxisSize+0.1;
 

@@ -1,6 +1,6 @@
 #include "volumedata.h"
 
-#include <QDebug>
+//#include <QDebug>
 
 const int kSize = 2;
 
