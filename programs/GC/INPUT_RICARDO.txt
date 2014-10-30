@@ -1,0 +1,40 @@
+#tipo
+INPUT3D
+#meu nome
+Ricardo Bustamante
+#nº de frames
+1
+#nº de objetos
+1
+#nome obj
+Teste de Input (Ricardo)
+#cor
+FFFFFF
+#spread
+1.0
+#nº de pontos
+6
+#ponto0
+1
+0
+0
+#ponto1
+-1
+0
+0
+#ponto2
+0
+1
+0
+#ponto3
+0
+-1
+0
+#ponto4
+0
+0
+1
+#ponto5
+0
+0
+-1

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/model">
+        <file>sphere.obj</file>
+        <file>dome.obj</file>
+    </qresource>
+    <qresource prefix="/material">
+        <file>sphere.mtl</file>
+        <file>dome.mtl</file>
+    </qresource>
+</RCC>
