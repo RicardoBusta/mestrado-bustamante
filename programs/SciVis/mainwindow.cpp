@@ -35,6 +35,8 @@ void MainWindow::init(){
 
   glwidget_->setScene(NULL);
 
+  ui_->glwidget_container->addWidget(glwidget_);
+
   //setCentralWidget(glwidget_);
 }
 

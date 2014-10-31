@@ -158,6 +158,7 @@ MarchingCubes *MarchingCubes::instance()
 
 int MarchingCubes::pattern(const QVector3D &p1, const QVector3D &p2, const VolumeData &data, const float value)
 {
+  qDebug() << p1 << p2;
   if(data.getParametricValue(p1.x(),p1.y(),p1.z())>value){
     return 1;
   }

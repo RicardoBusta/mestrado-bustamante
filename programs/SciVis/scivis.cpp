@@ -18,6 +18,6 @@ SciVis::SciVis(int argc, char *argv[]) :
 
 void SciVis::clean()
 {
-  Busta::OpenCLManager::instance()->UnloadLibrary();
+  //Busta::OpenCLManager::instance()->UnloadLibrary();
   qDebug() << "cleaning";
 }

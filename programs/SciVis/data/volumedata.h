@@ -19,6 +19,8 @@ public:
   float getValue(int i, int j, int k) const;
   float getInterpolatedValue(float i, float j, float k) const;
   float getParametricValue(float i, float j, float k) const;
+private:
+  int limit(int val, int min, int max) const;
 };
 
 #endif // VOLUMEDATA_H
