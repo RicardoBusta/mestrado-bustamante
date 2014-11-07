@@ -30,13 +30,21 @@ private:
   int zoom_;
   float rotx_, roty_, rotz_;
 
-  void vertex(const GLVertex &vertex, const Matrix4x4 &transform);
+  void vertex(const GLVertex &vertex);
+  void normal(const GLVertex &v1, const GLVertex &v2, const GLVertex &v3);
+  QColor phong(const GLVertex &vertex);
+  void loadTransform(const Matrix4x4 *loadTransform);
 
   // Scene
   QVector<GLVertex> vertex_;
   QVector<int> index_;
-  Matrix4x4 modelview;
+  Matrix4x4 view;
+  Matrix4x4 model;
   Matrix4x4 projection;
+
+  Vector4 current_normal_;
+  Matrix4x4 current_mvp_;
+  Vector4 current_light_position_;
 
 private slots:
   void stepScene();
