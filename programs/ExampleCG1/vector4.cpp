@@ -7,6 +7,8 @@
 
 #include "matrix4x4.h"
 
+#include <QtMath>
+
 Vector4::Vector4()
 {
   std::fill(data_,data_+4,0);
@@ -87,6 +89,44 @@ Vector4 Vector4::operator=(const Vector4 &v)
   return *this;
 }
 
+float Vector4::length() const
+{
+  return qSqrt( (data_[0]*data_[0]) + (data_[1]*data_[1]) + (data_[2]*data_[2]) + (data_[3]*data_[3]) );
+}
+
+Vector4 Vector4::normalized() const
+{
+  Vector4 result = *this;
+  float len = length();
+  for(int i=0;i<4;i++){
+    result.setData(i,result.data(i)/len);
+  }
+  return result;
+}
+
+Vector4 Vector4::reflect(const Vector4 &incident, const Vector4 &normal)
+{
+  return (incident - 2.0f * dot(normal,incident) * normal);
+}
+
+float Vector4::dot(const Vector4 &v1, const Vector4 &v2)
+{
+  float res = 0;
+  for(int i=0;i<4;i++){
+    res += v1.data(i)*v1.data(i);
+  }
+  return res;
+}
+
+Vector4 Vector4::clamp(const Vector4 &v, float min, float max)
+{
+  Vector4 result;
+  for(int i=0;i<4;i++){
+    result.setData(i,qMax(qMin(max,v.data(i)),min));
+  }
+  return result;
+}
+
 std::ostream &operator<<(std::ostream &os, const Vector4 &dt)
 {
   os << "("<<dt.data(0)<<", "<<dt.data(1)<<", "<<dt.data(2)<<", "<<dt.data(3)<<")";
@@ -111,4 +151,50 @@ Vector4 operator*(const Vector4 &v1, const Matrix4x4 &m2)
   }
 
   return result;
+}
+
+
+Vector4 operator-(const Vector4 &v1, const Vector4 &v2)
+{
+  Vector4 result;
+  for(int i=0;i<4;i++){
+    result.setData(i,v1.data(i)-v2.data(i));
+  }
+  return result;
+}
+
+
+Vector4 operator+(const Vector4 &v1, const Vector4 &v2)
+{
+  Vector4 result;
+  for(int i=0;i<4;i++){
+    result.setData(i,v1.data(i)+v2.data(i));
+  }
+  return result;
+}
+
+
+Vector4 operator-(const Vector4 &v1)
+{
+  Vector4 result;
+  for(int i=0;i<4;i++){
+    result.setData(i,-v1.data(i));
+  }
+  return result;
+}
+
+
+Vector4 operator*(const float &f1, const Vector4 &v2)
+{
+  Vector4 result;
+  for(int i=0;i<4;i++){
+    result.setData(i,f1*v2.data(i));
+  }
+  return result;
+}
+
+
+Vector4 operator*(const Vector4 &v1, const float &f2)
+{
+  return f2*v1;
 }

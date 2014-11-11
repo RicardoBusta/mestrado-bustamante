@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <iostream>
 
+#include <QtMath>
+
 const bool kUsePerspective = true;
 const bool kTransformLight = true;
 const bool kEnableLighting = true;
@@ -21,6 +23,11 @@ GLWidget::GLWidget(QWidget *parent) :
   roty_(0),
   rotz_(0)
 {
+
+  light_.ambient_ = Vector4(0,0,0,1);
+  light_.diffuse_ = Vector4(0.5,0,0,1);
+  light_.specular_ = Vector4(1,1,1,1);
+  light_.shininess_ = 100;
 
   /*  Timer que chama periodicamente as funções de atualizar a renderização
       e a função que atualiza a cena.  */
@@ -235,35 +242,57 @@ void GLWidget::normal(const GLVertex &v1, const GLVertex &v2, const GLVertex &v3
 
 QColor GLWidget::phong(const GLVertex &vertex)
 {
-  Vector4 L = current_light_position_-vertex.v_
-  const QString kPhongShaderFrag =
-      "varying vec3 N; \n"
-      "varying vec3 v; \n"
-      "varying vec4 t; \n"
-      "uniform sampler2D color_texture; \n"
-      "void main (void) \n"
-      "{ \n"
-      "  vec3 L = normalize(gl_LightSource[0].position.xyz - v); \n"
-      "  vec3 E = normalize(-v); // we are in Eye Coordinates, so EyePos is (0,0,0) \n"
-      "  vec3 R = normalize(-reflect(L,N)); \n"
-      " \n"
-      "  //calculate Ambient Term: \n"
-      "  vec4 Iamb = gl_FrontLightProduct[0].ambient; \n"
-      " \n"
-      "  //calculate Diffuse Term: \n"
-      "  vec4 Idiff = gl_FrontLightProduct[0].diffuse * max(dot(N,L), 0.0); \n"
-      "  Idiff = clamp(Idiff, 0.0, 1.0); \n"
-      " \n"
-      "  // calculate Specular Term: \n"
-      "  vec4 Ispec = gl_FrontLightProduct[0].specular \n"
-      "               * pow(max(dot(R,E),0.0),0.3*gl_FrontMaterial.shininess); \n"
-      "  Ispec = clamp(Ispec, 0.0, 1.0); \n"
-      "  // write Total Color: \n"
-      "  gl_FragColor = ( gl_FrontLightModelProduct.sceneColor + Iamb + Idiff + Ispec ) * texture2D(color_texture,t.st); \n"
-      "} \n";
+  Vector4 N = current_normal_;
+  Vector4 v = vertex.v_;
+  //Vector4 t = vertex.t_;
+
+  Vector4 L = (current_light_position_-vertex.v_).normalized();
+  Vector4 E = (-vertex.v_).normalized(); // EyePos é (0,0,0)
+  Vector4 R = (-Vector4::reflect(L,N)).normalized();
+
+  Vector4 Iamb = light_.ambient_;
+  Vector4 Idiff = light_.diffuse_ * qMax(Vector4::dot(N,L),0.0f);
+  Idiff = Vector4::clamp(Idiff,0.0f,1.0f);
+  Vector4 Ispec = light_.specular_ * qPow(qMax(Vector4::dot(R,E),0.0f),light_.shininess_);
+  Ispec = Vector4::clamp(Ispec,0.0f,1.0f);
+
+  Vector4 vec_color = Vector4::clamp( (Iamb + Idiff + Ispec), 0.0, 1.0 );
+
+  QColor color;
+  color.setRedF(vec_color.data(0));
+  color.setGreenF(vec_color.data(1));
+  color.setBlueF(vec_color.data(2));
+
+  return color;
+
+//  const QString kPhongShaderFrag =
+//      "varying vec3 N; \n"
+//      "varying vec3 v; \n"
+//      "varying vec4 t; \n"
+//      "uniform sampler2D color_texture; \n"
+//      "void main (void) \n"
+//      "{ \n"
+//      "  vec3 L = normalize(gl_LightSource[0].position.xyz - v); \n"
+//      "  vec3 E = normalize(-v); // we are in Eye Coordinates, so EyePos is (0,0,0) \n"
+//      "  vec3 R = normalize(-reflect(L,N)); \n"
+//      " \n"
+//      "  //calculate Ambient Term: \n"
+//      "  vec4 Iamb = gl_FrontLightProduct[0].ambient; \n"
+//      " \n"
+//      "  //calculate Diffuse Term: \n"
+//      "  vec4 Idiff = gl_FrontLightProduct[0].diffuse * max(dot(N,L), 0.0); \n"
+//      "  Idiff = clamp(Idiff, 0.0, 1.0); \n"
+//      " \n"
+//      "  // calculate Specular Term: \n"
+//      "  vec4 Ispec = gl_FrontLightProduct[0].specular \n"
+//      "               * pow(max(dot(R,E),0.0),0.3*gl_FrontMaterial.shininess); \n"
+//      "  Ispec = clamp(Ispec, 0.0, 1.0); \n"
+//      "  // write Total Color: \n"
+//      "  gl_FragColor = ( gl_FrontLightModelProduct.sceneColor + Iamb + Idiff + Ispec ) * texture2D(color_texture,t.st); \n"
+//      "} \n";
 }
 
-void GLWidget::loadTransform(const Matrix4x4 *transform)
+void GLWidget::loadTransform(const Matrix4x4 &transform)
 {
   current_mvp_ = transform;
 }

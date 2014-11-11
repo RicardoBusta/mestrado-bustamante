@@ -33,7 +33,7 @@ private:
   void vertex(const GLVertex &vertex);
   void normal(const GLVertex &v1, const GLVertex &v2, const GLVertex &v3);
   QColor phong(const GLVertex &vertex);
-  void loadTransform(const Matrix4x4 *loadTransform);
+  void loadTransform(const Matrix4x4 &loadTransform);
 
   // Scene
   QVector<GLVertex> vertex_;
@@ -45,6 +45,13 @@ private:
   Vector4 current_normal_;
   Matrix4x4 current_mvp_;
   Vector4 current_light_position_;
+
+  struct{
+    Vector4 ambient_;
+    Vector4 diffuse_;
+    Vector4 specular_;
+    float shininess_;
+  }light_;
 
 private slots:
   void stepScene();
