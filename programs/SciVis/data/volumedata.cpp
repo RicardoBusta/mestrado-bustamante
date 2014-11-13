@@ -5,7 +5,7 @@
 
 #include <limits>
 
-const int kSize = 20;
+const int kSize = 256;
 
 VolumeData::VolumeData()
 {
@@ -22,10 +22,16 @@ VolumeData::VolumeData()
       float fj = (float(j)-(float(kSize)/2.0f));
       for(int k=0;k<d;k++){
         float fk = (float(k)-(float(kSize)/2.0f));
-        float val = qMax(kSize*kSize*2 - qSqrt(fi*fi + fj*fj + fk*fk),0.0);
-        max_val_ = max_val_>=val?max_val_:val;
-        min_val_ = min_val_<=val?min_val_:val;
-        setValue(i,j,k, val ) ;
+        float val = fi*fi + fj*fj + fk*fk;
+        if(val< ((kSize*kSize)/8)){
+          val = 1- (val/((kSize*kSize)/8));
+          val = val*val*val;
+          max_val_ = max_val_>=val?max_val_:val;
+          min_val_ = min_val_<=val?min_val_:val;
+          setValue(i,j,k, val ) ;
+        }else{
+          setValue(i,j,k, 0 ) ;
+        }
       }
     }
   }

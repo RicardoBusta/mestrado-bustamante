@@ -9,7 +9,7 @@
 
 const float kZoomFactor = 0.001f;
 
-const unsigned int layers = 10;
+const unsigned int layers = 100;
 
 VolumePlanesScene::VolumePlanesScene()
 {
@@ -32,8 +32,8 @@ void VolumePlanesScene::init()
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP);
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP);
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
   GLsizei tex_side = 20;
   GLubyte *tex_data = new GLubyte[tex_side*tex_side*tex_side];
@@ -48,6 +48,11 @@ void VolumePlanesScene::init()
         float fk = float(k)/float(tex_side-1);
         //qDebug() << data.getNormalizedValues(fi,fj,fk);
         tex_data[i + tex_side*(j + tex_side*k)] = data.getNormalizedValues(fi,fj,fk)*0xff;
+//        if(i>5 && i<15 && j>5 && j<15 && k>5 && k<15){
+//          tex_data[i + tex_side*(j + tex_side*k)] = 0xff;
+//        }else{
+//          tex_data[i + tex_side*(j + tex_side*k)] = 0x00;
+//        }
       }
     }
   }
@@ -63,8 +68,14 @@ void VolumePlanesScene::paintGL()
   glLoadIdentity();
 
   glTranslated(0,0,zoom_*kZoomFactor);
+
+  glMatrixMode(GL_TEXTURE);
+  glLoadIdentity();
+  glTranslatef(0.5,0.5,0.5);
   glRotatef(rotx_,1,0,0);
   glRotatef(roty_,0,1,0);
+  glTranslatef(-0.5,-0.5,-0.5);
+  glMatrixMode(GL_MODELVIEW);
 
   glColor4f(1,1,1,1);
 
