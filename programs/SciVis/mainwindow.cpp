@@ -6,6 +6,8 @@
 #include "scene/volumeplanesscene.h"
 #include "scene/marchingcubesscene.h"
 
+#include <QTimer>
+
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui_(new Ui::MainWindow)
@@ -28,24 +30,21 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::init(){
-  glwidget_ = new Busta::GLWidget(this);
-
   scenes.insert("planes",new VolumePlanesScene());
   scenes.insert("cubes",new MarchingCubesScene());
 
-  glwidget_->setScene(NULL);
-
-  ui_->glwidget_container->addWidget(glwidget_);
+  ui_->widget->setScene(NULL);
 
   //setCentralWidget(glwidget_);
 }
 
 void MainWindow::setSceneCubes()
 {
-  glwidget_->setScene(scenes["cubes"]);
+  ui_->widget->setScene(scenes["cubes"]);
 }
 
 void MainWindow::setScenePlanes()
 {
-  glwidget_->setScene(scenes["planes"]);
+  ui_->widget->setScene(scenes["planes"]);
+  ui_->widget->setGeometry(ui_->widget->geometry());
 }

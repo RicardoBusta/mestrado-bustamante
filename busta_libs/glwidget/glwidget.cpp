@@ -10,7 +10,8 @@ namespace Busta{
   GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent),
     scene_(NULL),
-    auto_rot_speed_(0.4f)
+    auto_rot_speed_(0.4f),
+    context_initialized_(false)
   {
     connect(&timer_,SIGNAL(timeout()),this,SLOT(sceneStep()));
     connect(&timer_,SIGNAL(timeout()),this,SLOT(updateGL()));
@@ -34,14 +35,18 @@ namespace Busta{
 
   void GLWidget::resizeGL(int w, int h)
   {
-    if(NULL == scene_) return;
-
     setViewport(w,h);
-    scene_->projection();
+    if(NULL == scene_){
+      return;
+    }else{
+      scene_->projection();
+    }
   }
 
   void GLWidget::paintGL()
   {
+    if(!context_initialized_) context_initialized_ = true;
+
     if(NULL == scene_){
       glClear(GL_COLOR_BUFFER_BIT);
       return;
@@ -124,6 +129,9 @@ namespace Busta{
     scene_ = scene;
     if(scene_!=NULL){
       scene_->init();
+    }
+    if(context_initialized_){
+      scene_->projection();
     }
   }
 

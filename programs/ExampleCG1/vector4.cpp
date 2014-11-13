@@ -106,7 +106,7 @@ Vector4 Vector4::normalized() const
 
 Vector4 Vector4::reflect(const Vector4 &incident, const Vector4 &normal)
 {
-  return (incident - 2.0f * dot(normal,incident) * normal);
+  return (incident - (2.0f * dot(normal,incident) * normal) );
 }
 
 float Vector4::dot(const Vector4 &v1, const Vector4 &v2)
@@ -125,6 +125,18 @@ Vector4 Vector4::clamp(const Vector4 &v, float min, float max)
     result.setData(i,qMax(qMin(max,v.data(i)),min));
   }
   return result;
+}
+
+Vector4 Vector4::cross(const Vector4 &v1, const Vector4 &v2)
+{
+  Vector4 v(
+        v1.y()*v2.z() - v1.z()*v2.y(),
+        v1.z()*v2.x() - v1.x()*v2.z(),
+        v1.x()*v2.y() - v1.y()*v2.x(),
+        0
+  );
+
+  return v;
 }
 
 std::ostream &operator<<(std::ostream &os, const Vector4 &dt)
@@ -197,4 +209,11 @@ Vector4 operator*(const float &f1, const Vector4 &v2)
 Vector4 operator*(const Vector4 &v1, const float &f2)
 {
   return f2*v1;
+}
+
+
+QDebug operator<<(QDebug os, const Vector4 &dt)
+{
+  os << "("<<dt.data(0)<<", "<<dt.data(1)<<", "<<dt.data(2)<<", "<<dt.data(3)<<")";
+  return os;
 }

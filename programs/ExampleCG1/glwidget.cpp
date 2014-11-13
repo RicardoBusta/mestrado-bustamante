@@ -26,7 +26,7 @@ GLWidget::GLWidget(QWidget *parent) :
 
   light_.ambient_ = Vector4(0,0,0,1);
   light_.diffuse_ = Vector4(0.5,0,0,1);
-  light_.specular_ = Vector4(1,1,1,1);
+  light_.specular_ = Vector4(1,1,0,1);
   light_.shininess_ = 100;
 
   /*  Timer que chama periodicamente as funções de atualizar a renderização
@@ -138,6 +138,7 @@ void GLWidget::paintGL()
 
   float zoom = float(zoom_)*kZoomTransform;
 
+
   // Matriz "View", que representa transformações de camera.
   view.loadIdentity();
   view.scale(zoom);
@@ -148,6 +149,8 @@ void GLWidget::paintGL()
   // Matriz "Model", que representa transformação dos objetos
   model.loadIdentity();
   model.translate(2,0,0);
+
+  current_light_position_ = current_mvp_ * kLightPosition;
 
   // Calcula matriz final, com todas as transformações concatenadas.
   loadTransform(projection*view*model);
@@ -165,6 +168,18 @@ void GLWidget::paintGL()
   }
   glEnd();
 
+  glBegin(GL_LINES);
+  for(int i=0;i+2<index_.size();i+=3){
+    qDebug() << "lines";
+    // Função que calcula a normal a partir de 3 vértices (normal da face).
+    normal(vertex_[index_[i+0]],vertex_[index_[i+1]],vertex_[index_[i+2]]);
+    // Desenha os 3 vértices da face.
+    Vector4 center = (vertex_[index_[i+0]].v_ + vertex_[index_[i+1]].v_ + vertex_[index_[i+2]].v_)*(1.0f/3.0f);
+    vertex(center);
+    vertex(center+current_normal_);
+  }
+  glEnd();
+
   // Matriz "Model", que representa transformação dos objetos
   model.loadIdentity();
   model.translate(-2,0,0);
@@ -176,7 +191,9 @@ void GLWidget::paintGL()
   glBegin(GL_TRIANGLES);
   for(int i=0;i+2<index_.size();i+=3){
     // Função que calcula a normal a partir de 3 vértices (normal da face).
+    //qDebug() << "face: " << index_[i+0] << index_[i+1] << index_[i+2];
     normal(vertex_[index_[i+0]],vertex_[index_[i+1]],vertex_[index_[i+2]]);
+    //qDebug() << current_normal_;
     // Desenha os 3 vértices da face.
     vertex(vertex_[index_[i+0]]);
     vertex(vertex_[index_[i+1]]);
@@ -235,26 +252,40 @@ void GLWidget::vertex(const GLVertex &vertex)
   glVertex3f(transformed.x(),transformed.y(),transformed.z());
 }
 
+void GLWidget::vertex(const Vector4 &vertex)
+{
+  Vector4 transformed = current_mvp_ * vertex;
+  glColor3f(1,1,1);
+  glVertex3f(transformed.x(),transformed.y(),transformed.z());
+}
+
 void GLWidget::normal(const GLVertex &v1, const GLVertex &v2, const GLVertex &v3)
 {
-  current_normal_ = Vector4();
+  current_normal_ =  Vector4::cross( v2.v_-v1.v_ , v3.v_-v1.v_ ).normalized() ;
 }
 
 QColor GLWidget::phong(const GLVertex &vertex)
 {
   Vector4 N = current_normal_;
+
   Vector4 v = vertex.v_;
   //Vector4 t = vertex.t_;
 
+  Vector4 v1 = Vector4(-0.5,-0.5,0,0);
+  Vector4 v2 = Vector4::reflect(v1,Vector4(0,1,0,0));
+  qDebug() << "v1" << v1 << "v2" << v2;
+
   Vector4 L = (current_light_position_-vertex.v_).normalized();
-  Vector4 E = (-vertex.v_).normalized(); // EyePos é (0,0,0)
-  Vector4 R = (-Vector4::reflect(L,N)).normalized();
+  Vector4 E = (Vector4(0,0,0,1)-vertex.v_).normalized(); // EyePos é (0,0,0)
+  Vector4 R = (Vector4(0,0,0,0)-Vector4::reflect(L,N)).normalized();
 
   Vector4 Iamb = light_.ambient_;
   Vector4 Idiff = light_.diffuse_ * qMax(Vector4::dot(N,L),0.0f);
   Idiff = Vector4::clamp(Idiff,0.0f,1.0f);
-  Vector4 Ispec = light_.specular_ * qPow(qMax(Vector4::dot(R,E),0.0f),light_.shininess_);
+  Vector4 Ispec = light_.specular_ * qPow(qMax(Vector4::dot(R,E),0.0f),0.3*light_.shininess_);
   Ispec = Vector4::clamp(Ispec,0.0f,1.0f);
+
+  qDebug() << Iamb << Idiff << Ispec;
 
   Vector4 vec_color = Vector4::clamp( (Iamb + Idiff + Ispec), 0.0, 1.0 );
 
@@ -262,6 +293,8 @@ QColor GLWidget::phong(const GLVertex &vertex)
   color.setRedF(vec_color.data(0));
   color.setGreenF(vec_color.data(1));
   color.setBlueF(vec_color.data(2));
+
+  //color = Qt::red;
 
   return color;
 

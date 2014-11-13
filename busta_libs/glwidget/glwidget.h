@@ -39,6 +39,8 @@ namespace Busta{
 
     float auto_rot_speed_;
 
+    bool context_initialized_;
+
     Busta::GLWidgetScene *scene_;
   signals:
 

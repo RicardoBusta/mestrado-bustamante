@@ -31,6 +31,7 @@ private:
   float rotx_, roty_, rotz_;
 
   void vertex(const GLVertex &vertex);
+  void vertex(const Vector4 &vertex);
   void normal(const GLVertex &v1, const GLVertex &v2, const GLVertex &v3);
   QColor phong(const GLVertex &vertex);
   void loadTransform(const Matrix4x4 &loadTransform);
