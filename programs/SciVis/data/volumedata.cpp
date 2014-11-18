@@ -7,49 +7,80 @@
 
 const int kSize = 256;
 
+#include <QFile>
+
 VolumeData::VolumeData()
 {
-  w=h=d=kSize;
 
-  data_.resize(w*h*d);
 
-  max_val_ = std::numeric_limits<float>::min();
-  min_val_ = std::numeric_limits<float>::max();
+  //max_val_ = std::numeric_limits<float>::min();
+  //min_val_ = std::numeric_limits<float>::max();
+  max_val_ = 255;
+  min_val_ = 0;
 
-  for(int i=0;i<h;i++){
-    float fi = (float(i)-(float(kSize)/2.0f));
-    for(int j=0;j<w;j++){
-      float fj = (float(j)-(float(kSize)/2.0f));
-      for(int k=0;k<d;k++){
-        float fk = (float(k)-(float(kSize)/2.0f));
-        float val = fi*fi + fj*fj + fk*fk;
-        if(val< ((kSize*kSize)/8)){
-          val = 1- (val/((kSize*kSize)/8));
-          val = val*val*val;
-          max_val_ = max_val_>=val?max_val_:val;
-          min_val_ = min_val_<=val?min_val_:val;
-          setValue(i,j,k, val ) ;
-        }else{
-          setValue(i,j,k, 0 ) ;
-        }
-      }
-    }
+
+//  w=h=d=kSize;
+//  data_.resize(w*h*d);
+//  for(int i=0;i<h;i++){
+//    //float fi = (float(i)-(float(kSize)/2.0f))/(kSize/2);
+//    for(int j=0;j<w;j++){
+//      //float fj = (float(j)-(float(kSize)/2.0f))/(kSize/2);
+//      for(int k=0;k<d;k++){
+//        //float fk = (float(k)-(float(kSize)/2.0f))/(kSize/2);
+//        unsigned short val;// = (kSize-sqrt(float((i-kSize/2)*(i-kSize/2)+(j-kSize/2)*(j-kSize/2)+(k-kSize/2)*(k-kSize/2))))*0xff;
+//        if(i>kSize/4 && i<3*kSize/4){
+//          val = 0x11;
+//        }else{
+//          val = 0xff;
+//        }
+//          max_val_ = max_val_>=val?max_val_:val;
+//          min_val_ = min_val_<=val?min_val_:val;
+//          setValue(i,j,k, val ) ;
+
+//      }
+//    }
+//  }
+
+//  qDebug() << getNormalizedValues(0.5,0.5,0.5,true);
+
+  w = 150;
+  h = 150;
+  d = 276;
+
+//  //http://www.voreen.org/108-Data-Sets.html
+
+  QFile file("D:/Projects/mestrado-bustamante/programs/SciVis/data_files/mouse0.raw");
+  if(file.open(QIODevice::ReadOnly)){
+    qDebug() << "File Open!" << file.fileName();
+    data_.resize(w*d*h);
+    QByteArray data = file.readAll();
+    memcpy(data_.data(),data.data(),w*d*h*sizeof(unsigned short));
   }
+
+//  for(int i=0;i<w*d*h;i++){
+//    unsigned short val = data_[i];
+//    max_val_ = max_val_>=val?max_val_:val;
+//    min_val_ = min_val_<=val?min_val_:val;
+//  }
 }
 
-void VolumeData::setValue(int i, int j, int k, float value)
+void VolumeData::setValue(int i, int j, int k, unsigned short value)
 {
   //qDebug() << "data.size" << data_.size() << "index:" << (i)+(w*j)+(w*h*k);
   data_[(i)+(w*j)+(w*h*k)] = value;
 }
 
-float VolumeData::getValue(int i, int j, int k) const
+unsigned short VolumeData::getValue(int i, int j, int k, bool print) const
 {
+  if((i)+(w*j)+(w*h*k) >= data_.size()) return 0;
 //  qDebug() << "data.size" << data_.size() << i << j << k << "index:" << (i)+(w*j)+(w*h*k) << data_[(i)+(w*j)+(w*h*k)];
+  if(print){
+    qDebug() << QString("getValue(%1,%2,%3)").arg(i).arg(j).arg(k) << data_[(i)+(w*j)+(w*h*k)];
+  }
   return data_[(i)+(w*j)+(w*h*k)];
 }
 
-float VolumeData::getInterpolatedValue(float i, float j, float k) const
+float VolumeData::getInterpolatedValue(float i, float j, float k, bool print) const
 {
   float inti = floor(i);
   float intj = floor(j);
@@ -67,14 +98,14 @@ float VolumeData::getInterpolatedValue(float i, float j, float k) const
   int addj = vj==0?0:1;
   int addk = vk==0?0:1;
 
-  float v000 = getValue(inti,intj,intk);
-  float v100 = getValue(inti+addi,intj,intk);
-  float v010 = getValue(inti,intj+addj,intk);
-  float v110 = getValue(inti+addi,intj+addj,intk);
-  float v001 = getValue(inti,intj,intk+addk);
-  float v101 = getValue(inti+addi,intj,intk+addk);
-  float v011 = getValue(inti,intj+addj,intk+addk);
-  float v111 = getValue(inti+addi,intj+addj,intk+addk);
+  float v000 = getValue(inti,intj,intk,print);
+  float v100 = getValue(inti+addi,intj,intk,print);
+  float v010 = getValue(inti,intj+addj,intk,print);
+  float v110 = getValue(inti+addi,intj+addj,intk,print);
+  float v001 = getValue(inti,intj,intk+addk,print);
+  float v101 = getValue(inti+addi,intj,intk+addk,print);
+  float v011 = getValue(inti,intj+addj,intk+addk,print);
+  float v111 = getValue(inti+addi,intj+addj,intk+addk,print);
 
   //interp i
   float v00 = v000*(1-vi) + v100*vi;
@@ -89,21 +120,36 @@ float VolumeData::getInterpolatedValue(float i, float j, float k) const
   //interp k
   float v = v0*(1-vk)+v1*vk;
 
+  if(print){
+    qDebug() << QString("getInterpolatedValue(%1,%2,%3)").arg(i).arg(j).arg(k) << v;
+  }
   return v;
 }
 
-float VolumeData::getParametricValue(float i, float j, float k) const
+float VolumeData::getParametricValue(float i, float j, float k, bool print) const
 {
-  return getInterpolatedValue(i*float(h-1),j*float(w-1),k*float(d-1));
+  if(print){
+    qDebug() << QString("getParametricValue(%1,%2,%3)").arg(i).arg(j).arg(k) << getInterpolatedValue(i*float(h-1),j*float(w-1),k*float(d-1),print);
+  }
+  return getInterpolatedValue(i*float(h-1),j*float(w-1),k*float(d-1),print);
 }
 
-float VolumeData::getNormalizedValues(float i, float j, float k) const
+float VolumeData::getNormalizedValues(float i, float j, float k, bool print) const
 {
-  float v = getParametricValue(i,j,k);
+  float v = getParametricValue(i,j,k,print);
+  float res;
   if(max_val_-min_val_!=0){
-    return (v-min_val_)/(max_val_-min_val_);
+    res = (v-min_val_)/(max_val_-min_val_);
+  }else{
+    res = 0;
   }
-  return 0;
+
+  if(print){
+    qDebug() << QString("getNormalizedValues(%1,%2,%3)").arg(i).arg(j).arg(k)
+             << QString("MaxVal(%1) MinVal(%2)").arg(max_val_).arg(min_val_)
+             << res;
+  }
+  return res;
 }
 
 int VolumeData::limit(int val, int min, int max) const
