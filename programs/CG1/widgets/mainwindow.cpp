@@ -18,6 +18,7 @@
 #include "shaders/toon_shader.h"
 
 #include "widgets/showmatrixdialog.h"
+#include "widgets/add_matrix_dialog.h"
 
 #include <QRegExp>
 
@@ -64,6 +65,10 @@ void MainWindow::init()
 
   connect(ui->apply_transform,SIGNAL(clicked()),this,SLOT(transformChanged()));
   connect(ui->transform_modelview,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(showMatrix(QListWidgetItem*)));
+  connect(ui->add_modelview,SIGNAL(clicked()),this,SLOT(addModelviewMatrix()));
+  connect(ui->add_projection,SIGNAL(clicked()),this,SLOT(addProjectionMatrix()));
+  connect(ui->view_modelview,SIGNAL(clicked()),this,SLOT(viewModelviewMatrix()));
+  connect(ui->view_projection,SIGNAL(clicked()),this,SLOT(viewProjectionMatrix()));
 
   ui->shader_premade->addItem("-");
   ui->shader_premade->addItem("Phong");
@@ -250,6 +255,31 @@ void MainWindow::showMatrix(QListWidgetItem* item)
   setMatrix(item->text(),matrix);
   ShowMatrixDialog show_matrix(matrix,this);
   show_matrix.exec();
+}
+
+void MainWindow::addModelviewMatrix()
+{
+  AddMatrixDialog matrix_dialog;
+  int code = matrix_dialog.exec();
+  if(code == QDialog::Accepted){
+    qDebug() << "modelview accepted";
+    qDebug() << matrix_dialog.resulting_string();
+  }
+}
+
+void MainWindow::addProjectionMatrix()
+{
+
+}
+
+void MainWindow::viewModelviewMatrix()
+{
+
+}
+
+void MainWindow::viewProjectionMatrix()
+{
+
 }
 
 void MainWindow::addSceneControlWidget(QWidget *widget)

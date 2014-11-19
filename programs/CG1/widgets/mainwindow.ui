@@ -388,6 +388,9 @@
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="label_15">
             <property name="text">
@@ -396,7 +399,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="modelview_add">
+           <widget class="QPushButton" name="add_modelview">
             <property name="minimumSize">
              <size>
               <width>20</width>
@@ -411,6 +414,25 @@
             </property>
             <property name="text">
              <string>+</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="view_modelview">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>?</string>
             </property>
            </widget>
           </item>
@@ -427,40 +449,13 @@
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>item1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>item2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>rot(45,1,0,0)</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="label_16">
             <property name="text">
@@ -469,7 +464,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="projection_add">
+           <widget class="QPushButton" name="add_projection">
             <property name="minimumSize">
              <size>
               <width>20</width>
@@ -487,6 +482,25 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="view_projection">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>?</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -500,36 +514,6 @@
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>item1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>item2</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item>

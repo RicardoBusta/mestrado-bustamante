@@ -49,6 +49,10 @@ private slots:
 
   void transformChanged();
   void showMatrix(QListWidgetItem * item);
+  void addModelviewMatrix();
+  void addProjectionMatrix();
+  void viewModelviewMatrix();
+  void viewProjectionMatrix();
 };
 
 #undef DECLARE_TOGGLE_CHECK

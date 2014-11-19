@@ -12,3 +12,8 @@ AddMatrixDialog::~AddMatrixDialog()
 {
   delete ui;
 }
+
+QString AddMatrixDialog::resulting_string() const
+{
+  return resulting_string_;
+}

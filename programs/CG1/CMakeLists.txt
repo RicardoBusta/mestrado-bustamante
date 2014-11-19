@@ -36,6 +36,7 @@ set(SOURCE_FILES
   particle_behavior/particlefire.cpp
   scene/scene_multicubes.cpp
   widgets/showmatrixdialog.cpp
+  widgets/add_matrix_dialog.cpp
 )
 set(HEADER_FILES
   widgets/mainwindow.h
@@ -72,6 +73,7 @@ set(HEADER_FILES
   particle_behavior/particlefire.h
   scene/scene_multicubes.h
   widgets/showmatrixdialog.h
+  widgets/add_matrix_dialog.h
 )
 set(FORM_FILES
   widgets/mainwindow.ui
@@ -82,6 +84,7 @@ set(FORM_FILES
   widgets/fur_widget.ui
   widgets/truck_widget.ui
   widgets/showmatrixdialog.ui
+  widgets/add_matrix_dialog.ui
 )
 set(RESOURCE_FILES
   shaders/shaders.qrc
