@@ -595,13 +595,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="apply_transform">
-          <property name="text">
-           <string>Apply</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
