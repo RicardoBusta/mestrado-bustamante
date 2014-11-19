@@ -17,6 +17,17 @@
 #include "shaders/phong_shader.h"
 #include "shaders/toon_shader.h"
 
+#include "widgets/showmatrixdialog.h"
+
+#include <QRegExp>
+
+const QRegExp rotation_regexp = QRegExp("rot\\((\\S+),(\\S+),(\\S+),(\\S+)\\)");
+const QRegExp translation_regexp = QRegExp("tra\\((\\S+),(\\S+),(\\S+)\\)");
+const QRegExp scale_regexp = QRegExp("sca\\((\\S+),(\\S+),(\\S+)\\)");
+
+const QRegExp ortho_regexp = QRegExp("ort\\((\\S+),(\\S+),(\\S+),(\\S+),(\\S+),(\\S+)\\)");
+const QRegExp frustum_regexp = QRegExp("fru\\((\\S+),(\\S+),(\\S+),(\\S+),(\\S+),(\\S+)\\)");
+
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
@@ -51,6 +62,9 @@ void MainWindow::init()
 
   connect(ui->shader_apply,SIGNAL(clicked()),this,SLOT(setShaders()));
 
+  connect(ui->apply_transform,SIGNAL(clicked()),this,SLOT(transformChanged()));
+  connect(ui->transform_modelview,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(showMatrix(QListWidgetItem*)));
+
   ui->shader_premade->addItem("-");
   ui->shader_premade->addItem("Phong");
   ui->shader_premade->addItem("Toon");
@@ -82,6 +96,66 @@ void MainWindow::connectCheckBox(QCheckBox *check_box, bool value)
   connect(check_box,SIGNAL(toggled(bool)),this,SLOT(optionToggled(bool)));
   check_box->setChecked(value);
   Options::instance()->set_option(check_box->objectName(),value);
+}
+
+void MainWindow::setMatrix(const QString &matrix_name, Busta::Matrix4x4 &output)
+{
+  int index;
+  // ROTATION MATRIX
+  index = rotation_regexp.indexIn(matrix_name);
+  if(index > -1){
+    qDebug() << "Rotation";
+    float v[4];
+    for(int i=0;i<4;i++){
+      v[i] = rotation_regexp.cap(i+1).toFloat();
+      qDebug() << v[i];
+    }
+    output.rotate(v[0],v[1],v[2],v[3]);
+  }
+  // TRANSLATION MATRIX
+  index = translation_regexp.indexIn(matrix_name);
+  if(index > -1){
+    qDebug() << "Translation";
+    float v[3];
+    for(int i=0;i<3;i++){
+      v[i] = translation_regexp.cap(i+1).toFloat();
+      qDebug() << v[i];
+    }
+    output.translate(v[0],v[1],v[2]);
+  }
+  // SCALE MATRIX
+  index = scale_regexp.indexIn(matrix_name);
+  if(index > -1){
+    qDebug() << "Scale";
+    float v[3];
+    for(int i=0;i<3;i++){
+      v[i] = scale_regexp.cap(i+1).toFloat();
+      qDebug() << v[i];
+    }
+    output.scale(v[0],v[1],v[2]);
+  }
+  // ORTHO MATRIX
+  index = ortho_regexp.indexIn(matrix_name);
+  if(index > -1){
+    qDebug() << "Ortho";
+    float v[6];
+    for(int i=0;i<6;i++){
+      v[i] = ortho_regexp.cap(i+1).toFloat();
+      qDebug() << v[i];
+    }
+    output.ortho(v[0],v[1],v[2],v[3],v[4],v[5]);
+  }
+  // FRUSTUM MATRIX
+  index = frustum_regexp.indexIn(matrix_name);
+  if(index > -1){
+    qDebug() << "Frustum";
+    float v[6];
+    for(int i=0;i<6;i++){
+      v[i] = frustum_regexp.cap(i+1).toFloat();
+      qDebug() << v[i];
+    }
+    output.frustum(v[0],v[1],v[2],v[3],v[4],v[5]);
+  }
 }
 
 void MainWindow::hideTabs()
@@ -149,6 +223,33 @@ void MainWindow::setScene(QString s)
 
   ui->list_object->clear();
   ui->list_object->addItems(Scene::current()->getObjectList());
+}
+
+void MainWindow::transformChanged()
+{
+  // MODELVIEW MATRIX
+  interface_modelview.loadIdentity();
+  qDebug() << "Modelview Matrix";
+  foreach(QListWidgetItem* list_item, ui->transform_modelview->findItems("*", Qt::MatchWildcard))
+  {
+    setMatrix(list_item->text(),interface_modelview);
+  }
+  // PROJECTION MATRIX
+  interface_projection.loadIdentity();
+  qDebug() << "Projection Matrix";
+  foreach(QListWidgetItem* list_item, ui->transform_projection->findItems("*", Qt::MatchWildcard))
+  {
+   setMatrix(list_item->text(),interface_projection);
+  }
+}
+
+void MainWindow::showMatrix(QListWidgetItem* item)
+{
+  if(item==NULL) return;
+  Busta::Matrix4x4 matrix;
+  setMatrix(item->text(),matrix);
+  ShowMatrixDialog show_matrix(matrix,this);
+  show_matrix.exec();
 }
 
 void MainWindow::addSceneControlWidget(QWidget *widget)

@@ -1,6 +1,5 @@
 #include "volumeplanesscene.h"
 
-#include <QtOpenGL>
 #include <QDebug>
 
 #include "busta_libs/opengl_extension_manager/openglextensionmanager.h"
@@ -11,7 +10,7 @@ const float kZoomFactor = 0.001f;
 
 VolumePlanesScene::VolumePlanesScene()
 {
-  layers = 256;
+  layers = 512;
 }
 
 void VolumePlanesScene::init()
@@ -25,6 +24,7 @@ void VolumePlanesScene::init()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable( GL_BLEND );
 
+  setList();
   setTex3D();
 }
 
@@ -46,20 +46,7 @@ void VolumePlanesScene::paintGL()
   glColor4f(1,1,1,1);
 
   glEnable(GL_TEXTURE_3D);
-  glBegin(GL_QUADS);
-  for(int i=0;i<layers;i++){
-    float tz = float(i)/float(layers-1);
-    float z = -1.0f+(2.0f*tz);
-    glTexCoord3f(0,0,tz);
-    glVertex3f(-1,-1,z);
-    glTexCoord3f(1,0,tz);
-    glVertex3f( 1,-1,z);
-    glTexCoord3f(1,1,tz);
-    glVertex3f( 1, 1,z);
-    glTexCoord3f(0,1,tz);
-    glVertex3f(-1, 1,z);
-  }
-  glEnd();
+  glCallList(display_list);
 
   glDisable(GL_TEXTURE_3D);
   glRotatef(rotx_,1,0,0);
@@ -82,6 +69,29 @@ void VolumePlanesScene::paintGL()
 void VolumePlanesScene::release()
 {
 
+}
+
+void VolumePlanesScene::setList()
+{
+  glDeleteLists(display_list,1);
+  display_list = glGenLists(1);
+
+  glNewList(display_list, GL_COMPILE);
+  glBegin(GL_QUADS);
+  for(int i=0;i<layers;i++){
+    float tz = float(i)/float(layers-1);
+    float z = -1.0f+(2.0f*tz);
+    glTexCoord3f(0,0,tz);
+    glVertex3f(-1,-1,z);
+    glTexCoord3f(1,0,tz);
+    glVertex3f( 1,-1,z);
+    glTexCoord3f(1,1,tz);
+    glVertex3f( 1, 1,z);
+    glTexCoord3f(0,1,tz);
+    glVertex3f(-1, 1,z);
+  }
+  glEnd();
+  glEndList();
 }
 
 void VolumePlanesScene::setTex3D()
@@ -129,7 +139,7 @@ void VolumePlanesScene::setTex3D()
   Busta::OpenGL::instance()->texImage3D(GL_TEXTURE_3D,0,GL_RGBA,tex_width,tex_height,tex_depth,0,GL_RGBA,GL_UNSIGNED_BYTE,tex_data);
 }
 
-void VolumePlanesScene::transferFunction(unsigned short val, unsigned char *ret)
+void VolumePlanesScene::transferFunction(unsigned short val, GLubyte *ret)
 {
 
  if(val > 210){

@@ -35,6 +35,7 @@ set(SOURCE_FILES
   opengl/particle_behavior.cpp
   particle_behavior/particlefire.cpp
   scene/scene_multicubes.cpp
+  widgets/showmatrixdialog.cpp
 )
 set(HEADER_FILES
   widgets/mainwindow.h
@@ -70,6 +71,7 @@ set(HEADER_FILES
   shaders/toon_shader.h
   particle_behavior/particlefire.h
   scene/scene_multicubes.h
+  widgets/showmatrixdialog.h
 )
 set(FORM_FILES
   widgets/mainwindow.ui
@@ -79,6 +81,7 @@ set(FORM_FILES
   widgets/obj_widget.ui
   widgets/fur_widget.ui
   widgets/truck_widget.ui
+  widgets/showmatrixdialog.ui
 )
 set(RESOURCE_FILES
   shaders/shaders.qrc

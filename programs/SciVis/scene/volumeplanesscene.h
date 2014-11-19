@@ -3,6 +3,7 @@
 
 #include "busta_libs/glwidget/glwidgetscene.h"
 
+#include <QtOpenGL>
 #include <QString>
 
 class VolumePlanesScene : public Busta::GLWidgetScene
@@ -14,13 +15,16 @@ public:
   void paintGL();
   void release();
 
+  void setList();
   void setTex3D();
 
-  void transferFunction(unsigned short val, unsigned char *ret);
+  void transferFunction(unsigned short val, GLubyte *ret);
 
   unsigned int textureID;
 
   int layers;
+
+  GLuint display_list;
 
   QString file_name;
 };
