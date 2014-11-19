@@ -43,19 +43,49 @@ VolumeData::VolumeData()
 
 //  qDebug() << getNormalizedValues(0.5,0.5,0.5,true);
 
-  w = 150;
-  h = 150;
-  d = 276;
+  w = 0;
+  h = 0;
+  d = 0;
 
 //  //http://www.voreen.org/108-Data-Sets.html
 
-  QFile file("D:/Projects/mestrado-bustamante/programs/SciVis/data_files/mouse0.raw");
+  QString dat_file_path_and_name = "D:/Ricardo/mestrado-bustamante/programs/SciVis/data_files/mouse/mouse0.dat";
+//    QString dat_file_path_and_name = "D:/Ricardo/mestrado-bustamante/programs/SciVis/data_files/mouse/golfball0_0-512x256x256.dat";
+
+  QRegExp obj_file_name_regex = QRegExp("ObjectFileName:\\s*(\\S*)");
+  QRegExp resolution_regex = QRegExp("Resolution:\\s*(\\d+)\\s+(\\d+)\\s+(\\d+)");
+
+  QString raw_file_name;
+
+  QFile dat_file(dat_file_path_and_name);
+  if(dat_file.open(QIODevice::ReadOnly|QIODevice::Text)){
+    QFileInfo info(dat_file);
+
+    qDebug() << "Dat File Open!" << dat_file.fileName();
+    while(!dat_file.atEnd()){
+      QString line = dat_file.readLine();
+      if(obj_file_name_regex.indexIn(line)>-1){
+        raw_file_name = info.dir().path()+"/"+obj_file_name_regex.cap(1);
+        qDebug() << "file name" << raw_file_name;
+      }
+      if(resolution_regex.indexIn(line)>-1){
+        w = resolution_regex.cap(1).toInt();
+        h = resolution_regex.cap(2).toInt();
+        d = resolution_regex.cap(3).toInt();
+        qDebug() << "resolution" << w << h << d;
+      }
+    }
+  }else return;
+
+  qDebug() << "path?" << raw_file_name;
+
+  QFile file(raw_file_name);
   if(file.open(QIODevice::ReadOnly)){
     qDebug() << "File Open!" << file.fileName();
     data_.resize(w*d*h);
     QByteArray data = file.readAll();
     memcpy(data_.data(),data.data(),w*d*h*sizeof(unsigned short));
-  }
+  }else return;
 
 //  for(int i=0;i<w*d*h;i++){
 //    unsigned short val = data_[i];
@@ -78,6 +108,29 @@ unsigned short VolumeData::getValue(int i, int j, int k, bool print) const
     qDebug() << QString("getValue(%1,%2,%3)").arg(i).arg(j).arg(k) << data_[(i)+(w*j)+(w*h*k)];
   }
   return data_[(i)+(w*j)+(w*h*k)];
+}
+
+unsigned short VolumeData::getValue256(int i, int j, int k, bool print) const
+{
+  float offx = (256.0f - float(h))/2.0f;
+  float offy = (256.0f - float(w))/2.0f;
+  float offz = (256.0f - float(d))/2.0f;
+
+  if(i<offx || i > 256.0f-offx){
+    return 0;
+  }
+  if(j<offy || j > 256.0f-offy){
+    return 0;
+  }
+  if(k<offz || k > 256.0f-offz){
+    return 0;
+  }
+
+  if(print){
+    qDebug() << "getValue256" << i<<j<<k << offx << offy << offz;
+  }
+
+  return getInterpolatedValue(i-offx, j-offy, k-offz,print);
 }
 
 float VolumeData::getInterpolatedValue(float i, float j, float k, bool print) const

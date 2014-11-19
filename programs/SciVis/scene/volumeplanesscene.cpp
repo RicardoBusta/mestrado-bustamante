@@ -26,45 +26,7 @@ void VolumePlanesScene::init()
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable( GL_BLEND );
 
-  glGenTextures(1,&textureID);
-  glBindTexture(GL_TEXTURE_3D,textureID);
-
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-  GLsizei tex_width = 256;
-  GLsizei tex_height = 256;
-  GLsizei tex_depth = 256;
-  GLubyte *tex_data = new GLubyte[tex_width*tex_height*tex_depth];
-
-  VolumeData data;
-
-  for(int i=0;i<tex_height;i++){
-    float fi = float(i)/float(tex_height-1);
-    for(int j=0;j<tex_width;j++){
-      float fj = float(j)/float(tex_width-1);
-      for(int k=0;k<tex_depth;k++){
-        float fk = float(k)/float(tex_depth-1);
-        float val = data.getNormalizedValues(fi,fj,fk);
-        int coord = i + tex_height*(j + tex_width*k);
-        // Cut the borders
-        if(i==0 || j==0 || k==0 || i==tex_height-1 || j==tex_width-1 || k==tex_depth-1){
-          tex_data[coord]=0;
-        }else{
-          if(val>0.3){
-          tex_data[coord] = val*0xff;
-          }else{
-            tex_data[coord]=0;
-          }
-        }
-      }
-    }
-  }
-
-  Busta::OpenGL::instance()->texImage3D(GL_TEXTURE_3D,0,GL_INTENSITY,tex_width,tex_height,tex_depth,0,GL_LUMINANCE,GL_UNSIGNED_BYTE,tex_data);
+  setTex3D();
 }
 
 void VolumePlanesScene::paintGL()
@@ -121,4 +83,54 @@ void VolumePlanesScene::paintGL()
 void VolumePlanesScene::release()
 {
 
+}
+
+void VolumePlanesScene::setTex3D()
+{
+  glDeleteTextures(1,&textureID);
+  glGenTextures(1,&textureID);
+  glBindTexture(GL_TEXTURE_3D,textureID);
+
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+  GLsizei tex_width = 256;
+  GLsizei tex_height = 256;
+  GLsizei tex_depth = 256;
+  GLubyte *tex_data = new GLubyte[tex_width*tex_height*tex_depth];
+
+  VolumeData data;
+
+  for(int i=0;i<tex_height;i++){
+    float fi = float(i)/float(tex_height-1);
+    for(int j=0;j<tex_width;j++){
+      float fj = float(j)/float(tex_width-1);
+      for(int k=0;k<tex_depth;k++){
+        float fk = float(k)/float(tex_depth-1);
+//        float val = data.getInterpolatedValue(fi,fj,fk);
+        float val = data.getValue256(i,j,k);
+        int coord = i + tex_height*(j + tex_width*k);
+        // Cut the borders
+        if(i==0 || j==0 || k==0 || i==tex_height-1 || j==tex_width-1 || k==tex_depth-1){
+          tex_data[coord]=0;
+        }else{
+          tex_data[coord] = transferFunction(val);
+        }
+      }
+    }
+  }
+
+  Busta::OpenGL::instance()->texImage3D(GL_TEXTURE_3D,0,GL_INTENSITY,tex_width,tex_height,tex_depth,0,GL_LUMINANCE,GL_UNSIGNED_BYTE,tex_data);
+}
+
+unsigned short VolumePlanesScene::transferFunction(unsigned short val)
+{
+ if(val > 210){
+   return val;
+ }else{
+   return 0;
+ }
 }

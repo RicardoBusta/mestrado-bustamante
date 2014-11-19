@@ -19,6 +19,7 @@ public:
 
   void setValue(int i, int j, int k, unsigned short value);
   unsigned short getValue(int i, int j, int k, bool print = false) const;
+  unsigned short getValue256(int i, int j, int k, bool print = false) const;
   // float values between 0 and w,h,d
   float getInterpolatedValue(float i, float j, float k, bool print = false) const;
   // float values between 0 and 1

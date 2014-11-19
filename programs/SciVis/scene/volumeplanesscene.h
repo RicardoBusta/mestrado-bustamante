@@ -13,6 +13,10 @@ public:
   void paintGL();
   void release();
 
+  void setTex3D();
+
+  unsigned short transferFunction(unsigned short val);
+
   unsigned int textureID;
 };
 
