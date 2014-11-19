@@ -63,12 +63,14 @@ void MainWindow::init()
 
   connect(ui->shader_apply,SIGNAL(clicked()),this,SLOT(setShaders()));
 
-  connect(ui->apply_transform,SIGNAL(clicked()),this,SLOT(transformChanged()));
+  connect(ui->transform_modelview,SIGNAL(indexesMoved(QModelIndexList)),this,SLOT(transformChanged()));
   connect(ui->transform_modelview,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(showMatrix(QListWidgetItem*)));
   connect(ui->add_modelview,SIGNAL(clicked()),this,SLOT(addModelviewMatrix()));
   connect(ui->add_projection,SIGNAL(clicked()),this,SLOT(addProjectionMatrix()));
   connect(ui->view_modelview,SIGNAL(clicked()),this,SLOT(viewModelviewMatrix()));
   connect(ui->view_projection,SIGNAL(clicked()),this,SLOT(viewProjectionMatrix()));
+  connect(ui->remove_modelview,SIGNAL(clicked()),this,SLOT(removeModelviewMatrix()));
+  connect(ui->remove_projection,SIGNAL(clicked()),this,SLOT(removeProjectionMatrix()));
 
   ui->shader_premade->addItem("-");
   ui->shader_premade->addItem("Phong");
@@ -228,6 +230,10 @@ void MainWindow::setScene(QString s)
 
   ui->list_object->clear();
   ui->list_object->addItems(Scene::current()->getObjectList());
+
+  if(Scene::current()!=NULL){
+    Scene::current()->setGuiMatrix(interface_modelview,interface_projection);
+  }
 }
 
 void MainWindow::transformChanged()
@@ -246,6 +252,10 @@ void MainWindow::transformChanged()
   {
    setMatrix(list_item->text(),interface_projection);
   }
+
+  if(Scene::current()!=NULL){
+    Scene::current()->setGuiMatrix(interface_modelview,interface_projection);
+  }
 }
 
 void MainWindow::showMatrix(QListWidgetItem* item)
@@ -262,24 +272,59 @@ void MainWindow::addModelviewMatrix()
   AddMatrixDialog matrix_dialog;
   int code = matrix_dialog.exec();
   if(code == QDialog::Accepted){
-    qDebug() << "modelview accepted";
-    qDebug() << matrix_dialog.resulting_string();
+    QString res = matrix_dialog.resulting_string();
+    if(!res.isEmpty()){
+      ui->transform_modelview->addItem(res);
+      transformChanged();
+    }
   }
 }
 
 void MainWindow::addProjectionMatrix()
 {
-
+  AddMatrixDialog matrix_dialog;
+  int code = matrix_dialog.exec();
+  if(code == QDialog::Accepted){
+    QString res = matrix_dialog.resulting_string();
+    if(!res.isEmpty()){
+      ui->transform_projection->addItem(res);
+      transformChanged();
+    }
+  }
 }
 
 void MainWindow::viewModelviewMatrix()
 {
-
+  if(ui->transform_modelview->currentItem()!=NULL){
+    showMatrix(ui->transform_modelview->currentItem());
+  }
 }
 
 void MainWindow::viewProjectionMatrix()
 {
+  if(ui->transform_projection->currentItem()!=NULL){
+    showMatrix(ui->transform_projection->currentItem());
+  }
+}
 
+void MainWindow::removeModelviewMatrix()
+{
+  if(ui->transform_modelview->currentItem()!=NULL){
+    qDebug() << "Removing";
+    QListWidgetItem *item = ui->transform_modelview->takeItem(ui->transform_modelview->currentIndex().row());
+    delete item;
+    transformChanged();
+  }
+}
+
+void MainWindow::removeProjectionMatrix()
+{
+  if(ui->transform_projection->currentItem()!=NULL){
+    qDebug() << "Removing";
+    QListWidgetItem *item = ui->transform_projection->takeItem(ui->transform_projection->currentIndex().row());
+    delete item;
+    transformChanged();
+  }
 }
 
 void MainWindow::addSceneControlWidget(QWidget *widget)

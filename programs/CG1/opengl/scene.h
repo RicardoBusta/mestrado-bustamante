@@ -5,6 +5,7 @@
 #include <QObject>
 
 #include "programs/CG1/opengl/object.h"
+#include "busta_libs/common_structures/matrix4x4.h"
 
 class Scene : public QObject
 {
@@ -50,6 +51,8 @@ public:
 
   virtual void applyCameraConstraint();
 
+  void setGuiMatrix(const Busta::Matrix4x4 &modelview, const Busta::Matrix4x4 &projection);
+
   float zoom() const;
 protected:
   virtual void setup_spec();
@@ -88,6 +91,9 @@ private:
 
   static QMap<QString,Scene*> scene_;
   static QString current_scene_;
+
+  Busta::Matrix4x4 gui_projection_;
+  Busta::Matrix4x4 gui_modelview_;
 };
 
 #endif // SCENE_H

@@ -53,6 +53,8 @@ private slots:
   void addProjectionMatrix();
   void viewModelviewMatrix();
   void viewProjectionMatrix();
+  void removeModelviewMatrix();
+  void removeProjectionMatrix();
 };
 
 #undef DECLARE_TOGGLE_CHECK

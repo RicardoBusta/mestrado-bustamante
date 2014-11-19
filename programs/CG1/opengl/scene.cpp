@@ -55,6 +55,13 @@ void Scene::applyCameraConstraint()
 {
 }
 
+void Scene::setGuiMatrix(const Busta::Matrix4x4 &modelview, const Busta::Matrix4x4 &projection)
+{
+  qDebug() << "gui setting matrix";
+  gui_modelview_ = modelview;
+  gui_projection_ = projection;
+}
+
 void Scene::GlVertex(const QVector3D &v) const
 {
   glVertex3f(v.x(),v.y(),v.z());
@@ -286,6 +293,12 @@ void Scene::drawObjects() const
   glRotatef(rot_x_,1,0,0);
   glRotatef(rot_y_,0,1,0);
   glRotatef(rot_z_,0,0,1);
+
+  glMultMatrixf(gui_modelview_.data());
+
+//  glMatrixMode(GL_PROJECTION);
+//  glMultMatrixf(gui_projection_.data());
+//  glMatrixMode(GL_MODELVIEW);
 
   //glRotatef(90,1,0,0);
   //  glFrustum(-.1,.1,-.1,.1,1,10);
