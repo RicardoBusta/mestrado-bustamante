@@ -7,6 +7,7 @@
 #include "scene/marchingcubesscene.h"
 
 #include <QTimer>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -45,6 +46,13 @@ void MainWindow::setSceneCubes()
 
 void MainWindow::setScenePlanes()
 {
+
+  VolumePlanesScene *ps = /*(VolumePlanesScene *)*/dynamic_cast<VolumePlanesScene*>(scenes["planes"]);
+  if(ps!=NULL){
+    QString res = QFileDialog::getOpenFileName();
+    qDebug() << "opened?";
+    if(!res.isEmpty()) ps->file_name = res;
+  }
   ui_->widget->setScene(scenes["planes"]);
   ui_->widget->setGeometry(ui_->widget->geometry());
 }

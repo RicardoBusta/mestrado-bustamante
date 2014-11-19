@@ -9,14 +9,16 @@ const int kSize = 256;
 
 #include <QFile>
 
+const QRegExp kObjFileNameRegex = QRegExp("ObjectFileName:\\s*(\\S*)");
+const QRegExp kResolutionRegex = QRegExp("Resolution:\\s*(\\d+)\\s+(\\d+)\\s+(\\d+)");
+
 VolumeData::VolumeData()
 {
 
 
   //max_val_ = std::numeric_limits<float>::min();
   //min_val_ = std::numeric_limits<float>::max();
-  max_val_ = 255;
-  min_val_ = 0;
+
 
 
 //  w=h=d=kSize;
@@ -43,35 +45,45 @@ VolumeData::VolumeData()
 
 //  qDebug() << getNormalizedValues(0.5,0.5,0.5,true);
 
+
+
+//  for(int i=0;i<w*d*h;i++){
+//    unsigned short val = data_[i];
+//    max_val_ = max_val_>=val?max_val_:val;
+//    min_val_ = min_val_<=val?min_val_:val;
+  //  }
+}
+
+void VolumeData::load(QString dat_file_name)
+{
+  max_val_ = 255;
+  min_val_ = 0;
+
   w = 0;
   h = 0;
   d = 0;
 
-//  //http://www.voreen.org/108-Data-Sets.html
-
-  QString dat_file_path_and_name = "D:/Ricardo/mestrado-bustamante/programs/SciVis/data_files/mouse/mouse0.dat";
-//    QString dat_file_path_and_name = "D:/Ricardo/mestrado-bustamante/programs/SciVis/data_files/mouse/golfball0_0-512x256x256.dat";
-
-  QRegExp obj_file_name_regex = QRegExp("ObjectFileName:\\s*(\\S*)");
-  QRegExp resolution_regex = QRegExp("Resolution:\\s*(\\d+)\\s+(\\d+)\\s+(\\d+)");
-
   QString raw_file_name;
 
-  QFile dat_file(dat_file_path_and_name);
+  qDebug() << "Attempting to open" << dat_file_name;
+
+  if(dat_file_name=="") return;
+
+  QFile dat_file(dat_file_name);
   if(dat_file.open(QIODevice::ReadOnly|QIODevice::Text)){
     QFileInfo info(dat_file);
 
     qDebug() << "Dat File Open!" << dat_file.fileName();
     while(!dat_file.atEnd()){
       QString line = dat_file.readLine();
-      if(obj_file_name_regex.indexIn(line)>-1){
-        raw_file_name = info.dir().path()+"/"+obj_file_name_regex.cap(1);
+      if(kObjFileNameRegex.indexIn(line)>-1){
+        raw_file_name = info.dir().path()+"/"+kObjFileNameRegex.cap(1);
         qDebug() << "file name" << raw_file_name;
       }
-      if(resolution_regex.indexIn(line)>-1){
-        w = resolution_regex.cap(1).toInt();
-        h = resolution_regex.cap(2).toInt();
-        d = resolution_regex.cap(3).toInt();
+      if(kResolutionRegex.indexIn(line)>-1){
+        w = kResolutionRegex.cap(1).toInt();
+        h = kResolutionRegex.cap(2).toInt();
+        d = kResolutionRegex.cap(3).toInt();
         qDebug() << "resolution" << w << h << d;
       }
     }
@@ -86,12 +98,6 @@ VolumeData::VolumeData()
     QByteArray data = file.readAll();
     memcpy(data_.data(),data.data(),w*d*h*sizeof(unsigned short));
   }else return;
-
-//  for(int i=0;i<w*d*h;i++){
-//    unsigned short val = data_[i];
-//    max_val_ = max_val_>=val?max_val_:val;
-//    min_val_ = min_val_<=val?min_val_:val;
-//  }
 }
 
 void VolumeData::setValue(int i, int j, int k, unsigned short value)
@@ -102,6 +108,7 @@ void VolumeData::setValue(int i, int j, int k, unsigned short value)
 
 unsigned short VolumeData::getValue(int i, int j, int k, bool print) const
 {
+  if(data_.size()==0) return 0;
   if((i)+(w*j)+(w*h*k) >= data_.size()) return 0;
 //  qDebug() << "data.size" << data_.size() << i << j << k << "index:" << (i)+(w*j)+(w*h*k) << data_[(i)+(w*j)+(w*h*k)];
   if(print){

@@ -3,6 +3,7 @@
 
 #include "busta_libs/glwidget/glwidgetscene.h"
 
+#include <QString>
 
 class VolumePlanesScene : public Busta::GLWidgetScene
 {
@@ -15,9 +16,13 @@ public:
 
   void setTex3D();
 
-  unsigned short transferFunction(unsigned short val);
+  void transferFunction(unsigned short val, unsigned char *ret);
 
   unsigned int textureID;
+
+  int layers;
+
+  QString file_name;
 };
 
 #endif // VOLUMEPLANESSCENE_H

@@ -9,10 +9,9 @@
 
 const float kZoomFactor = 0.001f;
 
-const unsigned int layers = 100;
-
 VolumePlanesScene::VolumePlanesScene()
 {
+  layers = 256;
 }
 
 void VolumePlanesScene::init()
@@ -100,9 +99,10 @@ void VolumePlanesScene::setTex3D()
   GLsizei tex_width = 256;
   GLsizei tex_height = 256;
   GLsizei tex_depth = 256;
-  GLubyte *tex_data = new GLubyte[tex_width*tex_height*tex_depth];
+  GLubyte *tex_data = new GLubyte[tex_width*tex_height*tex_depth*4];
 
   VolumeData data;
+  data.load(file_name);
 
   for(int i=0;i<tex_height;i++){
     float fi = float(i)/float(tex_height-1);
@@ -112,25 +112,45 @@ void VolumePlanesScene::setTex3D()
         float fk = float(k)/float(tex_depth-1);
 //        float val = data.getInterpolatedValue(fi,fj,fk);
         float val = data.getValue256(i,j,k);
-        int coord = i + tex_height*(j + tex_width*k);
+        int coord = 4*(i + tex_height*(j + tex_width*k));
         // Cut the borders
         if(i==0 || j==0 || k==0 || i==tex_height-1 || j==tex_width-1 || k==tex_depth-1){
-          tex_data[coord]=0;
+          tex_data[coord+0]=0;
+          tex_data[coord+1]=0;
+          tex_data[coord+2]=0;
+          tex_data[coord+3]=0;
         }else{
-          tex_data[coord] = transferFunction(val);
+          transferFunction(val,&tex_data[coord]);
         }
       }
     }
   }
 
-  Busta::OpenGL::instance()->texImage3D(GL_TEXTURE_3D,0,GL_INTENSITY,tex_width,tex_height,tex_depth,0,GL_LUMINANCE,GL_UNSIGNED_BYTE,tex_data);
+  Busta::OpenGL::instance()->texImage3D(GL_TEXTURE_3D,0,GL_RGBA,tex_width,tex_height,tex_depth,0,GL_RGBA,GL_UNSIGNED_BYTE,tex_data);
 }
 
-unsigned short VolumePlanesScene::transferFunction(unsigned short val)
+void VolumePlanesScene::transferFunction(unsigned short val, unsigned char *ret)
 {
+
  if(val > 210){
-   return val;
+   ret[0] = 0xff;
+   ret[1] = 0xff;
+   ret[2] = 0xff;
+   ret[3] = 0x09;
+ }else if(val > 150){
+   ret[0] = 0xff;
+   ret[1] = 0x0;
+   ret[2] = 0x0;
+   ret[3] = 0x09;
+ }else if(val > 100){
+   ret[0] = 0xff;
+   ret[1] = 0xff;
+   ret[2] = 0x0;
+   ret[3] = 0x09;
  }else{
-   return 0;
+   ret[0] = 0xff;
+   ret[1] = 0xff;
+   ret[2] = 0xff;
+   ret[3] = 0x00;
  }
 }
