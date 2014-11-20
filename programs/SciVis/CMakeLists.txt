@@ -13,6 +13,7 @@ set(SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/scene/marchingcubesscene.cpp
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.cpp
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/loadingprogress.cpp
 )
 set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/scivis.h
@@ -22,9 +23,11 @@ set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubeskernel.h
+  ${CMAKE_CURRENT_LIST_DIR}/loadingprogress.h
 )
 set(FORM_FILES
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.ui
+  ${CMAKE_CURRENT_LIST_DIR}/loadingprogress.ui
 )
 set(RESOURCE_FILES
 )

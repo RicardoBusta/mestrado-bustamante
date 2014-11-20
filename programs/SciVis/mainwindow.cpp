@@ -5,6 +5,7 @@
 
 #include "scene/volumeplanesscene.h"
 #include "scene/marchingcubesscene.h"
+#include "loadingprogress.h"
 
 #include <QTimer>
 #include <QFileDialog>
@@ -46,7 +47,10 @@ void MainWindow::setSceneCubes()
 
 void MainWindow::setScenePlanes()
 {
-
+  LoadingProgress *progress = new LoadingProgress(this);
+  progress->setGeometry(this->rect());
+  progress->show();
+  progress->raise();
   VolumePlanesScene *ps = /*(VolumePlanesScene *)*/dynamic_cast<VolumePlanesScene*>(scenes["planes"]);
   if(ps!=NULL){
     QString res = QFileDialog::getOpenFileName();
@@ -55,4 +59,5 @@ void MainWindow::setScenePlanes()
   }
   ui_->widget->setScene(scenes["planes"]);
   ui_->widget->setGeometry(ui_->widget->geometry());
+  progress->hide();
 }

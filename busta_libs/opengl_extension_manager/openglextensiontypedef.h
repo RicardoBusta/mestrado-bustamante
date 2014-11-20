@@ -3,17 +3,27 @@
 
 #include <QtOpenGL>
 
-typedef void (*PFGLTEXIMAGE3D)(
-    GLenum ,
-    GLint ,
-    GLint ,
-    GLsizei ,
-    GLsizei ,
-    GLsizei ,
-    GLint ,
-    GLenum ,
-    GLenum ,
-    const GLvoid *
+#if defined(_WIN32)
+#define GL_EXT_ENTRY
+#define GL_EXT_CALL     __stdcall
+#define GL_CALLBACK     __stdcall
+#else
+#define GL_EXT_ENTRY
+#define GL_EXT_CALL
+#define GL_CALLBACK
+#endif
+
+typedef GL_EXT_ENTRY void (GL_EXT_CALL * PFGLTEXIMAGE3D)(
+    GLenum ,    // target
+    GLint ,     // level
+    GLint ,     // internalFormat
+    GLsizei ,   // width
+    GLsizei ,   // height
+    GLsizei ,   // depth
+    GLint ,     // border
+    GLenum ,    // format
+    GLenum ,    // type
+    const GLvoid * // data
     );
 
 #ifndef GL_TEXTURE_WRAP_R

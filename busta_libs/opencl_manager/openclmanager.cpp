@@ -127,6 +127,7 @@ namespace Busta{
 
   bool OpenCLManager::LoadLib()
   {
+    qDebug() << "loading lib";
     if(is_enabled_) return true;
 
 #if defined(_WIN32)
@@ -144,13 +145,14 @@ namespace Busta{
       return false;
     }else{
       is_enabled_ = true;
-      //      qWarning() << "Success to load lib: " << libname;
+      qWarning() << "Success to load lib: " << libname;
       return true;
     }
   }
 
   void OpenCLManager::UnloadLibrary()
   {
+    qDebug() << "unloading lib";
     if( NULL != lib_ ){
 #if defined(_WIN32)
       bool ret = FreeLibrary( (HMODULE)lib_ );
@@ -163,6 +165,7 @@ namespace Busta{
       if( 1 != ret ){
         qDebug() << "Failed unloading lib:" << ret;
       }
+      qDebug() << "sucessfully unloaded library";
     }
   }
 
