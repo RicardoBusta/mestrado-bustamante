@@ -161,12 +161,17 @@ void Scene::setOptions()
     }
 
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    if(Options::instance()->get_option("check_perspective")){
-      glFrustum(-.1,.1,-.1,.1,0.1,1000);
-      glTranslatef(0,0,-1);
+
+    if(!gui_projection_.isIdentity()){
+      glLoadMatrixf(gui_projection_.data());
     }else{
-      glOrtho(-1,1,-1,1,-50,50);
+      glLoadIdentity();
+      if(Options::instance()->get_option("check_perspective")){
+        glFrustum(-.1,.1,-.1,.1,0.1,1000);
+        glTranslatef(0,0,-1);
+      }else{
+        glOrtho(-1,1,-1,1,-50,50);
+      }
     }
 
     glMatrixMode(GL_MODELVIEW);

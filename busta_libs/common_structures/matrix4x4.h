@@ -45,6 +45,8 @@ public:
   void orthoC(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far );
   void frustumC(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far );
 
+  bool isIdentity() const;
+
   // Matrix Operations
   void transpose();
   Matrix4x4 transposed() const;

@@ -62,8 +62,8 @@ void MainWindow::init()
   connect(ui->button_hide_interface,SIGNAL(clicked()),this,SLOT(hideTabs()));
 
   connect(ui->shader_apply,SIGNAL(clicked()),this,SLOT(setShaders()));
-
   connect(ui->transform_modelview,SIGNAL(indexesMoved(QModelIndexList)),this,SLOT(transformChanged()));
+  connect(ui->transform_modelview,SIGNAL(itemSelectionChanged()),this,SLOT(transformChanged()));
   connect(ui->transform_modelview,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(showMatrix(QListWidgetItem*)));
   connect(ui->add_modelview,SIGNAL(clicked()),this,SLOT(addModelviewMatrix()));
   connect(ui->add_projection,SIGNAL(clicked()),this,SLOT(addProjectionMatrix()));
