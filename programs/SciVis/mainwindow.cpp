@@ -5,6 +5,7 @@
 
 #include "scene/volumeplanesscene.h"
 #include "scene/marchingcubesscene.h"
+#include "loadingprogress.h"
 
 #include <QTimer>
 #include <QFileDialog>
@@ -39,6 +40,8 @@ void MainWindow::init(){
   //setCentralWidget(glwidget_);
 }
 
+#include "widgets/marchingcubesscenedialog.h"
+
 void MainWindow::setSceneCubes()
 {
   qDebug() << "Setting marching cube scene";
@@ -46,14 +49,24 @@ void MainWindow::setSceneCubes()
   if(ps!=NULL){
     QString res = QFileDialog::getOpenFileName();
     qDebug() << "opened?";
-    if(!res.isEmpty()) ps->file_name = res;
+    MarchingCubesSceneDialog dialog(this);
+    dialog.exec();
+    if(!res.isEmpty()){
+      ps->file_name = res;
+      ps->iso_value = 205;
+    }
   }
+  this->raise();
   ui_->widget->setScene(scenes["cubes"]);
   ui_->widget->setGeometry(ui_->widget->geometry());
 }
 
 void MainWindow::setScenePlanes()
 {
+  LoadingProgress *progress = new LoadingProgress(this);
+  progress->setGeometry(this->rect());
+  progress->show();
+  progress->raise();
   qDebug() << "Setting planes scene";
   VolumePlanesScene *ps = dynamic_cast<VolumePlanesScene*>(scenes["planes"]);
   if(ps!=NULL){
@@ -63,4 +76,5 @@ void MainWindow::setScenePlanes()
   }
   ui_->widget->setScene(scenes["planes"]);
   ui_->widget->setGeometry(ui_->widget->geometry());
+  progress->hide();
 }

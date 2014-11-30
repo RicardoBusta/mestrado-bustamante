@@ -19,7 +19,7 @@ void MarchingCubesScene::init()
 
   QVector<QVector3D> vertex;
 
-  vertex = MarchingCubes::instance()->march(data, 205);
+  vertex = MarchingCubes::instance()->march(data, iso_value);
 
   glDeleteLists(display_list,1);
   display_list = glGenLists(1);

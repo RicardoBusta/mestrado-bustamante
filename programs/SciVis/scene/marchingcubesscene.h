@@ -14,6 +14,7 @@ public:
   void release();
 
   QString file_name;
+  int iso_value;
   GLuint display_list;
 };
 
