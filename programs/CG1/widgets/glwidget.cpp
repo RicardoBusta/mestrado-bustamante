@@ -10,6 +10,7 @@
 #include "programs/CG1/opengl/shaders.h"
 
 #include <QMessageBox>
+#include <QFileDialog>
 
 GLWidget::GLWidget(QWidget *parent) :
   QGLWidget(parent),
@@ -151,4 +152,15 @@ void GLWidget::sceneStep()
   if(!Scene::valid()) return;
 
   Scene::current()->step();
+}
+
+void GLWidget::exportFrameBuffer()
+{
+  qDebug() << "export";
+
+  QString save_name = QFileDialog::getSaveFileName(this,"Save Image","","Images (*.png *.jpg)");
+  if(!save_name.isEmpty()){
+    QImage img = grabFrameBuffer(false);
+    img.save(save_name);
+  }
 }

@@ -39,6 +39,8 @@ signals:
 
 public slots:
   void sceneStep();
+
+  void exportFrameBuffer();
 };
 
 #endif // GLWIDGET_H

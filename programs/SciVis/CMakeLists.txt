@@ -2,7 +2,7 @@ project("SciVis")
 
 include_directories(${ROOT_DIR} ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
-include_directories("${ROOT_DIR}/others_libs/NVIDIA_SDK/OpenCL/inc")
+#include_directories("${ROOT_DIR}/others_libs/NVIDIA_SDK/OpenCL/inc")
 
 #Add project files
 set(SOURCE_FILES
@@ -22,6 +22,7 @@ set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/data/volumedata.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubes.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubeskernel.h
+  ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubestables.h
 )
 set(FORM_FILES
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.ui
@@ -34,7 +35,7 @@ set(OTHER_FILES
 
 set(DEPENDENCY_LIBRARIES
   BustaGLWidget
-  BustaOpenCLManager
+  #BustaOpenCLManager
   BustaOpenGLExtensionManager
 )
 

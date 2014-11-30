@@ -13,13 +13,40 @@ MarchingCubesScene::MarchingCubesScene()
 
 void MarchingCubesScene::init()
 {
-  vertex = MarchingCubes::instance()->march(data, 800);
-  vertex = MarchingCubes::instance()->march(data, 800);
+  VolumeData data;
+
+  data.load(file_name);
+
+  QVector<QVector3D> vertex;
+
+  vertex = MarchingCubes::instance()->march(data, 205);
+
+  glDeleteLists(display_list,1);
+  display_list = glGenLists(1);
+
+  glNewList(display_list, GL_COMPILE);
+  glBegin(GL_TRIANGLES);
+  for(int i=0;i+2<vertex.size();i+=3){
+    QVector3D normal = QVector3D::crossProduct(vertex[i+1]-vertex[i],vertex[i+2]-vertex[i]);
+    normal.normalize();
+    glNormal3f(normal.x(),normal.y(),normal.z());
+    glVertex3f(vertex[i].x(),vertex[i].y(),vertex[i].z());
+    glVertex3f(vertex[i+1].x(),vertex[i+1].y(),vertex[i+1].z());
+    glVertex3f(vertex[i+2].x(),vertex[i+2].y(),vertex[i+2].z());
+  }
+  glEnd();
+  glEndList();
 }
 
 void MarchingCubesScene::paintGL()
 {
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
+  glEnable(GL_NORMALIZE);
+  glEnable(GL_DEPTH_TEST);
+  glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
   glLoadIdentity();
 
@@ -27,11 +54,8 @@ void MarchingCubesScene::paintGL()
   glRotatef(rotx_,1,0,0);
   glRotatef(roty_,0,1,0);
 
-  glBegin(GL_TRIANGLES);
-  for(int i=0;i<vertex.size();i++){
-    glVertex3f(vertex[i].x(),vertex[i].y(),vertex[i].z());
-  }
-  glEnd();
+  glColor3f(1,1,1);
+  glCallList(display_list);
 }
 
 void MarchingCubesScene::release()

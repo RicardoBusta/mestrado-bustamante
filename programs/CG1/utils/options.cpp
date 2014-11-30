@@ -104,6 +104,11 @@ void Options::set_option(QString option, bool v)
   }
 }
 
+void Options::force_change_option()
+{
+  options_changed_ = true;
+}
+
 void Options::setVoxelScene(QString scene)
 {
   voxel_scene_ = scene;

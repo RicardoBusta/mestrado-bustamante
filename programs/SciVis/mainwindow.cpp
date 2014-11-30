@@ -41,13 +41,21 @@ void MainWindow::init(){
 
 void MainWindow::setSceneCubes()
 {
+  qDebug() << "Setting marching cube scene";
+  MarchingCubesScene *ps = dynamic_cast<MarchingCubesScene*>(scenes["cubes"]);
+  if(ps!=NULL){
+    QString res = QFileDialog::getOpenFileName();
+    qDebug() << "opened?";
+    if(!res.isEmpty()) ps->file_name = res;
+  }
   ui_->widget->setScene(scenes["cubes"]);
+  ui_->widget->setGeometry(ui_->widget->geometry());
 }
 
 void MainWindow::setScenePlanes()
 {
-
-  VolumePlanesScene *ps = /*(VolumePlanesScene *)*/dynamic_cast<VolumePlanesScene*>(scenes["planes"]);
+  qDebug() << "Setting planes scene";
+  VolumePlanesScene *ps = dynamic_cast<VolumePlanesScene*>(scenes["planes"]);
   if(ps!=NULL){
     QString res = QFileDialog::getOpenFileName();
     qDebug() << "opened?";

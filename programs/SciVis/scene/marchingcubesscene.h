@@ -13,8 +13,8 @@ public:
   void paintGL();
   void release();
 
-  VolumeData data;
-  QVector<QVector3D> vertex;
+  QString file_name;
+  GLuint display_list;
 };
 
 #endif // MARCHINGCUBESSCENE_H

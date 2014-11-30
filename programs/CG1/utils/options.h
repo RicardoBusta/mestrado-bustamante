@@ -27,6 +27,7 @@ public:
 
   bool get_option(QString option);
   void set_option(QString option, bool v);
+  void force_change_option();
 
   void setVoxelScene(QString scene);
   QString getVoxelScene() const;

@@ -72,6 +72,8 @@ void MainWindow::init()
   connect(ui->remove_modelview,SIGNAL(clicked()),this,SLOT(removeModelviewMatrix()));
   connect(ui->remove_projection,SIGNAL(clicked()),this,SLOT(removeProjectionMatrix()));
 
+  connect(ui->export_pushButton,SIGNAL(clicked()),ui->gl_widget,SLOT(exportFrameBuffer()));
+
   ui->shader_premade->addItem("-");
   ui->shader_premade->addItem("Phong");
   ui->shader_premade->addItem("Toon");
@@ -252,6 +254,8 @@ void MainWindow::transformChanged()
   {
    setMatrix(list_item->text(),interface_projection);
   }
+
+  Options::instance()->force_change_option();
 
   if(Scene::current()!=NULL){
     Scene::current()->setGuiMatrix(interface_modelview,interface_projection);

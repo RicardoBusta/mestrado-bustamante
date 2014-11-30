@@ -17,6 +17,10 @@ void VolumePlanesScene::init()
 {
   glEnable(GL_TEXTURE_3D);
   glEnable(GL_CULL_FACE);
+  glDisable(GL_LIGHTING);
+  glDisable(GL_NORMALIZE);
+  glDisable(GL_DEPTH_TEST);
+  glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
 //  glEnable(GL_DEPTH_TEST);
 //  glEnable ( GL_ALPHA_TEST ) ;
   //glAlphaFunc ( GL_GREATER, 0.1f ) ;

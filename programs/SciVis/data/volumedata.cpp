@@ -140,6 +140,31 @@ unsigned short VolumeData::getValue256(int i, int j, int k, bool print) const
   return getInterpolatedValue(i-offx, j-offy, k-offz,print);
 }
 
+unsigned short VolumeData::getValueF(float fi, float fj, float fk, bool print) const
+{
+  float i = fi*256.0f, j = fj * 256.0f, k = fk*256.0f;
+
+  float offx = (256.0f - float(h))/2.0f;
+  float offy = (256.0f - float(w))/2.0f;
+  float offz = (256.0f - float(d))/2.0f;
+
+  if(i<offx || i > 256.0f-offx){
+    return 0;
+  }
+  if(j<offy || j > 256.0f-offy){
+    return 0;
+  }
+  if(k<offz || k > 256.0f-offz){
+    return 0;
+  }
+
+  if(print){
+    qDebug() << "getValue256" << i<<j<<k << offx << offy << offz;
+  }
+
+  return getInterpolatedValue(i-offx, j-offy, k-offz,print);
+}
+
 float VolumeData::getInterpolatedValue(float i, float j, float k, bool print) const
 {
   float inti = floor(i);
