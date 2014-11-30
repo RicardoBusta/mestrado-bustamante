@@ -1,7 +1,5 @@
 #include "marchingcubes.h"
 
-const int kVoxelSize = 100;
-
 //#include <QDebug>
 
 //#include "marchingcubeskernel.h"
@@ -181,11 +179,11 @@ QVector3D MarchingCubes::calculate_vertex(float iso_level, const QPair<float, QV
   return res;
 }
 
-QVector<QVector3D> MarchingCubes::march(const VolumeData &data, const float iso_level)
+QVector<QVector3D> MarchingCubes::march(const VolumeData &data, const int size, const float iso_level)
 {
   QVector<QVector3D> output;
 
-  float div = 1.0f/float(kVoxelSize);
+  float div = 1.0f/float(size);
 
   for(float i=0;i<1.0f;i+=div){
     for(float j=0;j<1.0f;j+=div){

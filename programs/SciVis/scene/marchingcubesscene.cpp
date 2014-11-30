@@ -19,7 +19,8 @@ void MarchingCubesScene::init()
 
   QVector<QVector3D> vertex;
 
-  vertex = MarchingCubes::instance()->march(data, iso_value);
+  qDebug() << "Marching" << cube_size << iso_value;
+  vertex = MarchingCubes::instance()->march(data,cube_size,iso_value);
 
   glDeleteLists(display_list,1);
   display_list = glGenLists(1);
@@ -46,6 +47,7 @@ void MarchingCubesScene::paintGL()
   glEnable(GL_LIGHT0);
   glEnable(GL_NORMALIZE);
   glEnable(GL_DEPTH_TEST);
+  glEnable(GL_COLOR_MATERIAL);
   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
   glLoadIdentity();
@@ -54,7 +56,8 @@ void MarchingCubesScene::paintGL()
   glRotatef(rotx_,1,0,0);
   glRotatef(roty_,0,1,0);
 
-  glColor3f(1,1,1);
+  qDebug() << "color" << color;
+  glColor3f(color.redF(),color.greenF(),color.blueF());
   glCallList(display_list);
 }
 

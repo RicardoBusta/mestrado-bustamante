@@ -15,6 +15,8 @@ public:
 
   QString file_name;
   int iso_value;
+  int cube_size;
+  QColor color;
   GLuint display_list;
 };
 

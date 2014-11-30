@@ -46,16 +46,21 @@ void MainWindow::setSceneCubes()
 {
   qDebug() << "Setting marching cube scene";
   MarchingCubesScene *ps = dynamic_cast<MarchingCubesScene*>(scenes["cubes"]);
-  if(ps!=NULL){
-    QString res = QFileDialog::getOpenFileName();
-    qDebug() << "opened?";
-    MarchingCubesSceneDialog dialog(this);
-    dialog.exec();
-    if(!res.isEmpty()){
-      ps->file_name = res;
-      ps->iso_value = 205;
-    }
-  }
+  if(ps==NULL) return;
+
+  QString res = QFileDialog::getOpenFileName();
+
+  if(res.isEmpty()) return;
+
+  MarchingCubesSceneDialog dialog(this);
+  int result = dialog.exec();
+  if(result == QDialog::Rejected) return;
+
+  ps->file_name = res;
+  ps->iso_value = dialog.iso_value;
+  ps->cube_size = dialog.size;
+  ps->color = dialog.color;
+
   this->raise();
   ui_->widget->setScene(scenes["cubes"]);
   ui_->widget->setGeometry(ui_->widget->geometry());

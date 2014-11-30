@@ -7,7 +7,7 @@
 class MarchingCubes
 {
 public:
-  QVector<QVector3D> march(const VolumeData &data, const float iso_level);
+  QVector<QVector3D> march(const VolumeData &data, const int size, const float iso_level);
   void setup();
   void release();
 
