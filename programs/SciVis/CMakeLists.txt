@@ -16,6 +16,8 @@ set(SOURCE_FILES
   ${CMAKE_CURRENT_LIST_DIR}/loadingprogress.cpp
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/transferfunction.cpp
   ${CMAKE_CURRENT_LIST_DIR}/widgets/marchingcubesscenedialog.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/transferfunctiondialog.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/transferfunctionwidget.cpp
 )
 set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/scivis.h
@@ -29,11 +31,14 @@ set(HEADER_FILES
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/marchingcubestables.h
   ${CMAKE_CURRENT_LIST_DIR}/algorithm/transferfunction.h
   ${CMAKE_CURRENT_LIST_DIR}/widgets/marchingcubesscenedialog.h
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/transferfunctiondialog.h
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/transferfunctionwidget.h
 )
 set(FORM_FILES
   ${CMAKE_CURRENT_LIST_DIR}/mainwindow.ui
   ${CMAKE_CURRENT_LIST_DIR}/loadingprogress.ui
   ${CMAKE_CURRENT_LIST_DIR}/widgets/marchingcubesscenedialog.ui
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/transferfunctiondialog.ui
 )
 set(RESOURCE_FILES
 )

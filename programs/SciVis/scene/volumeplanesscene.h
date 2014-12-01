@@ -5,6 +5,7 @@
 
 #include <QtOpenGL>
 #include <QString>
+#include "algorithm/transferfunction.h"
 
 class VolumePlanesScene : public Busta::GLWidgetScene
 {
@@ -25,6 +26,7 @@ public:
   int layers;
 
   GLuint display_list;
+  TransferFunction tf;
 
   QString file_name;
 };

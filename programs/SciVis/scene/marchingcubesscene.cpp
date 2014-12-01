@@ -47,6 +47,7 @@ void MarchingCubesScene::paintGL()
   glEnable(GL_LIGHT0);
   glEnable(GL_NORMALIZE);
   glEnable(GL_DEPTH_TEST);
+  glDisable(GL_CULL_FACE);
   glEnable(GL_COLOR_MATERIAL);
   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 

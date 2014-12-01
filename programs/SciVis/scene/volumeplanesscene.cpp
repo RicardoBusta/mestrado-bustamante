@@ -6,6 +6,8 @@
 
 #include "data/volumedata.h"
 
+#include "algorithm/transferfunction.h"
+
 const float kZoomFactor = 0.001f;
 
 VolumePlanesScene::VolumePlanesScene()
@@ -145,26 +147,10 @@ void VolumePlanesScene::setTex3D()
 
 void VolumePlanesScene::transferFunction(unsigned short val, GLubyte *ret)
 {
+  QColor c = tf.get(val);
 
- if(val > 210){
-   ret[0] = 0xff;
-   ret[1] = 0xff;
-   ret[2] = 0xff;
-   ret[3] = 0x09;
- }else if(val > 150){
-   ret[0] = 0xff;
-   ret[1] = 0x0;
-   ret[2] = 0x0;
-   ret[3] = 0x09;
- }else if(val > 100){
-   ret[0] = 0xff;
-   ret[1] = 0xff;
-   ret[2] = 0x0;
-   ret[3] = 0x09;
- }else{
-   ret[0] = 0xff;
-   ret[1] = 0xff;
-   ret[2] = 0xff;
-   ret[3] = 0x00;
- }
+  ret[0] = c.red();
+  ret[1] = c.green();
+  ret[2] = c.blue();
+  ret[3] = c.alpha();
 }

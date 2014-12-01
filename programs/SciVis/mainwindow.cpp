@@ -7,6 +7,9 @@
 #include "scene/marchingcubesscene.h"
 #include "loadingprogress.h"
 
+#include "widgets/marchingcubesscenedialog.h"
+#include "widgets/transferfunctiondialog.h"
+
 #include <QTimer>
 #include <QFileDialog>
 
@@ -40,8 +43,6 @@ void MainWindow::init(){
   //setCentralWidget(glwidget_);
 }
 
-#include "widgets/marchingcubesscenedialog.h"
-
 void MainWindow::setSceneCubes()
 {
   qDebug() << "Setting marching cube scene";
@@ -49,7 +50,6 @@ void MainWindow::setSceneCubes()
   if(ps==NULL) return;
 
   QString res = QFileDialog::getOpenFileName();
-
   if(res.isEmpty()) return;
 
   MarchingCubesSceneDialog dialog(this);
@@ -61,25 +61,42 @@ void MainWindow::setSceneCubes()
   ps->cube_size = dialog.size;
   ps->color = dialog.color;
 
-  this->raise();
-  ui_->widget->setScene(scenes["cubes"]);
-  ui_->widget->setGeometry(ui_->widget->geometry());
-}
-
-void MainWindow::setScenePlanes()
-{
   LoadingProgress *progress = new LoadingProgress(this);
   progress->setGeometry(this->rect());
   progress->show();
   progress->raise();
+
+  this->raise();
+  ui_->widget->setScene(scenes["cubes"]);
+  ui_->widget->setGeometry(ui_->widget->geometry());
+
+  delete progress;
+}
+
+void MainWindow::setScenePlanes()
+{
   qDebug() << "Setting planes scene";
   VolumePlanesScene *ps = dynamic_cast<VolumePlanesScene*>(scenes["planes"]);
-  if(ps!=NULL){
-    QString res = QFileDialog::getOpenFileName();
-    qDebug() << "opened?";
-    if(!res.isEmpty()) ps->file_name = res;
-  }
+  if(ps==NULL) return;
+
+  QString res = QFileDialog::getOpenFileName();
+  if(res.isEmpty()) return;
+
+  TransferFunctionDialog dialog(this);
+  int result = dialog.exec();
+  if(result == QDialog::Rejected) return;
+
+  ps->file_name = res;
+  ps->tf = dialog.transfer_function;
+
+  LoadingProgress *progress = new LoadingProgress(this);
+  progress->setGeometry(this->rect());
+  progress->show();
+  progress->raise();
+
+  this->raise();
   ui_->widget->setScene(scenes["planes"]);
   ui_->widget->setGeometry(ui_->widget->geometry());
-  progress->hide();
+
+  delete progress;
 }
