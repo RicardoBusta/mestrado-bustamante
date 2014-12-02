@@ -14,6 +14,8 @@ public:
   void paintEvent(QPaintEvent *e);
 
   void mouseDoubleClickEvent(QMouseEvent *e);
+  void mousePressEvent(QMouseEvent *e);
+  void mouseReleaseEvent(QMouseEvent *e);
 
   TransferFunction tf;
 

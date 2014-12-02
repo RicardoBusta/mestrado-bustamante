@@ -21,6 +21,7 @@ private:
   Ui::TransferFunctionDialog *ui;
 private slots:
   void updateTF();
+  void clearTF();
 };
 
 #endif // TRANSFERFUNCTIONDIALOG_H

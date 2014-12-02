@@ -91,6 +91,16 @@ void TransferFunctionWidget::mouseDoubleClickEvent(QMouseEvent *e)
   e->accept();
 }
 
+void TransferFunctionWidget::mousePressEvent(QMouseEvent *e)
+{
+
+}
+
+void TransferFunctionWidget::mouseReleaseEvent(QMouseEvent *e)
+{
+
+}
+
 QPointF TransferFunctionWidget::normalizedToWidgetCoord(float x, float y)
 {
   QPointF p(x*(this->width()-1),(1.0f-y)*(this->height()-1));
