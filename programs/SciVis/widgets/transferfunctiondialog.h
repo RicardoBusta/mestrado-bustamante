@@ -19,6 +19,8 @@ public:
   TransferFunction transfer_function;
 private:
   Ui::TransferFunctionDialog *ui;
+private slots:
+  void updateTF();
 };
 
 #endif // TRANSFERFUNCTIONDIALOG_H

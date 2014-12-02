@@ -25,6 +25,8 @@ public:
 
   void add(float value, QColor color);
 
+  void remove(int index);
+
   void clear();
 
   //use once before the first get or after the last add.

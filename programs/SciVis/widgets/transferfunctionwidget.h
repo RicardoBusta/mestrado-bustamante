@@ -19,6 +19,7 @@ public:
 
 private:
   QPointF normalizedToWidgetCoord(float x, float y);
+  QPointF getNormalizedFromWidgetCoord(QPoint p);
 };
 
 #endif // TRANSFERFUNCTIONWIDGET_H

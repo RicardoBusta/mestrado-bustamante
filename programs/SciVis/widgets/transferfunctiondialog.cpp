@@ -8,9 +8,16 @@ TransferFunctionDialog::TransferFunctionDialog(QWidget *parent) :
   ui->setupUi(this);
 
   transfer_function = ui->widget->tf;
+
+  connect(this,SIGNAL(accepted()),this,SLOT(updateTF()));
 }
 
 TransferFunctionDialog::~TransferFunctionDialog()
 {
   delete ui;
+}
+
+void TransferFunctionDialog::updateTF()
+{
+  transfer_function = ui->widget->tf;
 }

@@ -2,6 +2,12 @@
 
 #include <QPainter>
 #include <QLinearGradient>
+#include <QMouseEvent>
+#include <QDebug>
+#include <QVector2D>
+#include <QColorDialog>
+
+const int kEllipseRad = 5;
 
 TransferFunctionWidget::TransferFunctionWidget(QWidget *parent):
   QWidget(parent)
@@ -56,18 +62,44 @@ void TransferFunctionWidget::paintEvent(QPaintEvent *e)
 
   for(int i=0;i<circles.size();i++){
     painter.setBrush(circles[i].second);
-    painter.drawEllipse(circles[i].first,5,5);
+    painter.drawEllipse(circles[i].first,kEllipseRad,kEllipseRad);
   }
 
 }
 
 void TransferFunctionWidget::mouseDoubleClickEvent(QMouseEvent *e)
 {
+  QVector2D pos_v = QVector2D(e->pos());
+  for(int i=0;i<tf.size();i++){
+    QPointF circ_center = normalizedToWidgetCoord(tf.getIndex(i).value,tf.getIndex(i).color.alphaF());
+    float dist = (pos_v-QVector2D(circ_center)).length();
+    if(dist<=kEllipseRad){
+        tf.remove(i);
+        update();
+        e->accept();
+        return;
+    }
+  }
 
+  QPointF p = getNormalizedFromWidgetCoord(e->pos());
+  QColor color = QColorDialog::getColor();
+  if(!color.isValid()) return;
+  color.setAlphaF(p.y());
+  tf.add(p.x(),color);
+  tf.sort();
+  update();
+  e->accept();
 }
 
 QPointF TransferFunctionWidget::normalizedToWidgetCoord(float x, float y)
 {
   QPointF p(x*(this->width()-1),(1.0f-y)*(this->height()-1));
   return p;
+}
+
+QPointF TransferFunctionWidget::getNormalizedFromWidgetCoord(QPoint p)
+{
+  QPointF ret = QPointF( float(p.x())/(rect().width()),1-float(p.y())/(rect().height()) );
+  qDebug() << "ret" << ret;
+  return ret;
 }

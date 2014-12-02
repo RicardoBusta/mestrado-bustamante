@@ -52,6 +52,11 @@ void TransferFunction::add(float value, QColor color)
   function.push_back(TransferFunctionElement(value,color));
 }
 
+void TransferFunction::remove(int index)
+{
+  function.removeAt(index);
+}
+
 void TransferFunction::clear()
 {
   function.clear();
