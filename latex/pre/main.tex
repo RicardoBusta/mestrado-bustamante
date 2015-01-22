@@ -1,0 +1,58 @@
+% Mestre em LaTeX - v0.2
+% Copyleft 2008-2011 Bruno C. Vellutini - http://organelas.com/
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+%
+% Ou seja, utilize e modifique os arquivos como desejar.
+% 
+% Para mais informações visite http://code.google.com/p/mestre-em-latex/
+
+% Document Class
+\documentclass[twoside,a4paper,11pt]{report}
+
+% Packages and custom commands
+\include{config_meta}
+
+\usepackage{ucs}
+
+%\theoremstyle{definition}
+\newtheorem{defi}{Definição}
+\newtheorem{exem}{Exemplo}
+\newtheorem{teo}{Teorema}
+\newcommand{\setof}[1]{\ensuremath{\left \{ #1 \right \}}}
+\newcommand{\tuple}[1]{\ensuremath{\left \langle #1 \right \rangle }}
+
+%% Schedule packages
+\usepackage{colortbl}
+\usepackage{booktabs}
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
+\definecolor{tcA}{gray}{0}
+
+% Where the text begins
+\begin{document}
+
+\include{chapter_intro}   % Cover, foreword, etc..
+%\include{cap_template}	% chapters
+\include{chapter_final}	% Final considerations
+
+\nocite{*}
+% Bib format
+\bibliographystyle{plain}
+% Bib file
+\bibliography{bibfile}
+
+% End of the text
+\end{document}
