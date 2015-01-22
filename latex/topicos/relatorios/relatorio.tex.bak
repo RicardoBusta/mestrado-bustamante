@@ -1,0 +1,51 @@
+\documentclass[a4paper,10pt]{report}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% \hyphenation{}
+
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+    pdfborder = {0 0 0}
+}
+\usepackage[alf,abnt-etal-cite=2,abnt-etal-list=0,abnt-etal-text=emph]{abntex2cite}
+
+%opening
+\author{Ricardo Bustamante de Queiroz}
+\title{Tópicos Especiais em Computação Gráfica\\-- Artigos --}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Mês de agosto}
+%\input{artigos/1998_Atluri_ComputationalMechanics_MeshlessPetrovGalerkinComputMechanics/report_1998_atluri}
+\input{artigos/1994_Synthesizing_Parameterized_Motions_egw94/report_1994_synthesizing}
+
+\chapter{Mês de setembro}
+%\input{artigos/1994_windup_toys/report_1994_windup}
+
+\input{artigos/1999_Tracking_and_Modifying_Upper-body_Human_Motion_Data_with_Dynamic_Simulation_zordan_TMU/report_1999_upper_body}
+
+\input{artigos/2002_SCA_Motion_capture-driven_simulations_that_hit_and_react_p89-zordan/report_2002_mocap_sim}
+
+\chapter{Mês de outubro}
+
+\input{artigos/2011-Teaching_a_Robot_to_Grasp/report_2011_teaching_grasp}
+\input{artigos/2009-Ball_Tracking_System/report_2009_ball_tracking_system}
+\input{artigos/2011-vision-based/report_2011_vision-based}
+
+ 
+% \chapter{Mês de novembro}
+
+\bibliography{bib}
+
+\end{document}

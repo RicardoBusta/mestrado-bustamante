@@ -1,0 +1,61 @@
+\section{\textit{A VISION-BASED APPROACH TO
+BEHAVIORAL ANIMATION}}
+
+
+% ============================================================================
+\subsection{Referência completa do artigo}
+
+\begin{itemize}
+  \item \textbf{Autores:} Olivier Renault and Nadia Magnenat-Thalmann and Daniel Thalmann
+  \item \textbf{Local:} Computer Graphics Lab, Swiss federal Institute of Technology
+  \item \textbf{\textit{Journal}:} The Journal of Visualization and Computer Animation [Qualis ??]
+  \item \textbf{Data:} 20 JUL 2011
+  \item \textbf{Referência:} \citeonline{bib:2011:vision-based}
+\end{itemize}
+
+
+% ============================================================================
+\subsection{Resumo}
+% ..........................................................
+\subsubsection{Abstract}
+This paper presents an innovative way of animating actors at a high level based on the concept of synthetic vision. The objective is simple: to create an animation involving a synthetic actor automatically moving in a corridor avoiding objects and other synthetic actors. To simulate this behaviour, each synthetic actor uses a synthetic vision as its perception of the world and so as the unique input to its behavioural model. This model is based on the concept of Displacement Local Automata (DLA), which is similar to the concept of a script for natural language processing. A DLA is an algorithm that can deal with a specific environment. Two DLA's are described in detail called follow-the-corridor and avoid-the-obstacle.
+
+% ..........................................................
+\subsubsection{Propósito do artigo}
+O artigo utiliza o conceito de visão para definir um comportamento evasivo ao ator. Isso lembra um pouco o que estou buscando.
+
+% ============================================================================
+\subsection{Metodologia}
+% Descreva um pouco mais detalhadamente a metodologia e os resultados do artigo. 
+% Inclua as figuras que achar mais relevantes.
+
+O artigo define como funciona o sistema de captura de imagem. Diferente de sistemas robóticos onde há um processamento pesado na imagem para extrair informações como profundidade ou distância de objetos, o sistema proposto pega um atalho usando como vantagem as informações que já existem no sistema computacional virtual do ambiente. Porém, essa informação não pode ser obtida de qualquer maneira. É preciso limitar as informações ao campo visual do personagem, pois além de melhorar o desempenho no caso de uma cena muito complexa, aumenta o grau de realismo onde o personagem só percebe visualmente aquilo que está em seu campo de visão, e só então toma alguma ação.
+As informações adicionais, além da imagem 2D da cena capturada pelo personagem, contém informação de distância, obtida através do z-buffer do algoritmo de renderização, e uma flag identificando a qual objeto aquele pixel pintado originalmente pertence.
+Com essas informações, ele alimenta um controlador. Existem duas abordagens de controle: Em uma, para cada automato de controle, é enviada a condição de ativação extraida do input visual. Se positivo, ele executa sua ação. Um controlador não está ciente do outro. Isso pode causar conflitos e cada controlador precisa ter essa informação de quando deve ser ativado. A segunda opção é centralizar esta decisão e ativar o controlador mais adequado para cada situação.
+Para este trabalho foram implementados dois automatos de controle, conhecidos como DLA's ou Displacement Local Automata. No primeiro, o comportamento de andar para frente em direção a saida do corredor. No segundo, um controle de desvio de obstáculos.
+Desta forma, o personagem alterna seus comportamentos a fim de realizar a tarefa.
+
+% ============================================================================
+\subsection{Pontos fortes} %no máximo três
+\begin{itemize}
+  \item É um algoritmo bem simples, não faz uso de matemática complexa.
+  \item Parece relativamente fácil de programar um comportamento bem específico, sendo possível programar caso a caso.
+\end{itemize}  
+
+% ============================================================================
+\subsection{Limitações} %no máximo três
+\begin{itemize}
+  \item Não é uma solução muito genérica
+  \item Não parece ter muita naturalidade na escolha dos movimentos. A unica preocupação do algoritmo é respeitar as restrições impostas.
+\end{itemize} 
+
+
+% ============================================================================
+\subsection{Avaliação}
+%\textbf{(a) Avanço considerável (\textit{Breakthrough}).}
+% \textbf{(b) Contribuição significativa.}
+% \textbf{(c) Contribuição modesta.}
+ \textbf{(d) Contribuição fraca.}
+% \textbf{(e) Sem contribuição.}
+
+Parece um artigo interessante, mas sinto que a questão da visão utilizada por ele aborda um problema menos genérico. Ele trata para cada caso o imput visual para tomar uma decisão.

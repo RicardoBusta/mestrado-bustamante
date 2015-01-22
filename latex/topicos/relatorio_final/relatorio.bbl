@@ -1,0 +1,100 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.2 }
+
+\bibitem[Armstrong e Green 1985]{bib:1985:Armstrong}
+\abntrefinfo{Armstrong e Green}{ARMSTRONG; GREEN}{1985}
+{ARMSTRONG, W.~W.; GREEN, M. The dynamics of articulated rigid bodies for
+  purposes of animation.
+\emph{Proceedings of Graphics Interface}, 1985.}
+
+\bibitem[Birbach e Frese 2009]{bib:2009:Birbach}
+\abntrefinfo{Birbach e Frese}{BIRBACH; FRESE}{2009}
+{BIRBACH, O.; FRESE, U. A multiple hypothesis approach for a ball tracking
+  system.
+\emph{Computer Vision Systems}, 2009.}
+
+\bibitem[Geijtenbeek \emph{et al.} 2012]{bib:2012:Geijtenbeek}
+\abntrefinfo{Geijtenbeek \emph{et al.}}{GEIJTENBEEK \emph{et al.}}{2012}
+{GEIJTENBEEK, T.; PRONOST, N.; STAPPEN, A.~F. van~der. Simple data-driven
+  control for simulated bipeds.
+\emph{SIGGRAPH Symposium on Computer Animation}, 2012.}
+
+\bibitem[Hamon \emph{et al.} 2011]{bib:2011:Hamon}
+\abntrefinfo{Hamon \emph{et al.}}{HAMON \emph{et al.}}{2011}
+{HAMON, L.; LUCIDARME, P.; RICHARD, P.; RICHARD, E. Virtual reality and
+  programming by demonstration: Teaching a robot to grasp a dynamic object by
+  the generalization of human demonstrations.
+\emph{Presence: Teleoperators and Virtual Environments}, p. 241--253, 2011.}
+
+\bibitem[Nogueira \emph{et al.} 2013]{bib:2013:Nogueira}
+\abntrefinfo{Nogueira \emph{et al.}}{NOGUEIRA \emph{et al.}}{2013}
+{NOGUEIRA, Y. L.~B.; BRITO, C. E.~F. de; VIDAL, C.~A.; CAVALCANTE-NETO, J.~B.
+  Evolving plastic neuromodulated networks for behavior emergence of autonomous
+  virtual characters.
+\emph{Advances in Artificial Life}, 2013.}
+
+\bibitem[Nourbakhsh \emph{et al.} 1997]{bib:1997:Nourbakhsh}
+\abntrefinfo{Nourbakhsh \emph{et al.}}{NOURBAKHSH \emph{et al.}}{1997}
+{NOURBAKHSH, I.~R.; ANDRE, D.; TOMASI, C.; GENESERETH, M.~R. Mobile robot
+  obstacle avoidance via depth from focus.
+\emph{Robotics and Autonomous Systems}, p. 151--158, 1997.}
+
+\bibitem[Panne \emph{et al.} 1994]{bib:1994:Panne}
+\abntrefinfo{Panne \emph{et al.}}{PANNE \emph{et al.}}{1994}
+{PANNE, M. van~de; KIM, R.; FIUME, E. Synthesizing parameterized motions.
+\emph{Workshop on Animation and Simulation}, 1994.}
+
+\bibitem[Payeur \emph{et al.} 1995]{bib:1995:Payeur}
+\abntrefinfo{Payeur \emph{et al.}}{PAYEUR \emph{et al.}}{1995}
+{PAYEUR, P.; LE-HUY, H.; GOSSELIN, C.~M. Trajectory prediction for moving
+  objects using artificial neural networks. ieee transactions on industrial
+  electronics.
+\emph{IEEE Transactions on Industrial Eletronics}, p. 147--158, 1995.}
+
+\bibitem[Pomerleau \emph{et al.} 1991]{bib:1991:Pomerleau}
+\abntrefinfo{Pomerleau \emph{et al.}}{POMERLEAU \emph{et al.}}{1991}
+{POMERLEAU, D.~A.; GOWDY, J.; THORPE, C.~E. Combining artificial neural
+  networks and symbolic processing for autonomous robot guidance.
+\emph{Engineering Applications of Artificial Intelligence}, 1991.}
+
+\bibitem[Renault \emph{et al.} 2011]{bib:2011:Renault}
+\abntrefinfo{Renault \emph{et al.}}{RENAULT \emph{et al.}}{2011}
+{RENAULT, O.; THALMANN, N.~M.; THALMANN, D. A vision-based approach to
+  behavioural animation.
+\emph{The Journal of Visualization and Computer Animation}, 2011.}
+
+\bibitem[Silva \emph{et al.} 2014]{bib:2014:Silva}
+\abntrefinfo{Silva \emph{et al.}}{SILVA \emph{et al.}}{2014}
+{SILVA, D.~B. da; VIDAL, C.~A.; CAVALCANTE-NETO, J.~B.; NUNES, R.~F. Simple
+  data-driven control for simulated bipeds.
+\emph{Symposium on Virtual and Augmented Reality}, 2014.}
+
+\bibitem[Wilhelms e Barsky 1985]{bib:1985:Wilhelms}
+\abntrefinfo{Wilhelms e Barsky}{WILHELMS; BARSKY}{1985}
+{WILHELMS, J.; BARSKY, B. Using dynamic analysis for the animation of
+  articulated bodies such as humans and robots.
+\emph{Proceedings of Graphics Interface}, 1985.}
+
+\bibitem[Yin \emph{et al.} 2007]{bib:2007:Yin}
+\abntrefinfo{Yin \emph{et al.}}{YIN \emph{et al.}}{2007}
+{YIN, K.; LOKEN, K.; PANNE, M. van~de. Simbicon: Simple biped locomotion
+  control.
+\emph{SIGGRAPH Symposium on Computer Animation}, 2007.}
+
+\bibitem[Zordan e Hodgins 1999]{bib:1999:Zordan}
+\abntrefinfo{Zordan e Hodgins}{ZORDAN; HODGINS}{1999}
+{ZORDAN, V.~B.; HODGINS, J.~K. Tracking and modifying upper-body human motion
+  data with dynamic simulation.
+\emph{SIGGRAPH Symposium on Computer Animation}, 1999.}
+
+\bibitem[Zordan e Hodgins 2002]{bib:2002:Zordan}
+\abntrefinfo{Zordan e Hodgins}{ZORDAN; HODGINS}{2002}
+{ZORDAN, V.~B.; HODGINS, J.~K. Motion capture-driven simulations that hit and
+  react.
+\emph{SIGGRAPH Symposium on Computer Animation}, 2002.}
+
+\end{thebibliography}

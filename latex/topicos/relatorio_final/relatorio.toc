@@ -1,0 +1,14 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Motiva\IeC {\c c}\IeC {\~a}o}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Descri\IeC {\c c}\IeC {\~a}o do problema}{4}{subsection.1.2}
+\contentsline {section}{\numberline {2}Trabalhos Relacionados}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Teaching a robot to grasp}{6}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Trajectory Prediction}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Emergent Behavior}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Vision-based behavioral animation}{8}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Ball tracking}{8}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Autonomous robot guidance}{9}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Obstacle avoidance}{9}{subsection.2.7}
+\contentsline {section}{\numberline {3}Problemas poss\IeC {\'\i }veis}{9}{section.3}
+\contentsline {section}{\numberline {4}Considera\IeC {\c c}\IeC {\~o}es do relat\IeC {\'o}rio}{10}{section.4}

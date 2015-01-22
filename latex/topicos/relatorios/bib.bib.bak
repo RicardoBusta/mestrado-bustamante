@@ -1,0 +1,43 @@
+@article{bib:1998:Atluri,
+    author    	= {S. N. Atluri, T. Zhu},
+    title     	= {A new Meshless Local Petrov-Galerkin (MLPG) approach
+in computational mechanics},
+    journal   	= {Computational Mechanics},
+    year     	= {1998},
+    pages		= {117-127},
+}
+
+@article{bib:1994:synthesizing,
+    author    	= {Michiel van de Panne,Ryan Kim,Eugene Fiume},
+    title     	= {Synthesizing Parameterized Motions},
+    journal   	= {Workshop on Animation and Simulation},
+    year     	= {1994},
+}
+
+@article{bib:1999:upperbody,
+    author    	= {Victor B. Zordan, Jessica K. Hodgins},
+    title     	= {Tracking and Modifying Upper-body Human Motion Data with Dynamic Simulation},
+    journal   	= {SIGGRAPH Symposium on Computer Animation},
+    year     	= {1999},
+}
+
+@article{bib:2002:cms,
+    author    	= {Victor B. Zordan, Jessica K. Hodgins},
+    title     	= {Motion capture-driven simulations that hit and react},
+    journal   	= {SIGGRAPH Symposium on Computer Animation},
+    year     	= {2002},
+}
+
+@article{bib:2007:simbicon,
+    author    	= {KangKang Yin Kevin Loken Michiel van de Panne*},
+    title     	= {SIMBICON: Simple Biped Locomotion Control},
+    journal   	= {SIGGRAPH Symposium on Computer Animation},
+    year     	= {2007},
+}
+
+@article{bib:2012:data-driven,
+    author    	= {T. Geijtenbeek N. Pronost A. F. van der Stappen},
+    title     	= {Simple Data-Driven Control for Simulated Bipeds},
+    journal   	= {SIGGRAPH Symposium on Computer Animation},
+    year     	= {2012},
+}

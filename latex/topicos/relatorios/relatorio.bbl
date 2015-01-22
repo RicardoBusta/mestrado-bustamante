@@ -1,0 +1,31 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.2 }
+
+\bibitem[Hamon \emph{et al.} 2011]{bib:2011:teaching-grasp}
+\abntrefinfo{Hamon \emph{et al.}}{HAMON \emph{et al.}}{2011}
+{HAMON, L.; LUCIDARME, P.; RICHARD, P.; RICHARD, E. Teaching a robot to grasp a
+  dynamic object by the generalisation of human demonstrations.
+\emph{Symposium on Virtual and Augmented Reality}, 2011.}
+
+\bibitem[Panne \emph{et al.} 1994]{bib:1994:synthesizing}
+\abntrefinfo{Panne \emph{et al.}}{PANNE \emph{et al.}}{1994}
+{PANNE, M. van~de; KIM, R.; FIUME, E. Synthesizing parameterized motions.
+\emph{Workshop on Animation and Simulation}, 1994.}
+
+\bibitem[Zordan e Hodgins 1999]{bib:1999:upperbody}
+\abntrefinfo{Zordan e Hodgins}{ZORDAN; HODGINS}{1999}
+{ZORDAN, V.~B.; HODGINS, J.~K. Tracking and modifying upper-body human motion
+  data with dynamic simulation.
+\emph{SIGGRAPH Symposium on Computer Animation}, 1999.}
+
+\bibitem[Zordan e Hodgins 2002]{bib:2002:cms}
+\abntrefinfo{Zordan e Hodgins}{ZORDAN; HODGINS}{2002}
+{ZORDAN, V.~B.; HODGINS, J.~K. Motion capture-driven simulations that hit and
+  react.
+\emph{SIGGRAPH Symposium on Computer Animation}, 2002.}
+
+\end{thebibliography}

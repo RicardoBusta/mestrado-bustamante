@@ -1,0 +1,97 @@
+\section{\textit{A Multiple Hypothesis Approach
+for a Ball Tracking System}}
+
+
+% ============================================================================
+\subsection{Referência completa do artigo}
+
+\begin{itemize}
+  \item \textbf{Autores:} Oliver Birbach and Udo Frese
+  \item \textbf{Local:} Bremen, Germany
+  \item \textbf{\textit{Journal}:} xxx [Qualis XXX]
+  \item \textbf{Data:} xxx
+  \item \textbf{Referência:} \citeonline{bib:2014:Autor}
+\end{itemize}
+
+
+% ============================================================================
+\subsection{Resumo}
+
+\subsubsection{Abstract}
+This paper presents a computer vision system for tracking
+and predicting flying balls in 3-D from a stereo-camera. It pursues a “textbook-style” approach with a robust circle detector and probabilis tic models for ball motion and circle detection handled by state-of-theart estimation algorithms. In particular we use a Multiple-Hypotheses Tracker (MHT) with an Unscented Kalman Filter (UKF) for each track, handling multiple flying balls, missing and false detections and track
+initiation and termination. The system also performs auto-calibration estimating physical parameters (ball radius, gravity relative to camera, air drag) simply from observing some flying balls. This reduces the setup time in a new environment.
+
+% ..........................................................
+\subsubsection{Propósito do artigo}
+A ideia era encontrar um artigo que pudesse rastrear algum tipo de objeto usando câmera. Esse artigo de fato faz isso, porém ele utiliza técnicas probabilísticas e processamento de imagens para detectar apenas círculos na tela, e com isso, poder rastrear. Nesse caso, toda a matemática do problema teve de ser pensada para elaborar um algoritmo específico para um tipo de objeto em um tipo de comportamento. Não era bem o que eu estava procurando. Farei, de modo resumido, a leitura.
+
+% ..........................................................
+%\subsubsection{Técnicas utilizadas} 
+% \begin{itemize}
+%   \item xxx
+% \end{itemize}  
+%xxx
+
+% ..........................................................
+%\subsubsection{Contribuição em relação a artigos anteriores} %mais ou menos 10 linhas
+% \begin{itemize}
+%   \item xxx
+% \end{itemize}  
+%xxx
+
+% ============================================================================
+\subsection{Metodologia}
+
+
+	Inicialmente o artigo descreve a disposição do sistema de captura. Duas cameras capturam imagem de uma mesma cena. Um detector de círculos identifica os artefatos nas imagens capturadas. Os círculos identificados são colocados em um rastreador, que aplica um método estatístico para obter a posição e a velocidade de cada uma das bolas.
+	A forma que a detecção de círculo funciona é simples: Ele identifica um provável píxel de círculo, fazendo uma busca exaustiva na imagem, procurando por bordas. Ao encontrar uma borda, percorre no sentido perpendicular à tangente da superficie, esperando encontrar o raio. Como o raio é possível estimar a distância da bola para o observador, considerando que o raio da bola seja previamente conhecido.
+	Então ele define o Single Track Probabilistic Model, que prevê o movimento da bola, ou seja, posição e velocidade, a partir das imagens capturadas. O modelo é baseado nas fórmulas classicas da mecânica, que incluem gravidade e atrito do ar.  Para estimar a distância da bola, o seu diâmetro é levando em consideração. Portanto o método se restringe a um tamanho conhecido de bola.
+	Utilizar o método anterior para associar todas as medidas realizadas a diversas bolas é uma tarefa dificil. Alguns artefatos podem estar oclusos por outros, ou aparecendo em determinado quadro e em outro não. Alarmes falsos como a cabeça de uma pessoa também precisa ser eliminada do processo de rastreio. Para cada trilha rastreada, é associada uma probabilidade de ser um falso alarme. Para cada hipotese m e tempo k, ele calcula a probabilidade.
+	Quando está utilizando imagens estereoscópicas, ou seja, duas câmeras, é preciso fazer uma associação entre os objetos que aparecem em uma imagem com os da outra imagem. Nesse caso, utilizando o método proposto, ele poderia combinar os elementos das duas imagens antes de tentar rastrear e integrar os resultados como um valor 3D. A segunda opção é deixar o método implicitamente gerenciar essa questão dos candidatos a serem o mesmo objeto.
+	É importante lembrar dos parâmetros utilizados na fórmula, que incluem a gravidade, o diâmetro da bola, e a calibração das câmeras (distância de uma para a outra por exemplo).  Os parâmetros são estimados com objetos sendo arremessados durante a fase de calibragem.
+
+ ..........................................................
+\subsubsection{Resultados}
+A detecção de círculo usada é comparada com o OpenCV. Ele sugere que a implementação que fizeram para essa aplicação em particular pode ser mais robusta.
+
+
+% ============================================================================
+%\subsection{Pontos fortes} %no máximo três
+%\begin{itemize}
+%  \item xxx
+%  \item xxx
+%  \item xxx
+%\end{itemize}  
+
+% ============================================================================
+%\subsection{Limitações} %no máximo três
+%\begin{itemize}
+ % \item xxx
+%  \item xxx
+%  \item xxx
+%\end{itemize} 
+
+
+% ============================================================================
+%\subsection{Avaliação}
+%\textbf{(a) Avanço considerável (\textit{Breakthrough}).}
+% \textbf{(b) Contribuição significativa.}
+% \textbf{(c) Contribuição modesta.}
+% \textbf{(d) Contribuição fraca.}
+% \textbf{(e) Sem contribuição.}
+%Justificativa.
+
+% ============================================================================
+%\subsection{Problema em aberto}
+% \begin{itemize}
+%   \item xxx
+% \end{itemize}  
+%xxx
+
+% ============================================================================
+%\subsection{Aspecto obscuro}
+% \begin{itemize}
+%   \item xxx
+% \end{itemize}  
+%xxx
