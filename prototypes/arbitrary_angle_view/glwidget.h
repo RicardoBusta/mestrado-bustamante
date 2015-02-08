@@ -3,13 +3,13 @@
 
 #include <QGLWidget>
 
-class GLWidget : public QGLWidget
+class AAVGLWidget : public QGLWidget
 {
   Q_OBJECT
 
 public:
-  explicit GLWidget(QWidget *parent = 0);
-  ~GLWidget();
+  explicit AAVGLWidget(QWidget *parent = 0);
+  ~AAVGLWidget();
 
 protected:
   void initializeGL();
@@ -18,9 +18,21 @@ protected:
   void clearGL();
 
 private:
-  float rot_angle;
+  float rot_angle_x;
+  float rot_angle_y;
+
+  float fov_angle;
+
+  int slices_num;
+
+  GLuint framebuffer;
+  GLuint render_texture;
+  GLuint depth_buffer;
 private slots:
-  void updateAngle();
+  void updateXRotation(int xr);
+  void updateYRotation(int yr);
+  void updateFoVAngle(int angle);
+  void updateSlices(int slices);
 };
 
 #endif // GLWIDGET_H
