@@ -1,5 +1,7 @@
 #include "transferfunction.h"
 
+#include <QPointF>
+
 TransferFunction::TransferFunction()
 {
   max = 300;
@@ -60,6 +62,12 @@ void TransferFunction::remove(int index)
 void TransferFunction::clear()
 {
   function.clear();
+}
+
+void TransferFunction::moveIndex(int index, const QPointF &point)
+{
+  function[index].color.setAlphaF(point.y());
+  function[index].value = qMin(1.0,qMax(0.0,point.x()));
 }
 
 void TransferFunction::sort()
