@@ -1,10 +1,10 @@
-#include "widgets/mainwindow.h"
+#include "aavmainwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  MainWindow w;
+  AAVMainWindow w;
   w.show();
 
   return a.exec();

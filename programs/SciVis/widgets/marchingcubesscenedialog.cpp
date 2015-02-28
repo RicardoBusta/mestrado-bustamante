@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QColorDialog>
 
+const QString kColorButtonStyle = QString("background-color: %1;");
+
 MarchingCubesSceneDialog::MarchingCubesSceneDialog(QWidget *parent) :
   QDialog(parent),
   ui(new Ui::MarchingCubesSceneDialog)
@@ -17,6 +19,8 @@ MarchingCubesSceneDialog::MarchingCubesSceneDialog(QWidget *parent) :
 
   ui->size_line->setText("50");
   ui->iso_line->setText("200");
+  color = QColor(255,255,255);
+  setColor();
 }
 
 MarchingCubesSceneDialog::~MarchingCubesSceneDialog()
@@ -39,5 +43,5 @@ void MarchingCubesSceneDialog::setSize(QString value)
 void MarchingCubesSceneDialog::setColor()
 {
   color = QColorDialog::getColor();
-  ui->color_button->setStyleSheet(QString("background-color: %1;").arg(color.name()));
+  ui->color_button->setStyleSheet(kColorButtonStyle.arg(color.name()));
 }

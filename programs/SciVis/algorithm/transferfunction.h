@@ -25,7 +25,11 @@ public:
 
   void add(float value, QColor color);
 
+  void remove(int index);
+
   void clear();
+
+  void moveIndex(int index, const QPointF &point);
 
   //use once before the first get or after the last add.
   void sort();
