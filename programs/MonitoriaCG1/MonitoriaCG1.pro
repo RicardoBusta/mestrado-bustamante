@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    model.cpp
+    model.cpp \
+    glwidget.cpp
 
 HEADERS  += mainwindow.h \
-    model.h
+    model.h \
+    glwidget.h
 
 FORMS    += mainwindow.ui
