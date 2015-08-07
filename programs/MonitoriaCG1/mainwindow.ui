@@ -77,7 +77,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget_2">
-       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,10">
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,10">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -88,7 +88,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="texture_pushButton">
             <property name="text">
              <string>Load Texture</string>
             </property>
@@ -97,14 +97,31 @@
          </layout>
         </item>
         <item>
-         <widget class="GLWidget" name="openGLWidget">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>0</height>
-           </size>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="comboBox"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="hide_pushButton">
+            <property name="text">
+             <string>Remove</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="GLWidget" name="opengl_widget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -136,8 +153,9 @@
  <customwidgets>
   <customwidget>
    <class>GLWidget</class>
-   <extends>QOpenGLWidget</extends>
+   <extends>QWidget</extends>
    <header>glwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -3,12 +3,13 @@
 
 #include <QMainWindow>
 
+#include "model.h"
+
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -17,6 +18,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    ModelMap models_;
+
+private slots:
+    void ToggleHideCurrentModel();
+    void UpdateModels();
 };
 
 #endif // MAINWINDOW_H
