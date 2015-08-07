@@ -3,7 +3,7 @@
 
 #include <QGLWidget>
 #include <QMap>
-#include <QOpenGLShaderProgram>
+#include <QGLShaderProgram>
 #include <QOpenGLTexture>
 
 #include "model.h"
@@ -25,6 +25,8 @@ public:
     void wheelEvent(QWheelEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
+    void SetShaders(const QString &v_shader, const QString &f_shader);
+
 private:
     ModelMap * models_;
 
@@ -32,16 +34,21 @@ private:
     QPoint delta_;
     QPoint auto_delta_;
 
-    QOpenGLShaderProgram shader_program_;
+    QGLShaderProgram shader_program_;
 
     QTimer * timer_;
 
     float zoom_;
     float rotx_;
     float roty_;
+
+    bool perspective_;
+
+    bool initialized_;
 private slots:
     void AutoRotate();
     void LoadTexture();
+    void TogglePerspective();
 };
 
 #endif // GLWIDGET_H

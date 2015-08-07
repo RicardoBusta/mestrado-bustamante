@@ -6,6 +6,8 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <QImage>
+#include <QMessageBox>
+#include <QString>
 
 const float kRotDeltaToAngle = 0.5f;
 const float kAutoDeltaToAngle = 0.1f;
@@ -17,7 +19,9 @@ GLWidget::GLWidget(QWidget *parent)
     zoom_(0.5),
     rotx_(0),
     roty_(0),
-    timer_(new QTimer(this)){
+    timer_(new QTimer(this)),
+    perspective_(false),
+    initialized_(false){
   timer_->setInterval(1000/60);
   QObject::connect(timer_,SIGNAL(timeout()),this,SLOT(AutoRotate()));
 }
@@ -32,7 +36,12 @@ void GLWidget::SetModelRef(ModelMap *models) {
 }
 
 void GLWidget::initializeGL() {
-  glClearColor(0.0f,0.0f,0.0f,1.0f);
+  if(initialized_){
+    return;
+  }
+  initialized_ = true;
+  qDebug() << "initialize";
+  glClearColor(0.5f,0.5f,0.5f,1.0f);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
@@ -46,14 +55,30 @@ void GLWidget::initializeGL() {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
+  // Create Basic Texture
   QImage img(QSize(16,16),QImage::Format_ARGB32);
-  img.fill(0xffff9900);
   for(int i=0;i<16;i++){
-    img.setPixel(i,0,0xff000000);
-    img.setPixel(0,i,0xff000000);
-    img.setPixel(i,i,0xffffffff);
-    img.setPixel(i,15,0xffffffff);
-    img.setPixel(15,i,0xffffffff);
+    for(int j=0;j<16;j++){
+      unsigned int color = 0xff000000;
+      if(i==j || i==15-j){
+        color = 0xffffffff;
+      }else if(i==0||j==0||i==15||j==15){
+        color = 0xff000000;
+      }else if(i>j){
+        if(15-i>j){
+          color = 0xffff9900;
+        }else{
+          color = 0xff0099ff;
+        }
+      }else{
+        if(15-i>j){
+          color = 0xff00ff99;
+        }else{
+          color = 0xffff0099;
+        }
+      }
+      img.setPixel(i,j,color);
+    }
   }
   bindTexture(img,GL_TEXTURE_2D,GL_RGBA32F,QGLContext::NoBindOption);
 }
@@ -79,7 +104,12 @@ void GLWidget::resizeGL(int w, int h) {
   float ratio = static_cast<float>(w)/static_cast<float>(h);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(-1*ratio,1*ratio,-1,1,-100,100);
+  if(perspective_){
+    glFrustum(-0.1*ratio,0.1*ratio,-0.1,0.1,0.01,1000.0);
+    glTranslatef(0,0,-5);
+  }else{
+    glOrtho(-1*ratio,1*ratio,-1,1,-100,100);
+  }
   glMatrixMode(GL_MODELVIEW);
 }
 
@@ -127,6 +157,35 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event) {
   update();
 }
 
+void GLWidget::SetShaders(const QString &v_shader, const QString &f_shader) {
+  bool error = false;
+  QString error_str = "";
+
+  error = shader_program_.addShaderFromSourceCode(QGLShader::Vertex,"void main(){}");
+  if(error){
+    error_str += shader_program_.log()+"\n";
+  }
+  error = shader_program_.addShaderFromSourceCode(QGLShader::Fragment,"");
+  if(error){
+    error_str += shader_program_.log()+"\n";
+  }
+  error = shader_program_.link();
+  if(error){
+    error_str += shader_program_.log()+"\n";
+  }
+  error = shader_program_.bind();
+  if(error){
+    error_str += shader_program_.log()+"\n";
+  }
+
+  if(!error_str.isEmpty()){
+    QMessageBox * box = new QMessageBox(this);
+    box->setText(error_str);
+    box->exec();
+    delete box;
+  }
+}
+
 void GLWidget::AutoRotate()
 {
   rotx_ += auto_delta_.y();
@@ -143,5 +202,9 @@ void GLWidget::LoadTexture() {
       bindTexture(img);
     }
   }
+}
+
+void GLWidget::TogglePerspective() {
+  perspective_ = !perspective_;
 }
 

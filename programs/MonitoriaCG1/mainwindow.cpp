@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
   UpdateModels();
   ui->comboBox->setCurrentText(m.name());
 
+  ui->splitter->setStretchFactor(0,1);
+  ui->splitter->setStretchFactor(1,5);
+
   QObject::connect(ui->hide_pushButton,SIGNAL(clicked(bool)),this,SLOT(ToggleHideCurrentModel()));
   QObject::connect(ui->texture_pushButton,SIGNAL(clicked(bool)),ui->opengl_widget,SLOT(LoadTexture()));
 }
