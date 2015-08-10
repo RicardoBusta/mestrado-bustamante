@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
                    SLOT(LoadVsh()));
   QObject::connect(ui->load_obj_pushButton, SIGNAL(clicked()), this,
                    SLOT(LoadObjModel()));
+  QObject::connect(ui->compile_shaders_pushButton,SIGNAL(clicked()),this,SLOT(CompileShaders()));
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -61,7 +62,6 @@ void MainWindow::LoadObjModel() {
 void MainWindow::LoadVsh() {
   QString filename = QFileDialog::getOpenFileName(
       this, "Open Vertex Shader File", ".", "Vertex Shader (*.vsh *.vert)");
-  if()
 }
 
 void MainWindow::LoadFsh() {

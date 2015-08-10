@@ -25,4 +25,7 @@ lessThan(QT_MAJOR_VERSION, 5){
 
   FORMS    += \
       mainwindow.ui
+
+  win32{LIBS += -lopengl32}
+  unix:!macx{LIBS += -lGL -lGLU}
 }

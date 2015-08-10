@@ -149,28 +149,47 @@ void GLWidget::SetShaders(const QString &v_shader, const QString &f_shader) {
   bool error = false;
   QString error_str = "";
 
-  error = shader_program_.addShaderFromSourceCode(QGLShader::Vertex,
-                                                  "void main(){}");
+  if(shader_program_.hasOpenGLShaderPrograms(QGLContext::currentContext())){
+    shader_program_.removeAllShaders();
+  }
+
+  qDebug() << "***************";
+  qDebug() << v_shader;
+  qDebug() << "***************";
+
+  error = !shader_program_.addShaderFromSourceCode(QGLShader::Vertex, v_shader);
   if (error) {
     error_str += shader_program_.log() + "\n";
   }
-  error = shader_program_.addShaderFromSourceCode(QGLShader::Fragment, "");
-  if (error) {
-    error_str += shader_program_.log() + "\n";
-  }
-  error = shader_program_.link();
-  if (error) {
-    error_str += shader_program_.log() + "\n";
-  }
-  error = shader_program_.bind();
+  qDebug() << "error" << error;
+
+  qDebug() << "***************";
+  qDebug() << f_shader;
+  qDebug() << "***************";
+  error =
+      !shader_program_.addShaderFromSourceCode(QGLShader::Fragment, f_shader);
   if (error) {
     error_str += shader_program_.log() + "\n";
   }
 
-  if (!error_str.isEmpty()) {
+  qDebug() << "error" << error;
+  error = !shader_program_.link();
+  if (error) {
+    error_str += shader_program_.log() + "\n";
+  }
+
+  qDebug() << "error" << error;
+  error = !shader_program_.bind();
+  if (error) {
+    error_str += shader_program_.log() + "\n";
+  }
+  qDebug() << "error" << error;
+
+  if (error) {
     QMessageBox *box = new QMessageBox(this);
     box->setText(error_str);
     box->exec();
+    shader_program_.release();
     delete box;
   }
 }
