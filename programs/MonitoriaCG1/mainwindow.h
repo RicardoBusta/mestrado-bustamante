@@ -10,20 +10,24 @@ class MainWindow;
 }
 
 class MainWindow : public QMainWindow {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+ public:
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 
-private:
-    Ui::MainWindow *ui;
+ private:
+  Ui::MainWindow *ui;
 
-    ModelMap models_;
+  ModelMap models_;
 
-private slots:
-    void ToggleHideCurrentModel();
-    void UpdateModels();
+ private slots:
+  void ToggleHideCurrentModel();
+  void UpdateModels();
+  void LoadObjModel();
+  void LoadVsh();
+  void LoadFsh();
+  void CompileShaders();
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

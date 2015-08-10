@@ -45,6 +45,8 @@ private:
     bool perspective_;
 
     bool initialized_;
+
+    void SetProjection(int w, int h);
 private slots:
     void AutoRotate();
     void LoadTexture();
